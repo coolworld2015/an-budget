@@ -36,6 +36,8 @@ class ResourceDetails extends Component {
 				id: props.data.id,
 				name: props.data.name,
 				price: props.data.price,
+				quantity: props.data.quantity,
+				store: props.data.store,
 				description: props.data.description,
 				showProgress: false
 			};
@@ -43,6 +45,7 @@ class ResourceDetails extends Component {
     }
 
     updateUser() {
+		console.log(this.state);
         if (this.state.name == '' ||
             this.state.price == '' ||
             this.state.description == '') {
@@ -57,12 +60,14 @@ class ResourceDetails extends Component {
 			bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'api/users/update', {
+        fetch(appConfig.url + 'api/goods/update', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
                 name: this.state.name,
-                pass: this.state.pass,
+                price: this.state.price,
+				quantity: this.state.quantity,
+				store: this.state.store,
                 description: this.state.description,
 				authorization: appConfig.access_token
             }),
@@ -73,8 +78,8 @@ class ResourceDetails extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				if (responseData.pass) {
-					appConfig.users.refresh = true;
+				if (responseData.price) {
+					appConfig.goods.refresh = true;
 					this.props.navigator.pop();
 				} else {
 					this.setState({
@@ -232,7 +237,7 @@ class ResourceDetails extends Component {
 					<View style={{
 						flex: 1,
 						padding: 10,
-						paddingBottom: 20,
+						paddingBottom: 80,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
 					}}>						
@@ -249,23 +254,19 @@ class ResourceDetails extends Component {
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.id}>
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								price: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={(+this.state.price).toFixed(2)}
+							//value={(+this.state.price).toFixed(2)}
+							value={this.state.price}
 							placeholder="Price">
 						</TextInput>
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false

@@ -277,7 +277,7 @@ class Users extends Component {
                         backgroundColor: 'whitesmoke',
                         borderWidth: 3,
                         borderColor: 'lightgray',
-                        borderRadius: 0,
+                        borderRadius: 0
                     }}
 						underlineColorAndroid='rgba(0,0,0,0)'
 						onChangeText={this.onChangeText.bind(this)}

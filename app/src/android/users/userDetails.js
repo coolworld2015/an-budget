@@ -232,7 +232,7 @@ class UserDetails extends Component {
 					<View style={{
 						flex: 1,
 						padding: 10,
-						paddingBottom: 55,
+						paddingBottom: 70,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
 					}}>						
