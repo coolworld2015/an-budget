@@ -114,7 +114,7 @@ class Login extends Component {
                     <Image style={styles.logo}
                            source={require('../../../logo.jpg')}
                     />
-                    <Text style={styles.heading}>RN-Base</Text>
+                    <Text style={styles.heading}>AN-Budget</Text>
                     <TextInput
 						underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text)=> this.setState({

@@ -165,6 +165,7 @@ class UserAdd extends Component {
 						backgroundColor: 'white'
 					}}>
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								name: text,
 								invalidValue: false
@@ -175,6 +176,7 @@ class UserAdd extends Component {
 						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								pass: text,
 								invalidValue: false
@@ -185,6 +187,7 @@ class UserAdd extends Component {
 						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false

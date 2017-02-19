@@ -255,9 +255,10 @@ class Audit extends Component {
                         borderColor: 'lightgray',
                         borderRadius: 0,
                     }}
-                               onChangeText={this.onChangeText.bind(this)}
-                               value={this.state.searchQuery}
-                               placeholder="Search">
+						underlineColorAndroid='rgba(0,0,0,0)'
+						onChangeText={this.onChangeText.bind(this)}
+						value={this.state.searchQuery}
+						placeholder="Search">
                     </TextInput>
 
                     {errorCtrl}

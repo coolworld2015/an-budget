@@ -11,7 +11,7 @@ npm install (for rn-base.git)
 -------------------------------------------------------------------------------------------------
 react-native init AwesomeProject
 -------------------------------------------------------------------------------------------------
-rn-base\android -> local.properties -> sdk.dir = C:/Users/ed/AppData/Local/Android/sdk
+rn-budget\android -> local.properties -> sdk.dir = C:/Users/ed/AppData/Local/Android/sdk
 -------------------------------------------------------------------------------------------------
 Android SDK Manager -> Android SDK Build-tools (23.0.1)
 -------------------------------------------------------------------------------------------------

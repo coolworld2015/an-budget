@@ -239,6 +239,7 @@ class UserDetails extends Component {
 						backgroundColor: 'white'
 					}}>						
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								name: text,
 								invalidValue: false
@@ -249,11 +250,13 @@ class UserDetails extends Component {
 						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
 							value={this.state.id}>
 						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								pass: text,
 								invalidValue: false
@@ -264,6 +267,7 @@ class UserDetails extends Component {
 						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false

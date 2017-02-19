@@ -1,11 +1,10 @@
------------------------------------------------------------------------------------------------------
-mongoose.connect('mongodb://admin:admin@ds011258.mongolab.com:11258/ui-base');
------------------------------------------------------------------------------------------------------
 node index.js
 
 mongod.exe --dbpath d:/MongoDB/db
 mongod.exe --dbpath d:/MongoDB/db --repair
 
+mongod.exe --dbpath c:/!DISK/MongoDB
+mongod.exe --dbpath c:/!DISK/MongoDB --repair
 -----------------------------------------------------------------------------------------------------
 mongo shell
 show dbs
@@ -13,37 +12,38 @@ use test
 show collections
 db.dropDatabase()
 
+mongoimport --db test --collection clients --file clients.json
 -----------------------------------------------------------------------------------------------------
-mongoimport -h ds011258.mongolab.com:11258 -d ui-base -c items -u admin -p admin --file kiev09_100_000_mongo.json
 
------------------------------------------------------------------------------------------------------
-mongoimport -h ds011258.mongolab.com:11258 -d ui-base -c items -u admin -p admin --file items.json
-mongoexport -h ds011258.mongolab.com:11258 -d ui-base -c items -u admin -p admin -o items1.json
+mongoose.connect('mongodb://admin:admin@ds015760.mlab.com:15760/ui-budget');
 
-mongoimport -h ds011258.mongolab.com:11258 -d ui-base -c users -u admin -p admin --file users.json
-mongoexport -h ds011258.mongolab.com:11258 -d ui-base -c users -u admin -p admin -o users1.json
+mongoimport -h ds015760.mlab.com:15760 -d ui-budget -c goods -u admin -p admin --file goods.json
+mongoexport -h ds015760.mlab.com:15760 -d ui-budget -c goods -u admin -p admin -o goods1.json
 
+mongoimport -h ds015760.mlab.com:15760 -d ui-budget -c employees -u admin -p admin --file employees.json
+mongoexport -h ds015760.mlab.com:15760 -d ui-budget -c employees -u admin -p admin -o employees1.json
 -----------------------------------------------------------------------------------------------------
-mongoose.connect('mongodb://localhost:27017/ui-base');
 
-mongoimport --db ui-base --collection items --file items.json
-mongoexport --db ui-base --collection items -o items1.json
+mongoose.connect('mongodb://admin:admin@ds053728.mongolab.com:53728/warehouse');
 
-mongoimport --db ui-base --collection users --file users.json
-mongoexport --db ui-base --collection users -o users1.json
+mongoimport -h ds053728.mongolab.com:53728 -d warehouse -c clients -u admin -p admin --file clients.json
+mongoexport -h ds053728.mongolab.com:53728 -d warehouse -c clients -u admin -p admin -o clients1.json
 
+mongoimport -h ds053728.mongolab.com:53728 -d warehouse -c goods -u admin -p admin --file goods.json
+mongoexport -h ds053728.mongolab.com:53728 -d warehouse -c goods -u admin -p admin -o goods1.json
+
+mongoimport -h ds053728.mongolab.com:53728 -d warehouse -c users -u admin -p admin --file users.json
+mongoexport -h ds053728.mongolab.com:53728 -d warehouse -c users -u admin -p admin -o users1.json
 -----------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------
------------------------------------------------------------------------------------------------------
-SELECT * INTO table_100_000
-FROM ส่ๅโ09
-WHERE id between 1 and 100000
------------------------------------------------------------------------------------------------------
-phone, name, index, street, house, apt
------------------------------------------------------------------------------------------------------
-export to Text File (Advance - UTF-8)
-import from Text File (Advance - UTF-8)
------------------------------------------------------------------------------------------------------
-MDBAdmin - export data - json
------------------------------------------------------------------------------------------------------
-Notepad++ - convert to UTF-8 // ONLY )))))))))
+
+mongoose.connect('mongodb://localhost:27017/warehouse');
+
+mongoimport --db warehouse --collection clients --file clients.json
+mongoexport --db warehouse --collection clients -o clients1.json
+
+mongoimport --db warehouse --collection goods --file goods.json
+mongoexport --db warehouse --collection goods -o goods1.json
+
+mongoimport --db warehouse --collection users --file users.json
+mongoexport --db warehouse --collection users -o users1.json
+
