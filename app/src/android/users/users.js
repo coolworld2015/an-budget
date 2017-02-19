@@ -1,5 +1,3 @@
-//'use strict';
-
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -64,7 +62,7 @@ class Users extends Component {
             .then((responseData)=> {
 
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort)),
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
                     resultsCount: responseData.length,
                     responseData: responseData,
                     filteredItems: responseData
@@ -121,7 +119,7 @@ class Users extends Component {
                     borderBottomWidth: 1,
                     backgroundColor: '#fff'
                 }}>
-                    <Text style={{backgroundColor: '#fff', color: 'black'}}>
+                    <Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
                         {rowData.name}
                     </Text>
                 </View>
@@ -187,7 +185,8 @@ class Users extends Component {
 	
 	refreshDataAndroid() {
 		this.setState({
-			showProgress: true
+			showProgress: true,
+			resultsCount: 0
 		});
 
 		this.getUsers();

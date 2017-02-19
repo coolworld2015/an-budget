@@ -1,5 +1,3 @@
-//'use strict';
-
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -39,7 +37,7 @@ class App extends Component {
 		
         appConfig = {
             access_token: '',
-			url: 'http://jwt-base.herokuapp.com/',
+			url: 'http://jwt-budget.herokuapp.com/',
 			users: {
                 refresh: false
             },

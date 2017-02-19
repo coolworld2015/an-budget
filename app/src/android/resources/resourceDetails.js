@@ -16,7 +16,7 @@ import {
 	Alert
 } from 'react-native';
 
-class UserDetails extends Component {
+class ResourceDetails extends Component {
     constructor(props) {
         super(props);
 		
@@ -35,7 +35,7 @@ class UserDetails extends Component {
 			this.state = {
 				id: props.data.id,
 				name: props.data.name,
-				pass: props.data.pass,
+				price: props.data.price,
 				description: props.data.description,
 				showProgress: false
 			};
@@ -44,7 +44,7 @@ class UserDetails extends Component {
 
     updateUser() {
         if (this.state.name == '' ||
-            this.state.pass == '' ||
+            this.state.price == '' ||
             this.state.description == '') {
             this.setState({
                 invalidValue: true
@@ -256,12 +256,12 @@ class UserDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								pass: text,
+								price: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.pass}
-							placeholder="Password">
+							value={(+this.state.price).toFixed(2)}
+							placeholder="Price">
 						</TextInput>
 
 						<TextInput
@@ -270,7 +270,7 @@ class UserDetails extends Component {
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInput1}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>
@@ -335,6 +335,16 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         color: 'black'
     },
+    loginInput1: {
+        height: 100,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 0,
+        color: 'black'
+    },	
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
@@ -365,4 +375,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default UserDetails;
+export default ResourceDetails;

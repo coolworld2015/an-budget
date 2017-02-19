@@ -1,5 +1,3 @@
-//'use strict';
-
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -13,10 +11,11 @@ import {
     ActivityIndicator,
     TabBarIOS,
     NavigatorIOS,
-    TextInput
+    TextInput,
+    Alert
 } from 'react-native';
 
-class Phones extends Component {
+class Resources extends Component {
     constructor(props) {
         super(props);
 
@@ -35,11 +34,23 @@ class Phones extends Component {
     }
 	
 	componentDidMount() {
-		this.getPhones();
+		this.getUsers();
 	}
+	
+    componentWillUpdate() {
+        if (appConfig.users.refresh) {
+            appConfig.users.refresh = false;
 
-    getPhones() {
-        fetch(appConfig.url + 'api/items/get', {			
+            this.setState({
+                showProgress: true
+            });
+
+            this.getUsers();
+        }
+    }
+
+    getUsers() {
+        fetch(appConfig.url + 'api/goods/get', {			
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -51,7 +62,7 @@ class Phones extends Component {
             .then((responseData)=> {
 
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort)),
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
                     resultsCount: responseData.length,
                     responseData: responseData,
                     filteredItems: responseData
@@ -87,30 +98,40 @@ class Phones extends Component {
 		});
     }
 	
+    addUser() {
+		this.props.navigator.push({
+			index: 2
+		});
+    }
+	
     renderRow(rowData) {
         return (
             <TouchableHighlight
                 onPress={()=> this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    padding: 20,
-                    alignItems: 'center',
-                    borderColor: '#D7D7D7',
-                    borderBottomWidth: 1,
-                    backgroundColor: '#fff'
-                }}>
-                    <Text style={{backgroundColor: '#fff', color: 'black'}}>
-                        {rowData.name} - {rowData.phone}
-                    </Text>
-                </View>
+				<View style={{
+						flex: 1,
+						flexDirection: 'column',
+						padding: 12,
+						borderColor: '#D7D7D7',
+						borderBottomWidth: 1,
+						backgroundColor: '#fff'
+					}}>              
+						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+							{rowData.name}
+						</Text>						
+						
+						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+							Price: {(+rowData.price).toFixed(2)}
+						</Text>
+				</View>
             </TouchableHighlight>
         );
     }
 
     refreshData(event) {
+		console.log(event.nativeEvent.contentOffset);
         if (this.state.showProgress == true) {
             return;
         }
@@ -125,7 +146,7 @@ class Phones extends Component {
             });
 
             setTimeout(() => {
-                this.getPhones()
+                this.getUsers()
             }, 300);
         }
 
@@ -167,10 +188,11 @@ class Phones extends Component {
 	
 	refreshDataAndroid() {
 		this.setState({
-			showProgress: true
+			showProgress: true,
+			resultsCount: 0
 		});
 
-		this.getPhones();
+		this.getUsers();
 	}
 	
     render() {
@@ -195,7 +217,7 @@ class Phones extends Component {
 
         return (
             <View style={{flex: 1, justifyContent: 'center'}}>
-					<View style={{
+				<View style={{
 						flexDirection: 'row',
 						justifyContent: 'space-between'
 					}}>
@@ -223,16 +245,17 @@ class Phones extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
-								marginRight: 40,
+								marginRight: 20,
 								fontWeight: 'bold',
 								color: 'black'
 							}}>
-								Phones
+								Resources
 							</Text>
 						</TouchableHighlight>	
 					</View>						
 					<View>
 						<TouchableHighlight
+							onPress={()=> this.addUser()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
@@ -240,9 +263,9 @@ class Phones extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'darkblue'
 							}}>
-								
+								Add
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -251,44 +274,41 @@ class Phones extends Component {
                 <View style={{marginTop: 0}}>
                     <TextInput style={{
                         height: 45,
-                        marginTop: 4,
+						marginTop: 4,
                         padding: 5,
                         backgroundColor: 'whitesmoke',
                         borderWidth: 3,
                         borderColor: 'lightgray',
                         borderRadius: 0,
                     }}
-                               onChangeText={this.onChangeText.bind(this)}
-                               value={this.state.searchQuery}
-                               placeholder="Search">
-                    </TextInput>
+						underlineColorAndroid='rgba(0,0,0,0)'
+						onChangeText={this.onChangeText.bind(this)}
+						value={this.state.searchQuery}
+						placeholder="Search">
+                    </TextInput>    
 
-                    {errorCtrl}
+					{errorCtrl}
+					
+				</View>
 
-                </View>
-
-                {loader}
-
-                <ScrollView
-                    onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}>
-                    <ListView
-						enableEmptySections={true}
-                        style={{marginTop: 0, marginBottom: 0}}
-                        dataSource={this.state.dataSource}
-                        renderRow={this.renderRow.bind(this)}
-                    />
-                </ScrollView>
+                {loader}	
 				
-				<TouchableHighlight
-					onPress={()=> this.addUser()}
-					underlayColor='#ddd'
-				>
-					<View style={{marginBottom: 0}}>
-						<Text style={styles.countFooter}>
-							{this.state.resultsCount} entries were found.
-						</Text>
-					</View>
-				</TouchableHighlight>
+				<ScrollView
+					onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}>
+					<ListView
+						enableEmptySections={true}
+						style={{marginTop: 0, marginBottom: 0}}
+						dataSource={this.state.dataSource}
+						renderRow={this.renderRow.bind(this)}
+					/>
+				</ScrollView>
+				
+				<View style={{marginBottom: 0}}>
+					<Text style={styles.countFooter}>
+						{this.state.resultsCount} entries were found.
+					</Text>
+				</View>
+
             </View>
         )
     }
@@ -359,4 +379,5 @@ const styles = StyleSheet.create({
         margin: 20
     }
 });
-export default Phones;
+
+export default Resources;

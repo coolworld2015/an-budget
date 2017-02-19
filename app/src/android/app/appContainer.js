@@ -1,5 +1,3 @@
-//'use strict';
-
 import React, {Component} from 'react';
 
 import {
@@ -22,11 +20,8 @@ import Users from '../users/users';
 import UserDetails from '../users/userDetails';
 import UserAdd from '../users/userAdd';
 
-import Phones from '../phones/phones';
-import PhoneDetails from '../phones/phoneDetails';
-
-import Search from '../search/search';
-import SearchResults from '../search/searchResults';
+import Resources from '../resources/resources';
+import ResourceDetails from '../resources/resourceDetails';
 
 class AppContainer extends Component {
 	constructor(props) {
@@ -36,6 +31,7 @@ class AppContainer extends Component {
 	render() {
 		return (
 			<ScrollableTabView>
+ 				<ResourcesTab tabLabel="Resources" />
  				<UsersTab tabLabel="Users" />
 				<AuditTab tabLabel="Audit" />
 			</ScrollableTabView>
@@ -43,56 +39,23 @@ class AppContainer extends Component {
 	}
 }
 
-class SearchTab extends Component {
+class ResourcesTab extends Component {
 	constructor(props) {
 		super(props);
 		this.routes = [
-			{title: 'Search', index: 0},
-			{title: 'Search Results', index: 1},
-			{title: 'Phones Details', index: 2}
+			{title: 'Resources', index: 0},
+			{title: 'Resource Details', index: 1},
+			{title: 'Add Resource', index: 2}
 		];
 	}
 		  
 	renderScene(route, navigator) {
 		switch (route.index) {
-			case 0: return <Search routes={this.routes} navigator={navigator} />
+			case 0: return <Resources routes={this.routes} navigator={navigator} />
 					break;			
-			case 1: return <SearchResults data={route.data} routes={this.routes} navigator={navigator} />
-					break;			
-			case 2: return <PhoneDetails data={route.data} routes={this.routes} navigator={navigator} />
-					break
- 		}
- 	}	
-	
-	render() {
-		return (
-	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
-		)
-	}
-}
-
-class PhonesTab extends Component {
-	constructor(props) {
-		super(props);
-		this.routes = [
-			{title: 'Phones', index: 0},
-			{title: 'Phones Details', index: 1}
-		];
-	}
-		  
-	renderScene(route, navigator) {
-		switch (route.index) {
-			case 0: return <Phones routes={this.routes} navigator={navigator} />
-					break;			
-			case 1: return <PhoneDetails data={route.data} routes={this.routes} navigator={navigator} />
+			case 1: return <ResourceDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;
+			case 2: return <UserAdd data={route.data} routes={this.routes} navigator={navigator} />
 					break
  		}
  	}	
@@ -117,7 +80,7 @@ class UsersTab extends Component {
 		super(props);
 		this.routes = [
 			{title: 'Users', index: 0},
-			{title: 'Users Details', index: 1},
+			{title: 'User Details', index: 1},
 			{title: 'Add User', index: 2}
 		];
 	}
@@ -182,128 +145,6 @@ class AuditTab extends Component {
 		/>
 		)
 	}
-}
-
-class PageOne extends Component {
-	constructor(props) {
-		super(props);
-		this.routes = [
-			{title: 'First Scene', index: 0},
-			{title: 'Second Scene', index: 1},
-			{title: 'Three Scene', index: 2},
-		];
-	}
-		  
-	renderScene(route, navigator) {
-		switch (route.index) {
-			case 0: return <PageFirst routes={this.routes} navigator={navigator} />
-					break;			
-			case 1: return <PageTwo routes={this.routes} navigator={navigator} />
-					break;			
-			case 2: return <PageThree routes={this.routes} navigator={navigator} />
-					break;
- 		}
- 	}	
-	
-	render() {
-		return (
-	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-
-		    navigationBar={
-				<Navigator.NavigationBar
-				routeMapper={{
-					LeftButton: (route, navigator, index, navState) =>
-						{ return null;(<Text>Cancel</Text>); },
-					RightButton: (route, navigator, index, navState) =>
-						{ return null; (<Text>Done</Text>); },
-					Title: (route, navigator, index, navState) =>
-						{ return (<Text>{route.title}</Text>); },
-				}}
-				style={{backgroundColor: 'red'}}
-				/>
-							}
-			
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
-		)
-	}
-}
-
-class PageFirst extends Component {
-	constructor(props) {
-		super(props);
-	}
-	
-	_handlePress() {
-		this.props.navigator.push(this.props.routes[1]);
-	}		
-	
-	render() {
-		return (
-			<View style={[styles.container, {backgroundColor: 'green'}]}>
-				<Text style={styles.welcome}>Greetings!!!</Text>
-				<TouchableOpacity onPress={this._handlePress.bind(this)}>
-					<View style={{paddingVertical: 20, paddingHorizontal: 20, backgroundColor: 'black'}}>
-						<Text style={styles.welcome}>Go to page two</Text>
-					</View>
-				</TouchableOpacity>	
-			</View>
-		)
-	}
-}
-
-class PageTwo extends Component {
-	constructor(props) {
-		super(props);	
-	}
-		
-	_handlePress() {
-		//this.props.navigator.pop();
-		this.props.navigator.push(this.props.routes[2]);
-	}
-		
-  render() {
-    return (
-      <View style={[styles.container, {backgroundColor: 'purple'}]}>
-        <Text style={styles.welcome}>This is page two!</Text>
-        <TouchableOpacity onPress={this._handlePress.bind(this)}>
-          <View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
-            <Text style={styles.welcome}>Go to page three</Text>
-          </View>
-        </TouchableOpacity>
-       </View>
-    )
-  }
-}
-
-class PageThree extends Component {
-	constructor(props) {
-		super(props);	
-	}
-		
-	_handlePress() {
-		this.props.navigator.popToTop(0);
-		//this.props.navigator.push(this.props.routes[0]);
-	}
-		
-  render() {
-    return (
-      <View style={[styles.container, {backgroundColor: 'blue'}]}>
-        <Text style={styles.welcome}>This is page three!</Text>
-        <TouchableOpacity onPress={this._handlePress.bind(this)}>
-          <View style={{paddingVertical: 10, paddingHorizontal: 20, backgroundColor: 'black'}}>
-            <Text style={styles.welcome}>Go back</Text>
-          </View>
-        </TouchableOpacity>
-       </View>
-    )
-  }
 }
 
 const styles = StyleSheet.create({

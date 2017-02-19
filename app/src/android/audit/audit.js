@@ -1,5 +1,3 @@
-//'use strict';
-
 import React, {Component} from 'react';
 import {
     AppRegistry,
@@ -92,7 +90,7 @@ class Audit extends Component {
                     borderBottomWidth: 1,
                     backgroundColor: '#fff'
                 }}>
-                    <Text style={{backgroundColor: '#fff', color: 'black'}}>
+                    <Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
                         {rowData.name} - {rowData.date}
                     </Text>
                 </View>
@@ -157,7 +155,8 @@ class Audit extends Component {
 	
 	refreshDataAndroid() {
 		this.setState({
-			showProgress: true
+			showProgress: true,
+			resultsCount: 0
 		});
 
 		this.getAudit();
