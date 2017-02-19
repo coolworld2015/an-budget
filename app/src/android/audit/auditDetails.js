@@ -63,12 +63,13 @@ class AuditDetails extends Component {
 							underlayColor='#ddd'
 						>
 							<Text style={{
-								fontSize: 18,
+								fontSize: 16,
 								textAlign: 'center',
-								margin: 20,
-								fontWeight: 'bold'
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'darkblue'
 							}}>
-								 
+								Back 
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -92,9 +93,9 @@ class AuditDetails extends Component {
 							underlayColor='#ddd'
 						>
 							<Text style={{
-								fontSize: 18,
+								fontSize: 16,
 								textAlign: 'center',
-								margin: 20,
+								margin: 14,
 								fontWeight: 'bold'
 							}}>
 								 
@@ -111,24 +112,28 @@ class AuditDetails extends Component {
 					backgroundColor: 'white'
 				}}>
 					<TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
 						style={styles.loginInput}
 						value={this.state.name}
 						placeholder="Name">
 					</TextInput>
 					
 					<TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
 						style={styles.loginInput}
 						value={this.state.id}
 						placeholder="ID">
 					</TextInput>
 					
 					<TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
 						style={styles.loginInput}
 						value={this.state.ip}
 						placeholder="IP">
 					</TextInput>
 
 					<TextInput
+						underlineColorAndroid='rgba(0,0,0,0)'
 						style={styles.loginInput1}
 						value={this.state.description}
 						multiline={true}

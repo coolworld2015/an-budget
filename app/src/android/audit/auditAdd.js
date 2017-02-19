@@ -118,61 +118,60 @@ class AuditAdd extends Component {
             </Text>;
         }
 
-        return (
-            <ScrollView>
-				<View style={{flex: 1, justifyContent: 'center'}}>
-					<View style={{
-							flexDirection: 'row',
-							justifyContent: 'space-between'
-						}}>
-						<View>
-							<TouchableHighlight
-								onPress={()=> this.goBack()}
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 16,
-									textAlign: 'center',
-									margin: 14,
-									fontWeight: 'bold',
-									color: 'darkblue'
-								}}>
-									Back
-								</Text>
-							</TouchableHighlight>	
-						</View>
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 20,
-									textAlign: 'center',
-									margin: 10,
-									marginRight: 40,
-									fontWeight: 'bold',
-									color: 'black'
-								}}>
-									 New
-								</Text>
-							</TouchableHighlight>	
-						</View>						
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 16,
-									textAlign: 'center',
-									margin: 14,
-									fontWeight: 'bold'
-								}}>
-									 
-								</Text>
-							</TouchableHighlight>	
-						</View>
+        return (            
+			<View style={{flex: 1, justifyContent: 'center'}}>
+				<View style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between'
+					}}>
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'darkblue'
+							}}>
+								Back
+							</Text>
+						</TouchableHighlight>	
 					</View>
-			
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 20,
+								textAlign: 'center',
+								margin: 10,
+								marginRight: 40,
+								fontWeight: 'bold',
+								color: 'black'
+							}}>
+								 New
+							</Text>
+						</TouchableHighlight>	
+					</View>						
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold'
+							}}>
+								 
+							</Text>
+						</TouchableHighlight>	
+					</View>
+				</View>
+				<ScrollView>
 					<View style={{backgroundColor: 'white'}}>
 						<View style={{
 							borderColor: 'lightgray',
@@ -194,7 +193,8 @@ class AuditAdd extends Component {
                                         id: item[0].id,
                                         name: item[0].name,
 										pass: item[0].pass,
-										description: item[0].description
+										description: item[0].description,
+										invalidValue: false
                                     })
                                 }}>
 
@@ -210,16 +210,10 @@ class AuditAdd extends Component {
 						padding: 10,
 						paddingTop: 0,
 						marginTop: 0,
-						paddingBottom: 70,
 						backgroundColor: 'white'
 					}}>
 						<TextInput
-							style={styles.loginInput}
-							value={this.state.id}
-							placeholder="ID">
-						</TextInput>
-						
-						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								name: text,
 								invalidValue: false
@@ -228,8 +222,16 @@ class AuditAdd extends Component {
 							value={this.state.name}
 							placeholder="Name">
 						</TextInput>
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.id}
+							placeholder="ID">
+						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								pass: text,
 								invalidValue: false
@@ -240,6 +242,7 @@ class AuditAdd extends Component {
 						</TextInput>
 
 						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false
@@ -265,8 +268,8 @@ class AuditAdd extends Component {
 							style={styles.loader}
 						/>
 					</View>
-                </View>
-            </ScrollView>
+				</ScrollView>
+			</View>
         )
     }
 }
