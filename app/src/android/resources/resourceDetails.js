@@ -35,7 +35,7 @@ class ResourceDetails extends Component {
 			this.state = {
 				id: props.data.id,
 				name: props.data.name,
-				price: props.data.price,
+				price: (+props.data.price).toFixed(2),
 				quantity: props.data.quantity,
 				store: props.data.store,
 				description: props.data.description,
@@ -78,7 +78,7 @@ class ResourceDetails extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				if (responseData.price) {
+				if (responseData) {
 					appConfig.goods.refresh = true;
 					this.props.navigator.pop();
 				} else {
@@ -259,7 +259,6 @@ class ResourceDetails extends Component {
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							//value={(+this.state.price).toFixed(2)}
 							value={this.state.price}
 							placeholder="Price">
 						</TextInput>
