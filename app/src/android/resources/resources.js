@@ -38,11 +38,12 @@ class Resources extends Component {
 	}
 	
     componentWillUpdate() {
-        if (appConfig.users.refresh) {
-            appConfig.users.refresh = false;
+        if (appConfig.goods.refresh) {
+            appConfig.goods.refresh = false;
 
             this.setState({
-                showProgress: true
+                showProgress: true,
+				resultsCount: 0
             });
 
             this.getUsers();

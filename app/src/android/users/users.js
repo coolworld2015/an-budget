@@ -42,7 +42,8 @@ class Users extends Component {
             appConfig.users.refresh = false;
 
             this.setState({
-                showProgress: true
+                showProgress: true,
+				resultsCount: 0
             });
 
             this.getUsers();

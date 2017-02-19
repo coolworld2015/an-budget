@@ -96,8 +96,8 @@ class ResourceDetails extends Component {
 
     deleteUserDialog() {
 		Alert.alert(
-			'Delete user',
-			'Are you sure you want to delete user ' + this.state.name + '?',
+			'Delete resource',
+			'Are you sure you want to delete resource ' + this.state.name + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
@@ -115,7 +115,7 @@ class ResourceDetails extends Component {
 			bugANDROID: ' '
         });
 		
-        fetch(appConfig.url + 'api/users/delete', {
+        fetch(appConfig.url + 'api/goods/delete', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
@@ -130,7 +130,7 @@ class ResourceDetails extends Component {
             .then((responseData)=> {
 				console.log(responseData);
 				if (responseData.text) {
-					appConfig.users.refresh = true;
+					appConfig.goods.refresh = true;
 					this.props.navigator.pop();
 				} else {
 					this.setState({
@@ -174,65 +174,65 @@ class ResourceDetails extends Component {
         }
 
         return (
-            <ScrollView>
-				<View style={{flex: 1, justifyContent: 'center'}}>
-					<View style={{
-							flexDirection: 'row',
-							justifyContent: 'space-between'
-						}}>
-						<View>
-							<TouchableHighlight
-								onPress={()=> this.goBack()}
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 16,
-									textAlign: 'center',
-									margin: 14,
-									fontWeight: 'bold',
-									color: 'darkblue'
-								}}>
-									Back
-								</Text>
-							</TouchableHighlight>	
-						</View>
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 20,
-									textAlign: 'center',
-									margin: 10,
-									fontWeight: 'bold',
-									color: 'black'
-								}}>
-									{this.state.name}
-								</Text>
-							</TouchableHighlight>	
-						</View>						
-						<View>
-							<TouchableHighlight
-								onPress={()=> this.deleteUserDialog()}
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 16,
-									textAlign: 'center',
-									margin: 14,
-									fontWeight: 'bold',
-									color: 'darkblue'
-								}}>
-									Delete
-								</Text>
-							</TouchableHighlight>	
-						</View>
+ 			<View style={{flex: 1, justifyContent: 'center'}}>
+				<View style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between'
+					}}>
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'darkblue'
+							}}>
+								Back
+							</Text>
+						</TouchableHighlight>	
 					</View>
-
+					<View style={{flex:1,flexDirection:'column', flexWrap:'wrap'}}>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 20,
+								textAlign: 'center',
+								margin: 10,
+								fontWeight: 'bold',
+								color: 'black'
+							}}>
+								{this.state.name}
+							</Text>
+						</TouchableHighlight>	
+					</View>						
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.deleteUserDialog()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'darkblue'
+							}}>
+								Delete
+							</Text>
+						</TouchableHighlight>	
+					</View>
+				</View>
+				
+				<ScrollView>
 					<View style={{
 						flex: 1,
 						padding: 10,
-						paddingBottom: 55,
+						paddingBottom: 20,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
 					}}>						
@@ -294,8 +294,8 @@ class ResourceDetails extends Component {
 						
 						<Text>{this.state.bugANDROID}</Text>
 					</View>
-				</View>
-            </ScrollView>
+				</ScrollView>
+			</View>
         );
     }
 }

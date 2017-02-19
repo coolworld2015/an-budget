@@ -41,7 +41,7 @@ class App extends Component {
 			users: {
                 refresh: false
             },
-			phones: {
+			goods: {
                 refresh: false
             }
         };		

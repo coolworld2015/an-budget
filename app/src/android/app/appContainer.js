@@ -22,6 +22,7 @@ import UserAdd from '../users/userAdd';
 
 import Resources from '../resources/resources';
 import ResourceDetails from '../resources/resourceDetails';
+import ResourceAdd from '../resources/resourceAdd';
 
 class AppContainer extends Component {
 	constructor(props) {
@@ -55,7 +56,7 @@ class ResourcesTab extends Component {
 					break;			
 			case 1: return <ResourceDetails data={route.data} routes={this.routes} navigator={navigator} />
 					break;
-			case 2: return <UserAdd data={route.data} routes={this.routes} navigator={navigator} />
+			case 2: return <ResourceAdd data={route.data} routes={this.routes} navigator={navigator} />
 					break
  		}
  	}	

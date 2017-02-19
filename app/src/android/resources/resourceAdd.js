@@ -12,76 +12,29 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-    Picker,
-    CameraRoll
+	BackAndroid
 } from 'react-native';
 
-class AuditAdd extends Component {
+class ResourceAdd extends Component {
     constructor(props) {
         super(props);
-
-        var ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 != r2
-        });
-
+		
+		BackAndroid.addEventListener('hardwareBackPress', () => {
+			if (this.props.navigator) {
+				this.props.navigator.pop();
+			}
+			return true;
+		});
+		
         this.state = {
             showProgress: false,
-			serverError: true,
-            items: [],
-            item: 'New item',
-            dataSource: ds.cloneWithRows([])
-        };
-    }
-	
-	componentDidMount() {
-		this.getUsers();
-	}
-	
-    getUsers() {
-        fetch(appConfig.url + 'api/users/get', {			
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-				'Authorization': appConfig.access_token
-            }
-        })
-            .then((response)=> response.json())
-            .then((responseData)=> {
-				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select user'});
-				//console.log(items);
-                this.setState({
-                    items: items
-                });
-            })
-            .catch((error)=> {
-                this.setState({
-                    serverError: true
-                });
-            })
-            .finally(()=> {
-                this.setState({
-                    showProgress: false,
-                    serverError: false
-                });
-            });
-    }
-
-    sort(a, b) {
-        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
-        if (nameA < nameB) {
-            return -1
+			bugANDROID: ''
         }
-        if (nameA > nameB) {
-            return 1
-        }
-        return 0;
     }
 
     addUser() {
         if (this.state.name == undefined ||
-            this.state.pass == undefined ||
+            this.state.price == undefined ||
             this.state.description == undefined) {
             this.setState({
                 invalidValue: true
@@ -93,7 +46,40 @@ class AuditAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
-	}
+		
+        fetch(appConfig.url + 'api/goods/add', {
+            method: 'post',
+            body: JSON.stringify({
+                id: + new Date,
+                name: this.state.name,
+                price: this.state.price,
+				quantity: 0,
+				store: false,
+                description: this.state.description,
+				authorization: appConfig.access_token
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+                appConfig.goods.refresh = true;
+                this.props.navigator.pop();
+            })
+            .catch((error)=> {
+                console.log(error);
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
+    }
 	
 	goBack() {
 		this.props.navigator.pop();
@@ -116,98 +102,66 @@ class AuditAdd extends Component {
             </Text>;
         }
 
-        return (            
-			<View style={{flex: 1, justifyContent: 'center'}}>
-				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
-					<View>
-						<TouchableHighlight
-							onPress={()=> this.goBack()}
-							underlayColor='#ddd'
-						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'darkblue'
-							}}>
-								Back
-							</Text>
-						</TouchableHighlight>	
-					</View>
-					<View>
-						<TouchableHighlight
-							underlayColor='#ddd'
-						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								marginRight: 40,
-								fontWeight: 'bold',
-								color: 'black'
-							}}>
-								 New
-							</Text>
-						</TouchableHighlight>	
-					</View>						
-					<View>
-						<TouchableHighlight
-							underlayColor='#ddd'
-						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold'
-							}}>
-								 
-							</Text>
-						</TouchableHighlight>	
-					</View>
-				</View>
-				<ScrollView>
-					<View style={{backgroundColor: 'white'}}>
-						<View style={{
-							borderColor: 'lightgray',
-							borderWidth: 5,
-							marginTop: 15,
-							margin: 5,
-							marginBottom: 0,
-							flex: 1,
+        return (
+            <ScrollView>
+				<View style={{flex: 1, justifyContent: 'center'}}>
+					<View style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between'
 						}}>
-							<Picker style={{marginTop: 0}}
-                                selectedValue={this.state.item}
-
-                                onValueChange={(value) => {
-									let arr = [].concat(this.state.items);
- 									let item = arr.filter((el) => el.id == value);
- 
-                                    this.setState({
-                                        item: value,
-                                        id: item[0].id,
-                                        name: item[0].name,
-										pass: item[0].pass,
-										description: item[0].description,
-										invalidValue: false
-                                    })
-                                }}>
-
-								{this.state.items.map((item, i) =>
-									<Picker.Item value={item.id} label={item.name} key={i}/>
-								)}
-							</Picker>
+						<View>
+							<TouchableHighlight
+								onPress={()=> this.goBack()}
+								underlayColor='#ddd'
+							>
+								<Text style={{
+									fontSize: 16,
+									textAlign: 'center',
+									margin: 14,
+									fontWeight: 'bold',
+									color: 'darkblue'
+								}}>
+									Back
+								</Text>
+							</TouchableHighlight>	
+						</View>
+						<View>
+							<TouchableHighlight
+								underlayColor='#ddd'
+							>
+								<Text style={{
+									fontSize: 20,
+									textAlign: 'center',
+									margin: 10,
+									marginRight: 40,
+									fontWeight: 'bold',
+									color: 'black'
+								}}>
+									 New
+								</Text>
+							</TouchableHighlight>	
+						</View>						
+						<View>
+							<TouchableHighlight
+								underlayColor='#ddd'
+							>
+								<Text style={{
+									fontSize: 16,
+									textAlign: 'center',
+									margin: 14,
+									fontWeight: 'bold'
+								}}>
+									 
+								</Text>
+							</TouchableHighlight>	
 						</View>
 					</View>
-
+					
 					<View style={{
 						flex: 1,
 						padding: 10,
-						paddingTop: 0,
-						marginTop: 0,
+						justifyContent: 'flex-start',
+						paddingBottom: 115,
 						backgroundColor: 'white'
 					}}>
 						<TextInput
@@ -220,22 +174,15 @@ class AuditAdd extends Component {
 							value={this.state.name}
 							placeholder="Name">
 						</TextInput>
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.id}
-							placeholder="ID">
-						</TextInput>
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								pass: text,
+								price: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.pass}
+							value={this.state.price}
 							placeholder="Password">
 						</TextInput>
 
@@ -257,7 +204,7 @@ class AuditAdd extends Component {
 							style={styles.button}>
 							<Text style={styles.buttonText}>Add</Text>
 						</TouchableHighlight>
-						
+
 						{errorCtrl}
 
 						<ActivityIndicator
@@ -265,23 +212,16 @@ class AuditAdd extends Component {
 							size="large"
 							style={styles.loader}
 						/>
+						
+						<Text>{this.state.bugANDROID}</Text>
 					</View>
-				</ScrollView>
-			</View>
+				</View>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    imgsList: {
-        flex: 1,
-        flexDirection: 'row',
-        padding: 0,
-        alignItems: 'center',
-        borderColor: '#D7D7D7',
-        borderBottomWidth: 1,
-        backgroundColor: '#fff'
-    },
     AppContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -321,7 +261,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#48BBEC',
         borderColor: '#48BBEC',
         alignSelf: 'stretch',
-        marginTop: 25,
+        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5
@@ -331,20 +271,19 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-		marginTop: 30
+        marginTop: 40
     },
     error: {
         color: 'red',
-        paddingTop: 20,
+        paddingTop: 10,
         textAlign: 'center'
     },
     img: {
-        height: 300,
-        width: 300,
+        height: 95,
+        width: 75,
         borderRadius: 20,
-        margin: 20,
-        alignItems: 'center'
+        margin: 20
     }
 });
 
-export default AuditAdd;
+export default ResourceAdd;
