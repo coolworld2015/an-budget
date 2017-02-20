@@ -36,6 +36,8 @@ import Employees from '../employees/employees';
 import EmployeeDetails from '../employees/employeeDetails';
 import EmployeeAdd from '../employees/employeeAdd';
 
+import Assets from '../resources/assets';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -44,6 +46,7 @@ class AppContainer extends Component {
 	render() {
 		return (
 			<ScrollableTabView>
+ 				<AssetsTab tabLabel="Main" />
  				<EmployeesTab tabLabel="Emps" />
  				<DepartmentsTab tabLabel="Deps" />
  				<ProjectsTab tabLabel="Projs" />
@@ -52,6 +55,36 @@ class AppContainer extends Component {
 				<AuditTab tabLabel="Audit" />
 			</ScrollableTabView>
 		);
+	}
+}
+
+class AssetsTab extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'Assets', index: 0}
+		];
+	}
+		  
+	renderScene(route, navigator) {
+		switch (route.index) {
+			case 0: return <Assets routes={this.routes} navigator={navigator} />
+					break;
+		}
+ 	}	
+	
+	render() {
+		return (
+	  		<Navigator
+			initialRoute={this.routes[0]}
+			initialRouteStack={this.routes}
+		    renderScene={this.renderScene.bind(this)}
+			style={{padding: 0}}
+		  
+			configureScene={(route, routeStack) =>
+				Navigator.SceneConfigs.PushFromRight}
+		/>
+		)
 	}
 }
 
