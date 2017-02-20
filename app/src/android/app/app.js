@@ -49,6 +49,9 @@ class App extends Component {
             },
 			departments: {
                 refresh: false
+            },
+			employees: {
+                refresh: false
             }
         };		
     }

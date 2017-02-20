@@ -32,6 +32,10 @@ import Departments from '../departments/departments';
 import DepartmentDetails from '../departments/departmentDetails';
 import DepartmentAdd from '../departments/departmentAdd';
 
+import Employees from '../employees/employees';
+import EmployeeDetails from '../employees/employeeDetails';
+import EmployeeAdd from '../employees/employeeAdd';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -40,6 +44,7 @@ class AppContainer extends Component {
 	render() {
 		return (
 			<ScrollableTabView>
+ 				<EmployeesTab tabLabel="Emps" />
  				<DepartmentsTab tabLabel="Deps" />
  				<ProjectsTab tabLabel="Projs" />
  				<ResourcesTab tabLabel="Res" />
@@ -47,6 +52,42 @@ class AppContainer extends Component {
 				<AuditTab tabLabel="Audit" />
 			</ScrollableTabView>
 		);
+	}
+}
+
+class EmployeesTab extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'Employees', index: 0},
+			{title: 'Employee Details', index: 1},
+			{title: 'Add Employee', index: 2}
+		];
+	}
+		  
+	renderScene(route, navigator) {
+		switch (route.index) {
+			case 0: return <Employees routes={this.routes} navigator={navigator} />
+					break;			
+			case 1: return <EmployeeDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;
+			case 2: return <EmployeeAdd data={route.data} routes={this.routes} navigator={navigator} />
+					break
+ 		}
+ 	}	
+	
+	render() {
+		return (
+	  		<Navigator
+			initialRoute={this.routes[0]}
+			initialRouteStack={this.routes}
+		    renderScene={this.renderScene.bind(this)}
+			style={{padding: 0}}
+		  
+			configureScene={(route, routeStack) =>
+				Navigator.SceneConfigs.PushFromRight}
+		/>
+		)
 	}
 }
 
