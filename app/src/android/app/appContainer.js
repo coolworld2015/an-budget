@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import DefaultTabBar from './DefaultTabBar';
 
 import Audit from '../audit/audit';
 import AuditDetails from '../audit/auditDetails';
@@ -45,8 +46,12 @@ class AppContainer extends Component {
 	
 	render() {
 		return (
-			<ScrollableTabView>
+			<ScrollableTabView 
+				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
+			>
  				<AssetsTab tabLabel="Main" />
+ 				<AssetsTab tabLabel="Output" />
+ 				<AssetsTab tabLabel="Input" />
  				<EmployeesTab tabLabel="Emps" />
  				<DepartmentsTab tabLabel="Deps" />
  				<ProjectsTab tabLabel="Projs" />
@@ -76,14 +81,14 @@ class AssetsTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -112,14 +117,14 @@ class EmployeesTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -148,14 +153,14 @@ class DepartmentsTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -184,14 +189,14 @@ class ProjectsTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -220,14 +225,14 @@ class ResourcesTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -256,14 +261,14 @@ class UsersTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
@@ -292,14 +297,14 @@ class AuditTab extends Component {
 	render() {
 		return (
 	  		<Navigator
-			initialRoute={this.routes[0]}
-			initialRouteStack={this.routes}
-		    renderScene={this.renderScene.bind(this)}			
-			style={{padding: 0}}
-		  
-			configureScene={(route, routeStack) =>
-				Navigator.SceneConfigs.PushFromRight}
-		/>
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
 		)
 	}
 }
