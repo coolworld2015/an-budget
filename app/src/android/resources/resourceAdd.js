@@ -32,7 +32,7 @@ class ResourceAdd extends Component {
         }
     }
 
-    addUser() {
+    addItem() {
         if (this.state.name == undefined ||
             this.state.price == undefined ||
             this.state.description == undefined) {
@@ -201,7 +201,7 @@ class ResourceAdd extends Component {
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.addUser()}
+							onPress={()=> this.addItem()}
 							style={styles.button}>
 							<Text style={styles.buttonText}>Add</Text>
 						</TouchableHighlight>

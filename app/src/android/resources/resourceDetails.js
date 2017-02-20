@@ -44,8 +44,7 @@ class ResourceDetails extends Component {
 		}		
     }
 
-    updateUser() {
-		console.log(this.state);
+    updateItem() {
         if (this.state.name == '' ||
             this.state.price == '' ||
             this.state.description == '') {
@@ -99,22 +98,22 @@ class ResourceDetails extends Component {
             });
     }
 
-    deleteUserDialog() {
+    deleteItemDialog() {
 		Alert.alert(
-			'Delete resource',
-			'Are you sure you want to delete resource ' + this.state.name + '?',
+			'Delete record',
+			'Are you sure you want to delete record ' + this.state.name + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
 					text: 'OK', onPress: () => {
-					this.deleteUser();
+					this.deleteItem();
 					}
 				},
 			]
 		);	
 	}
 	
-    deleteUser() {		
+    deleteItem() {		
         this.setState({
             showProgress: true,
 			bugANDROID: ' '
@@ -217,7 +216,7 @@ class ResourceDetails extends Component {
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.deleteUserDialog()}
+							onPress={()=> this.deleteItemDialog()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
@@ -278,7 +277,7 @@ class ResourceDetails extends Component {
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.updateUser()}
+							onPress={()=> this.updateItem()}
 
 							style={styles.button}>
 							<Text style={styles.buttonText}>Submit</Text>

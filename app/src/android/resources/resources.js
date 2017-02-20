@@ -34,7 +34,7 @@ class Resources extends Component {
     }
 	
 	componentDidMount() {
-		this.getUsers();
+		this.getItems();
 	}
 	
     componentWillUpdate() {
@@ -46,11 +46,11 @@ class Resources extends Component {
 				resultsCount: 0
             });
 
-            this.getUsers();
+            this.getItems();
         }
     }
 
-    getUsers() {
+    getItems() {
         fetch(appConfig.url + 'api/goods/get', {			
             method: 'get',
             headers: {
@@ -99,7 +99,7 @@ class Resources extends Component {
 		});
     }
 	
-    addUser() {
+    addItem() {
 		this.props.navigator.push({
 			index: 2
 		});
@@ -193,7 +193,7 @@ class Resources extends Component {
 			resultsCount: 0
 		});
 
-		this.getUsers();
+		this.getItems();
 	}
 	
     render() {
@@ -256,7 +256,7 @@ class Resources extends Component {
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.addUser()}
+							onPress={()=> this.addItem()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
