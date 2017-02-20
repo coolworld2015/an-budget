@@ -52,6 +52,9 @@ class App extends Component {
             },
 			employees: {
                 refresh: false
+            },
+			inputs: {
+                refresh: false
             }
         };		
     }

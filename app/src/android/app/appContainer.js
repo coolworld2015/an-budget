@@ -39,6 +39,10 @@ import EmployeeAdd from '../employees/employeeAdd';
 
 import Assets from '../resources/assets';
 
+import Inputs from '../inputs/inputs';
+import InputDetails from '../inputs/inputDetails';
+import InputAdd from '../inputs/inputAdd';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -53,8 +57,8 @@ class AppContainer extends Component {
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
 			>
- 				<AssetsTab tabLabel="Main" />
- 				<AssetsTab tabLabel="Input" />
+ 				<InputsTab tabLabel="Input" />
+ 				<AssetsTab tabLabel="Assets" />
  				<EmployeesTab tabLabel="Emps" />
  				<DepartmentsTab tabLabel="Deps" />
  				<ProjectsTab tabLabel="Projs" />
@@ -64,6 +68,42 @@ class AppContainer extends Component {
 				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />
 			</ScrollableTabView>
 		);
+	}
+}
+
+class InputsTab extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'Inputs', index: 0},
+			{title: 'Input Details', index: 1},
+			{title: 'Add Input', index: 2}
+		];
+	}
+		  
+	renderScene(route, navigator) {
+		switch (route.index) {
+			case 0: return <Inputs routes={this.routes} navigator={navigator} />
+					break;			
+			case 1: return <InputDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;
+			case 2: return <InputAdd data={route.data} routes={this.routes} navigator={navigator} />
+					break
+ 		}
+ 	}	
+	
+	render() {
+		return (
+	  		<Navigator
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
+		)
 	}
 }
 
