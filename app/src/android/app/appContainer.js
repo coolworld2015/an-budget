@@ -44,13 +44,16 @@ class AppContainer extends Component {
 		super(props);				
 	}
 	
+	onLogOut() {
+        this.props.onLogOut();
+    }
+	
 	render() {
 		return (
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
 			>
  				<AssetsTab tabLabel="Main" />
- 				<AssetsTab tabLabel="Output" />
  				<AssetsTab tabLabel="Input" />
  				<EmployeesTab tabLabel="Emps" />
  				<DepartmentsTab tabLabel="Deps" />
@@ -58,6 +61,7 @@ class AppContainer extends Component {
  				<ResourcesTab tabLabel="Res" />
  				<UsersTab tabLabel="Users" />
 				<AuditTab tabLabel="Audit" />
+				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />
 			</ScrollableTabView>
 		);
 	}
@@ -88,6 +92,25 @@ class AssetsTab extends Component {
 			  
 				configureScene={(route, routeStack) =>
 					Navigator.SceneConfigs.PushFromRight}
+			/>
+		)
+	}
+}
+
+class LogOut extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'LogOut', index: 0}
+		];
+	}
+	
+	render() {
+		return (
+	  		<Navigator
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.props.logOut.bind(this)}
 			/>
 		)
 	}
