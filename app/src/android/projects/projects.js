@@ -38,8 +38,8 @@ class Projects extends Component {
 	}
 	
     componentWillUpdate() {
-        if (appConfig.goods.refresh) {
-            appConfig.goods.refresh = false;
+        if (appConfig.projects.refresh) {
+            appConfig.projects.refresh = false;
 
             this.setState({
                 showProgress: true,

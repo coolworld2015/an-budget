@@ -43,6 +43,9 @@ class App extends Component {
             },
 			goods: {
                 refresh: false
+            },
+			projects: {
+                refresh: false
             }
         };		
     }

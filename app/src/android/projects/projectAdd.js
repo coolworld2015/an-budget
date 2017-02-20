@@ -33,9 +33,11 @@ class ProjectAdd extends Component {
     }
 
     addItem() {
-        if (this.state.name == undefined ||
-            this.state.price == undefined ||
-            this.state.description == undefined) {
+        if (this.state.name == '' ||
+            this.state.address == '' ||
+            this.state.phone == '' ||
+            this.state.sum == '' ||
+            this.state.description == '') {
             this.setState({
                 invalidValue: true
             });
@@ -47,15 +49,15 @@ class ProjectAdd extends Component {
 			bugANDROID: ' '
         });
 		
-        fetch(appConfig.url + 'api/goods/add', {
+        fetch(appConfig.url + 'api/projects/add', {
             method: 'post',
             body: JSON.stringify({
                 id: + new Date,
                 name: this.state.name,
-                price: this.state.price,
-				quantity: 0,
-				store: false,
+                address: this.state.address,
+                phone: this.state.phone,
                 description: this.state.description,
+				sum: 0,
 				authorization: appConfig.access_token
             }),
             headers: {
@@ -65,7 +67,7 @@ class ProjectAdd extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-                appConfig.goods.refresh = true;
+                appConfig.projects.refresh = true;
                 this.props.navigator.pop();
             })
             .catch((error)=> {
@@ -178,13 +180,24 @@ class ProjectAdd extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								price: text,
+								address: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.price}
-							placeholder="Price">
-						</TextInput>
+							value={this.state.address}
+							placeholder="Address">
+						</TextInput>						
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							onChangeText={(text)=> this.setState({
+								phone: text,
+								invalidValue: false
+							})}
+							style={styles.loginInput}
+							value={this.state.phone}
+							placeholder="Phone">
+						</TextInput>						
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
@@ -193,7 +206,7 @@ class ProjectAdd extends Component {
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput1}
+							style={styles.loginInput}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>

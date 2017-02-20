@@ -35,10 +35,10 @@ class ProjectDetails extends Component {
 			this.state = {
 				id: props.data.id,
 				name: props.data.name,
-				price: (+props.data.price).toFixed(2),
-				quantity: props.data.quantity,
-				store: props.data.store,
+				address: props.data.address,
+				phone: props.data.phone,
 				description: props.data.description,
+				sum: (+props.data.sum).toFixed(2),
 				showProgress: false
 			};
 		}		
@@ -46,7 +46,9 @@ class ProjectDetails extends Component {
 
     updateItem() {
         if (this.state.name == '' ||
-            this.state.price == '' ||
+            this.state.address == '' ||
+            this.state.phone == '' ||
+            this.state.sum == '' ||
             this.state.description == '') {
             this.setState({
                 invalidValue: true
@@ -59,15 +61,15 @@ class ProjectDetails extends Component {
 			bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'api/goods/update', {
+        fetch(appConfig.url + 'api/projects/update', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
                 name: this.state.name,
-                price: this.state.price,
-				quantity: this.state.quantity,
-				store: this.state.store,
+				address: this.state.address,
+				phone: this.state.phone,
                 description: this.state.description,
+                sum: this.state.sum,
 				authorization: appConfig.access_token
             }),
             headers: {
@@ -78,7 +80,7 @@ class ProjectDetails extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				if (responseData) {
-					appConfig.goods.refresh = true;
+					appConfig.projects.refresh = true;
 					this.props.navigator.pop();
 				} else {
 					this.setState({
@@ -119,7 +121,7 @@ class ProjectDetails extends Component {
 			bugANDROID: ' '
         });
 		
-        fetch(appConfig.url + 'api/goods/delete', {
+        fetch(appConfig.url + 'api/projects/delete', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
@@ -134,7 +136,7 @@ class ProjectDetails extends Component {
             .then((responseData)=> {
 				console.log(responseData);
 				if (responseData.text) {
-					appConfig.goods.refresh = true;
+					appConfig.projects.refresh = true;
 					this.props.navigator.pop();
 				} else {
 					this.setState({
@@ -236,7 +238,7 @@ class ProjectDetails extends Component {
 					<View style={{
 						flex: 1,
 						padding: 10,
-						paddingBottom: 80,
+						paddingBottom: 40,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
 					}}>						
@@ -250,16 +252,27 @@ class ProjectDetails extends Component {
 							value={this.state.name}
 							placeholder="Name">
 						</TextInput>
-
+						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								price: text,
+								address: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.price}
-							placeholder="Price">
+							value={this.state.address}
+							placeholder="Address">
+						</TextInput>
+												
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							onChangeText={(text)=> this.setState({
+								phone: text,
+								invalidValue: false
+							})}
+							style={styles.loginInput}
+							value={this.state.phone}
+							placeholder="Phone">
 						</TextInput>
 
 						<TextInput
@@ -269,11 +282,18 @@ class ProjectDetails extends Component {
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput1}
+							style={styles.loginInput}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>
-
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.sum}
+							placeholder="Total">
+						</TextInput>
+						
 						{validCtrl}
 
 						<TouchableHighlight
