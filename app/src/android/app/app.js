@@ -46,6 +46,9 @@ class App extends Component {
             },
 			projects: {
                 refresh: false
+            },
+			departments: {
+                refresh: false
             }
         };		
     }
