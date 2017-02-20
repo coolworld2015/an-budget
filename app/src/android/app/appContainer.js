@@ -24,6 +24,10 @@ import Resources from '../resources/resources';
 import ResourceDetails from '../resources/resourceDetails';
 import ResourceAdd from '../resources/resourceAdd';
 
+import Projects from '../projects/projects';
+import ProjectDetails from '../projects/projectDetails';
+import ProjectAdd from '../projects/projectAdd';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -32,11 +36,48 @@ class AppContainer extends Component {
 	render() {
 		return (
 			<ScrollableTabView>
+ 				<ProjectsTab tabLabel="Projects" />
  				<ResourcesTab tabLabel="Resources" />
  				<UsersTab tabLabel="Users" />
 				<AuditTab tabLabel="Audit" />
 			</ScrollableTabView>
 		);
+	}
+}
+
+class ProjectsTab extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'Projects', index: 0},
+			{title: 'Project Details', index: 1},
+			{title: 'Add Project', index: 2}
+		];
+	}
+		  
+	renderScene(route, navigator) {
+		switch (route.index) {
+			case 0: return <Projects routes={this.routes} navigator={navigator} />
+					break;			
+			case 1: return <ProjectDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;
+			case 2: return <ProjectAdd data={route.data} routes={this.routes} navigator={navigator} />
+					break
+ 		}
+ 	}	
+	
+	render() {
+		return (
+	  		<Navigator
+			initialRoute={this.routes[0]}
+			initialRouteStack={this.routes}
+		    renderScene={this.renderScene.bind(this)}
+			style={{padding: 0}}
+		  
+			configureScene={(route, routeStack) =>
+				Navigator.SceneConfigs.PushFromRight}
+		/>
+		)
 	}
 }
 
