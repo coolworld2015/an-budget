@@ -12,31 +12,168 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-	BackAndroid
+    Picker,
+    CameraRoll
 } from 'react-native';
 
-class ProjectAdd extends Component {
+class InputAdd extends Component {
     constructor(props) {
         super(props);
-		
-		BackAndroid.addEventListener('hardwareBackPress', () => {
-			if (this.props.navigator) {
-				this.props.navigator.pop();
-			}
-			return true;
-		});
-		
+
+        var ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 != r2
+        });
+
         this.state = {
             showProgress: false,
-			bugANDROID: ''
-        }
+			serverError: true,
+            projects: [],
+            departments: [],
+            employees: [],
+            goods: [],
+            item: 'New item',
+            department: 'department',
+            dataSource: ds.cloneWithRows([])
+        };
+    }
+	
+	componentDidMount() {
+		this.getProjects();
+		this.getDepartments();
+		this.getEmployees();
+		this.getGoods();
+	}
+	
+	getGoods() {
+        fetch(appConfig.url + 'api/goods/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'Select resource'});
+                this.setState({
+                    goods: items
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
+    }	
+	
+	getEmployees() {
+        fetch(appConfig.url + 'api/employees/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'Select employee'});
+                this.setState({
+                    employees: items
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
+    }	
+	
+	getProjects() {
+        fetch(appConfig.url + 'api/projects/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'Select project'});
+                this.setState({
+                    projects: items
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
     }
 
-    addItem() {
+    getDepartments() {
+        fetch(appConfig.url + 'api/departments/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'Select department'});
+                this.setState({
+                    departments: items
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
+    }
+
+    sort(a, b) {
+        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+        if (nameA < nameB) {
+            return -1
+        }
+        if (nameA > nameB) {
+            return 1
+        }
+        return 0;
+    }
+
+    addUser() {
         if (this.state.name == undefined ||
-            this.state.address == undefined ||
-            this.state.phone == undefined ||
-            this.state.sum == undefined ||
+            this.state.pass == undefined ||
             this.state.description == undefined) {
             this.setState({
                 invalidValue: true
@@ -48,40 +185,7 @@ class ProjectAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
-		
-        fetch(appConfig.url + 'api/projects/add', {
-            method: 'post',
-            body: JSON.stringify({
-                id: + new Date,
-                name: this.state.name,
-                address: this.state.address,
-                phone: this.state.phone,
-                description: this.state.description,
-				sum: 0,
-				authorization: appConfig.access_token
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response)=> response.json())
-            .then((responseData)=> {
-                appConfig.projects.refresh = true;
-                this.props.navigator.pop();
-            })
-            .catch((error)=> {
-                console.log(error);
-                this.setState({
-                    serverError: true
-                });
-            })
-            .finally(()=> {
-                this.setState({
-                    showProgress: false
-                });
-            });
-    }
+	}
 	
 	goBack() {
 		this.props.navigator.pop();
@@ -104,7 +208,7 @@ class ProjectAdd extends Component {
             </Text>;
         }
 
-        return (
+        return (            
 			<View style={{flex: 1, justifyContent: 'center'}}>
 				<View style={{
 						flexDirection: 'row',
@@ -157,13 +261,15 @@ class ProjectAdd extends Component {
 						</TouchableHighlight>	
 					</View>
 				</View>
-					
+				
 				<ScrollView>
 					<View style={{
 						flex: 1,
 						padding: 10,
-						justifyContent: 'flex-start',
-						paddingBottom: 90,
+						paddingTop: 0,
+						paddingBottom: 0,
+						marginTop: 0,
+						marginBottom: 0,
 						backgroundColor: 'white'
 					}}>
 						<TextInput
@@ -176,32 +282,119 @@ class ProjectAdd extends Component {
 							value={this.state.name}
 							placeholder="Name">
 						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								address: text,
-								invalidValue: false
-							})}
-							style={styles.loginInput}
-							value={this.state.address}
-							placeholder="Address">
-						</TextInput>						
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.id}
+							placeholder="ID">
+						</TextInput>
+					</View>
+					
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
+                                selectedValue={this.state.department}
+
+                                onValueChange={(value) => {
+									let arr = [].concat(this.state.departments);
+ 									let department = arr.filter((el) => el.id == value);
+ 
+                                    this.setState({
+                                        department: value,
+                                        id: department[0].id,
+                                        name: department[0].name,
+										pass: department[0].pass,
+										description: department[0].description,
+										invalidValue: false
+                                    })
+                                }}>
+
+								{this.state.departments.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>
+					
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
+                                selectedValue={this.state.item}
+
+                                onValueChange={(value) => {
+									let arr = [].concat(this.state.projects);
+ 									let item = arr.filter((el) => el.id == value);
+ 
+                                    this.setState({
+                                        item: value,
+                                        id: item[0].id,
+                                        name: item[0].name,
+										pass: item[0].pass,
+										description: item[0].description,
+										invalidValue: false
+                                    })
+                                }}>
+
+								{this.state.projects.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>
+					
+					<View style={{
+						flex: 1,
+						padding: 10,
+						paddingTop: 0,
+						marginTop: 0,
+						backgroundColor: 'white'
+					}}>
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								phone: text,
+								name: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.phone}
-							placeholder="Phone">
-						</TextInput>						
+							value={this.state.name}
+							placeholder="Name">
+						</TextInput>
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.id}
+							placeholder="ID">
+						</TextInput>
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							multiline={true}
+							onChangeText={(text)=> this.setState({
+								pass: text,
+								invalidValue: false
+							})}
+							style={styles.loginInput}
+							value={this.state.pass}
+							placeholder="Password">
+						</TextInput>
+
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false
@@ -214,11 +407,11 @@ class ProjectAdd extends Component {
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.addItem()}
+							onPress={()=> this.addUser()}
 							style={styles.button}>
 							<Text style={styles.buttonText}>Add</Text>
 						</TouchableHighlight>
-
+						
 						{errorCtrl}
 
 						<ActivityIndicator
@@ -226,8 +419,6 @@ class ProjectAdd extends Component {
 							size="large"
 							style={styles.loader}
 						/>
-						
-						<Text>{this.state.bugANDROID}</Text>
 					</View>
 				</ScrollView>
 			</View>
@@ -236,6 +427,15 @@ class ProjectAdd extends Component {
 }
 
 const styles = StyleSheet.create({
+    imgsList: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 0,
+        alignItems: 'center',
+        borderColor: '#D7D7D7',
+        borderBottomWidth: 1,
+        backgroundColor: '#fff'
+    },
     AppContainer: {
         flex: 1,
         justifyContent: 'center',
@@ -270,22 +470,12 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         color: 'black'
     },
-    loginInput1: {
-        height: 100,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 0,
-        color: 'black'
-    },		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
         borderColor: '#48BBEC',
         alignSelf: 'stretch',
-        marginTop: 10,
+        marginTop: 25,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5
@@ -295,19 +485,20 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-        marginTop: 40
+		marginTop: 30
     },
     error: {
         color: 'red',
-        paddingTop: 10,
+        paddingTop: 20,
         textAlign: 'center'
     },
     img: {
-        height: 95,
-        width: 75,
+        height: 300,
+        width: 300,
         borderRadius: 20,
-        margin: 20
+        margin: 20,
+        alignItems: 'center'
     }
 });
 
-export default ProjectAdd;
+export default InputAdd;
