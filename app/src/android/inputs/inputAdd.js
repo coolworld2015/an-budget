@@ -33,11 +33,11 @@ class ProjectAdd extends Component {
     }
 
     addItem() {
-        if (this.state.name == '' ||
-            this.state.address == '' ||
-            this.state.phone == '' ||
-            this.state.sum == '' ||
-            this.state.description == '') {
+        if (this.state.name == undefined ||
+            this.state.address == undefined ||
+            this.state.phone == undefined ||
+            this.state.sum == undefined ||
+            this.state.description == undefined) {
             this.setState({
                 invalidValue: true
             });
