@@ -31,8 +31,6 @@ class InputAdd extends Component {
             departments: [],
             employees: [],
             goods: [],
-            item: 'New item',
-            department: 'department',
             dataSource: ds.cloneWithRows([])
         };
     }
@@ -58,7 +56,8 @@ class InputAdd extends Component {
 				var items = responseData.sort(this.sort);
 				items.unshift({name: 'Select resource'});
                 this.setState({
-                    goods: items
+                    goods: items,
+					serverError: false
                 });
             })
             .catch((error)=> {
@@ -87,7 +86,8 @@ class InputAdd extends Component {
 				var items = responseData.sort(this.sort);
 				items.unshift({name: 'Select employee'});
                 this.setState({
-                    employees: items
+                    employees: items,
+					serverError: false
                 });
             })
             .catch((error)=> {
@@ -116,7 +116,8 @@ class InputAdd extends Component {
 				var items = responseData.sort(this.sort);
 				items.unshift({name: 'Select project'});
                 this.setState({
-                    projects: items
+                    projects: items,
+					serverError: false
                 });
             })
             .catch((error)=> {
@@ -145,7 +146,8 @@ class InputAdd extends Component {
 				var items = responseData.sort(this.sort);
 				items.unshift({name: 'Select department'});
                 this.setState({
-                    departments: items
+                    departments: items,
+					serverError: false
                 });
             })
             .catch((error)=> {
@@ -301,6 +303,39 @@ class InputAdd extends Component {
 							flex: 1,
 						}}>
 							<Picker style={{marginTop: 0}}
+                                selectedValue={this.state.project}
+
+                                onValueChange={(value) => {
+									let arr = [].concat(this.state.projects);
+ 									let project = arr.filter((el) => el.id == value);
+ 
+                                    this.setState({
+                                        project: value,
+                                        id: project[0].id,
+                                        name: project[0].name,
+										pass: project[0].pass,
+										description: project[0].description,
+										invalidValue: false
+                                    })
+                                }}>
+
+								{this.state.projects.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>
+					
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
                                 selectedValue={this.state.department}
 
                                 onValueChange={(value) => {
@@ -334,23 +369,23 @@ class InputAdd extends Component {
 							flex: 1,
 						}}>
 							<Picker style={{marginTop: 0}}
-                                selectedValue={this.state.item}
+                                selectedValue={this.state.employee}
 
                                 onValueChange={(value) => {
-									let arr = [].concat(this.state.projects);
- 									let item = arr.filter((el) => el.id == value);
+									let arr = [].concat(this.state.employees);
+ 									let employee = arr.filter((el) => el.id == value);
  
                                     this.setState({
-                                        item: value,
-                                        id: item[0].id,
-                                        name: item[0].name,
-										pass: item[0].pass,
-										description: item[0].description,
+                                        employee: value,
+                                        id: employee[0].id,
+                                        name: employee[0].name,
+										pass: employee[0].pass,
+										description: employee[0].description,
 										invalidValue: false
                                     })
                                 }}>
 
-								{this.state.projects.map((item, i) =>
+								{this.state.employees.map((item, i) =>
 									<Picker.Item value={item.id} label={item.name} key={i}/>
 								)}
 							</Picker>
