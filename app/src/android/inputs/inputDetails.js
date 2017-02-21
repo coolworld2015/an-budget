@@ -34,70 +34,24 @@ class ProjectDetails extends Component {
 		if (props.data) {
 			this.state = {
 				id: props.data.id,
-				name: props.data.name,
-				address: props.data.address,
-				phone: props.data.phone,
+				invoiceID: props.data.invoiceID,
+				date: props.data.date,
+				project: props.data.project,
+				projectID: props.data.projectID,
+				department: props.data.department,				
+				departmentID: props.data.departmentID,				
+				employee: props.data.employee,
+				employeeID: props.data.employeeID,
+				product: props.data.product,	
+				productID: props.data.productID,				
 				description: props.data.description,
-				sum: (+props.data.sum).toFixed(2),
-				showProgress: false
+				price: (+props.data.price).toFixed(2),
+				quantity: (+props.data.quantity).toFixed(2),
+				total: (+props.data.total).toFixed(2),
+				showProgress: false,
+				serverError: false
 			};
 		}		
-    }
-
-    updateItem() {
-        if (this.state.name == '' ||
-            this.state.address == '' ||
-            this.state.phone == '' ||
-            this.state.sum == '' ||
-            this.state.description == '') {
-            this.setState({
-                invalidValue: true
-            });
-            return;
-        }
-
-        this.setState({
-            showProgress: true,
-			bugANDROID: ' '
-        });
-
-        fetch(appConfig.url + 'api/projects/update', {
-            method: 'post',
-            body: JSON.stringify({
-                id: this.state.id,
-                name: this.state.name,
-				address: this.state.address,
-				phone: this.state.phone,
-                description: this.state.description,
-                sum: this.state.sum,
-				authorization: appConfig.access_token
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response)=> response.json())
-            .then((responseData)=> {
-				if (responseData) {
-					appConfig.projects.refresh = true;
-					this.props.navigator.pop();
-				} else {
-					this.setState({
-						badCredentials: true
-					});
-				}
-            })
-            .catch((error)=> {
-                this.setState({
-                    serverError: true
-                });
-            })
-            .finally(()=> {
-                this.setState({
-                    showProgress: false
-                });
-            });
     }
 
     deleteItemDialog() {
@@ -120,11 +74,25 @@ class ProjectDetails extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
-		
-        fetch(appConfig.url + 'api/projects/delete', {
+
+        fetch(appConfig.url + 'api/inputs/delete', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
+				date: this.state.date,
+				department: this.state.department,
+				departmentID: this.state.departmentID,
+				description: this.state.description,
+				employee: this.state.employee,
+				employeeID: this.state.employeeID,
+				invoiceID: this.state.invoiceID,
+				price: this.state.price,
+				product: this.state.product,
+				productID: this.state.productID,
+				project: this.state.project,
+				projectID: this.state.projectID,
+				quantity: this.state.quantity,
+				total: this.state.total,
 				authorization: appConfig.access_token
             }),
             headers: {
@@ -135,8 +103,8 @@ class ProjectDetails extends Component {
 			.then((response)=> response.json())
             .then((responseData)=> {
 				console.log(responseData);
-				if (responseData.text) {
-					appConfig.projects.refresh = true;
+				if (responseData) {
+					appConfig.inputs.refresh = true;
 					this.props.navigator.pop();
 				} else {
 					this.setState({
@@ -178,7 +146,17 @@ class ProjectDetails extends Component {
                 Value required - please provide.
             </Text>;
         }
-
+		
+		var loader = <View />;
+				
+		if (this.state.showProgress) {
+			loader = <ActivityIndicator
+				animating={true}
+				size="large"
+				style={styles.loader}
+			/>	
+		}
+		
         return (
  			<View style={{flex: 1, justifyContent: 'center'}}>
 				<View style={{
@@ -212,7 +190,7 @@ class ProjectDetails extends Component {
 								fontWeight: 'bold',
 								color: 'black'
 							}}>
-								{this.state.name}
+								{this.state.invoiceID}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -233,7 +211,7 @@ class ProjectDetails extends Component {
 						</TouchableHighlight>	
 					</View>
 				</View>
-				
+										
 				<ScrollView>
 					<View style={{
 						flex: 1,
@@ -241,47 +219,70 @@ class ProjectDetails extends Component {
 						paddingBottom: 40,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
-					}}>						
+					}}>				
+						{errorCtrl}				
+						
+						{loader}
+						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								name: text,
-								invalidValue: false
-							})}
 							style={styles.loginInput}
-							value={this.state.name}
-							placeholder="Name">
+							value={this.state.invoiceID}
+							placeholder="invoiceID">
 						</TextInput>
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								address: text,
-								invalidValue: false
-							})}
 							style={styles.loginInput}
-							value={this.state.address}
-							placeholder="Address">
+							value={this.state.date}
+							placeholder="date">
 						</TextInput>
 												
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								phone: text,
-								invalidValue: false
-							})}
 							style={styles.loginInput}
-							value={this.state.phone}
-							placeholder="Phone">
+							value={this.state.project}
+							placeholder="project">
+						</TextInput>		
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.department}
+							placeholder="department">
+						</TextInput>				
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.employee}
+							placeholder="employee">
+						</TextInput>		
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.product}
+							placeholder="product">
+						</TextInput>		
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.price}
+							placeholder="price">
+						</TextInput>	
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.quantity}
+							placeholder="quantity">
 						</TextInput>
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							multiline={true}
-							onChangeText={(text)=> this.setState({
-								description: text,
-								invalidValue: false
-							})}
 							style={styles.loginInput}
 							value={this.state.description}
 							placeholder="Description">
@@ -290,26 +291,17 @@ class ProjectDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.sum}
+							value={this.state.total}
 							placeholder="Total">
 						</TextInput>
 						
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.updateItem()}
-
+							onPress={()=> this.goBack()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Submit</Text>
+							<Text style={styles.buttonText}>Back</Text>
 						</TouchableHighlight>
-						
-						{errorCtrl}
-						
-						<ActivityIndicator
-							animating={this.state.showProgress}
-							size="large"
-							style={styles.loader}
-						/>
 						
 						<Text>{this.state.bugANDROID}</Text>
 					</View>
@@ -379,11 +371,11 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-        marginTop: 40
+        //marginTop: 40
     },
     error: {
         color: 'red',
-        paddingTop: 10,
+        //paddingTop: 10,
         textAlign: 'center'
     },
     img: {
