@@ -25,8 +25,8 @@ class InputAdd extends Component {
 		let date = todayDate+ ' ' + time[0];
 		
         this.state = {
-            showProgress: false,
-			serverError: true,
+            showProgress: true,
+			serverError: false,
             projects: [],
             departments: [],
             employees: [],
@@ -99,7 +99,7 @@ class InputAdd extends Component {
             })
             .finally(()=> {
                 this.setState({
-                    showProgress: false
+                    //showProgress: false
                 });
             });
     }	
@@ -129,7 +129,7 @@ class InputAdd extends Component {
             })
             .finally(()=> {
                 this.setState({
-                    showProgress: false
+                    //showProgress: false
                 });
             });
     }
@@ -159,7 +159,7 @@ class InputAdd extends Component {
             })
             .finally(()=> {
                 this.setState({
-                    showProgress: false
+                    //showProgress: false
                 });
             });
     }
@@ -211,7 +211,16 @@ class InputAdd extends Component {
                 Value required - please provide.
             </Text>;
         }
+		
+		var loader = <View />;
 
+        if (this.state.showProgress) {
+			loader = <ActivityIndicator
+				animating={true}
+				size="large"
+			/>
+		}
+		
         return (            
 			<View style={{flex: 1, justifyContent: 'center'}}>
 				<View style={{
@@ -276,6 +285,10 @@ class InputAdd extends Component {
 						marginBottom: 0,
 						backgroundColor: 'white'
 					}}>
+						{errorCtrl}
+						
+						{loader}
+						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
@@ -286,7 +299,7 @@ class InputAdd extends Component {
 							value={this.state.resultsCount}
 							placeholder="resultsCount">
 						</TextInput>
-						
+
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
