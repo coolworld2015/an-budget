@@ -89,6 +89,7 @@ class Inputs extends Component {
     }
 	
     addItem() {
+		appConfig.inputs.inputsCount = (this.state.resultsCount + 1).toString();
 		this.props.navigator.push({
 			index: 2
 		});

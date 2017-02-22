@@ -54,7 +54,8 @@ class App extends Component {
                 refresh: false
             },
 			inputs: {
-                refresh: false
+                refresh: false,
+				inputsCount: 0
             }
         };		
     }

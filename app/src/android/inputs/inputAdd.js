@@ -12,18 +12,18 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-    Picker,
-    CameraRoll
+    Picker
 } from 'react-native';
 
 class InputAdd extends Component {
     constructor(props) {
         super(props);
-
-        var ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => r1 != r2
-        });
-
+		
+        let d = new Date;
+        let todayDate = d.getMonth() + 1 + '/' + (d.getDate()) + '/' + d.getFullYear();
+		let time = d.toTimeString().split(' ');
+		let date = todayDate+ ' ' + time[0];
+		
         this.state = {
             showProgress: false,
 			serverError: true,
@@ -31,8 +31,10 @@ class InputAdd extends Component {
             departments: [],
             employees: [],
             goods: [],
-            dataSource: ds.cloneWithRows([])
+			resultsCount: appConfig.inputs.inputsCount,
+			date: date
         };
+		
     }
 	
 	componentDidMount() {
@@ -277,19 +279,19 @@ class InputAdd extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								name: text,
+								resultsCount: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.name}
-							placeholder="Name">
+							value={this.state.resultsCount}
+							placeholder="resultsCount">
 						</TextInput>
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.id}
-							placeholder="ID">
+							value={this.state.date}
+							placeholder="date">
 						</TextInput>
 					</View>
 					
@@ -386,6 +388,39 @@ class InputAdd extends Component {
                                 }}>
 
 								{this.state.employees.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>					
+					
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
+                                selectedValue={this.state.good}
+
+                                onValueChange={(value) => {
+									let arr = [].concat(this.state.goods);
+ 									let good = arr.filter((el) => el.id == value);
+ 
+                                    this.setState({
+                                        good: value,
+                                        id: good[0].id,
+                                        name: good[0].name,
+										price: good[0].price,
+										description: good[0].description,
+										invalidValue: false
+                                    })
+                                }}>
+
+								{this.state.goods.map((item, i) =>
 									<Picker.Item value={item.id} label={item.name} key={i}/>
 								)}
 							</Picker>
