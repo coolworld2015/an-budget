@@ -33,8 +33,9 @@ class InputAdd extends Component {
             departments: [],
             employees: [],
             goods: [],
-			resultsCount: (appConfig.inputs.inputsCount).toString(),
+			invoiceID: (appConfig.inputs.inputsCount).toString(),
 			date: date,
+			id: +new Date,
 			total: '0.00'
         };
 		
@@ -181,10 +182,15 @@ class InputAdd extends Component {
 
     addUser() {
         if (this.state.projectID == undefined ||
+            this.state.projectName == undefined ||
             this.state.employeeID == undefined ||
+            this.state.employeeName == undefined ||
             this.state.departmentID == undefined ||
+            this.state.departmentName == undefined ||
             this.state.productID == undefined ||
-            this.state.resultsCount == undefined ||
+            this.state.productName == undefined ||
+
+            this.state.invoiceID == undefined ||
             this.state.date == undefined ||
             this.state.quantity == undefined ||
             this.state.description == undefined) {
@@ -198,7 +204,50 @@ class InputAdd extends Component {
             showProgressAdd: true,
 			bugANDROID: ' '
         });
-	}
+        fetch(appConfig.url + 'api/inputs/add', {
+            method: 'post',
+            body: JSON.stringify({
+                id: + new Date,
+				invoiceID: this.state.invoiceID,
+				date: this.state.date,
+				price: this.state.price,				
+				quantity: this.state.quantity,				
+				description: this.state.description,
+				total: this.state.total,
+				
+				projectID: this.state.projectID,
+				project: this.state.projectName,
+				employeeID: this.state.employeeID,
+				employee: this.state.employeeName,
+				departmentID: this.state.departmentID,
+				department: this.state.departmentName,
+				productID: this.state.productID,
+				product: this.state.productName,
+
+				authorization: appConfig.access_token
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+                appConfig.inputs.refresh = true;
+                this.props.navigator.pop();
+            })
+            .catch((error)=> {
+                console.log(error);
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
+    }
 	
 	goBack() {
 		this.props.navigator.pop();
@@ -301,12 +350,12 @@ class InputAdd extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								resultsCount: text,
+								invoiceID: text,
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.resultsCount}
-							placeholder="resultsCount">
+							value={this.state.invoiceID}
+							placeholder="invoiceID">
 						</TextInput>
 
 						<TextInput
@@ -335,6 +384,7 @@ class InputAdd extends Component {
                                     this.setState({
                                         project: value,
                                         projectID: project[0].id,
+                                        projectName: project[0].name,
 										invalidValue: false
                                     })
                                 }}>
@@ -365,6 +415,7 @@ class InputAdd extends Component {
                                     this.setState({
                                         department: value,
                                         departmentID: department[0].id,
+                                        departmentName: department[0].name,
 										invalidValue: false
                                     })
                                 }}>
@@ -395,6 +446,7 @@ class InputAdd extends Component {
                                     this.setState({
                                         employee: value,
                                         employeeID: employee[0].id,
+                                        employeeName: employee[0].name,
 										invalidValue: false
                                     })
                                 }}>
@@ -425,6 +477,7 @@ class InputAdd extends Component {
                                     this.setState({
                                         good: value,
                                         productID: good[0].id,
+                                        productName: good[0].name,
                                         price: (+good[0].price).toFixed(2),
 										invalidValue: false
                                     })
