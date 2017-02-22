@@ -12,7 +12,8 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-    Picker
+    Picker,
+	Alert
 } from 'react-native';
 
 class InputAdd extends Component {
@@ -26,13 +27,15 @@ class InputAdd extends Component {
 		
         this.state = {
             showProgress: true,
+            showProgressAdd: true,
 			serverError: false,
             projects: [],
             departments: [],
             employees: [],
             goods: [],
-			resultsCount: appConfig.inputs.inputsCount,
-			date: date
+			resultsCount: (appConfig.inputs.inputsCount).toString(),
+			date: date,
+			total: '0.00'
         };
 		
     }
@@ -69,7 +72,8 @@ class InputAdd extends Component {
             })
             .finally(()=> {
                 this.setState({
-                    showProgress: false
+                    showProgress: false,
+                    showProgressAdd: false
                 });
             });
     }	
@@ -176,8 +180,13 @@ class InputAdd extends Component {
     }
 
     addUser() {
-        if (this.state.name == undefined ||
-            this.state.pass == undefined ||
+        if (this.state.projectID == undefined ||
+            this.state.employeeID == undefined ||
+            this.state.departmentID == undefined ||
+            this.state.productID == undefined ||
+            this.state.resultsCount == undefined ||
+            this.state.date == undefined ||
+            this.state.quantity == undefined ||
             this.state.description == undefined) {
             this.setState({
                 invalidValue: true
@@ -186,7 +195,7 @@ class InputAdd extends Component {
         }
 
         this.setState({
-            showProgress: true,
+            showProgressAdd: true,
 			bugANDROID: ' '
         });
 	}
@@ -323,13 +332,9 @@ class InputAdd extends Component {
                                 onValueChange={(value) => {
 									let arr = [].concat(this.state.projects);
  									let project = arr.filter((el) => el.id == value);
- 
                                     this.setState({
                                         project: value,
-                                        id: project[0].id,
-                                        name: project[0].name,
-										pass: project[0].pass,
-										description: project[0].description,
+                                        projectID: project[0].id,
 										invalidValue: false
                                     })
                                 }}>
@@ -359,10 +364,7 @@ class InputAdd extends Component {
  
                                     this.setState({
                                         department: value,
-                                        id: department[0].id,
-                                        name: department[0].name,
-										pass: department[0].pass,
-										description: department[0].description,
+                                        departmentID: department[0].id,
 										invalidValue: false
                                     })
                                 }}>
@@ -392,10 +394,7 @@ class InputAdd extends Component {
  
                                     this.setState({
                                         employee: value,
-                                        id: employee[0].id,
-                                        name: employee[0].name,
-										pass: employee[0].pass,
-										description: employee[0].description,
+                                        employeeID: employee[0].id,
 										invalidValue: false
                                     })
                                 }}>
@@ -425,10 +424,8 @@ class InputAdd extends Component {
  
                                     this.setState({
                                         good: value,
-                                        id: good[0].id,
-                                        name: good[0].name,
-										price: good[0].price,
-										description: good[0].description,
+                                        productID: good[0].id,
+                                        price: (+good[0].price).toFixed(2),
 										invalidValue: false
                                     })
                                 }}>
@@ -449,31 +446,21 @@ class InputAdd extends Component {
 					}}>
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								name: text,
-								invalidValue: false
-							})}
 							style={styles.loginInput}
-							value={this.state.name}
-							placeholder="Name">
+							value={this.state.price}
+							placeholder="Price">
 						</TextInput>
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.id}
-							placeholder="ID">
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
-								pass: text,
+								quantity: text,
+								total: ((+this.state.price)*(+text)).toFixed(2).toString(),								
 								invalidValue: false
 							})}
 							style={styles.loginInput}
-							value={this.state.pass}
-							placeholder="Password">
+							value={this.state.quantity}
+							placeholder="Quantity">
 						</TextInput>
 
 						<TextInput
@@ -487,6 +474,13 @@ class InputAdd extends Component {
 							placeholder="Description">
 						</TextInput>
 
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.total}
+							placeholder="Total">
+						</TextInput>
+						
 						{validCtrl}
 
 						<TouchableHighlight
@@ -498,7 +492,7 @@ class InputAdd extends Component {
 						{errorCtrl}
 
 						<ActivityIndicator
-							animating={this.state.showProgress}
+							animating={this.state.showProgressAdd}
 							size="large"
 							style={styles.loader}
 						/>
@@ -568,7 +562,7 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-		marginTop: 30
+		marginTop: 20
     },
     error: {
         color: 'red',
