@@ -16,7 +16,7 @@ import {
 	Alert
 } from 'react-native';
 
-class InputAdd extends Component {
+class OutputAdd extends Component {
     constructor(props) {
         super(props);
 		
@@ -33,7 +33,7 @@ class InputAdd extends Component {
             departments: [],
             employees: [],
             goods: [],
-			invoiceID: (appConfig.inputs.inputsCount).toString(),
+			invoiceID: (appConfig.outputs.outputsCount).toString(),
 			date: date,
 			id: +new Date,
 			total: '0.00'
@@ -204,7 +204,7 @@ class InputAdd extends Component {
             showProgressAdd: true,
 			bugANDROID: ' '
         });
-        fetch(appConfig.url + 'api/inputs/add', {
+        fetch(appConfig.url + 'api/outputs/add', {
             method: 'post',
             body: JSON.stringify({
                 id: + new Date,
@@ -233,7 +233,7 @@ class InputAdd extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-                appConfig.inputs.refresh = true;
+                appConfig.outputs.refresh = true;
                 appConfig.assets.refresh = true;
                 this.props.navigator.pop();
             })
@@ -632,4 +632,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default InputAdd;
+export default OutputAdd;

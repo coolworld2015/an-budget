@@ -52,10 +52,17 @@ class App extends Component {
             },
 			employees: {
                 refresh: false
+            },			
+			assets: {
+                refresh: false
             },
 			inputs: {
                 refresh: false,
 				inputsCount: 0
+            },
+			outputs: {
+                refresh: false,
+				outputsCount: 0
             }
         };		
     }

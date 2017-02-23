@@ -10,8 +10,8 @@ import {
 	TouchableOpacity
 } from 'react-native';
 
-import ScrollableTabView from 'react-native-scrollable-tab-view';
-import DefaultTabBar from './DefaultTabBar';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
+//import DefaultTabBar from './DefaultTabBar';
 
 import Audit from '../audit/audit';
 import AuditDetails from '../audit/auditDetails';
@@ -43,6 +43,10 @@ import Inputs from '../inputs/inputs';
 import InputDetails from '../inputs/inputDetails';
 import InputAdd from '../inputs/inputAdd';
 
+import Outputs from '../outputs/outputs';
+import OutputDetails from '../outputs/outputDetails';
+import OutputAdd from '../outputs/outputAdd';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -57,17 +61,57 @@ class AppContainer extends Component {
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
 			>
- 				<InputsTab tabLabel="Input" />
  				<AssetsTab tabLabel="Assets" />
- 				<EmployeesTab tabLabel="Emps" />
+ 				<OutputsTab tabLabel="Output" />
+ 				<InputsTab tabLabel="Input" />
+
+				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />
+			</ScrollableTabView>
+		);
+	}
+}
+ 				/*
+				<EmployeesTab tabLabel="Emps" />
  				<DepartmentsTab tabLabel="Deps" />
  				<ProjectsTab tabLabel="Projs" />
  				<ResourcesTab tabLabel="Res" />
  				<UsersTab tabLabel="Users" />
 				<AuditTab tabLabel="Audit" />
-				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />
-			</ScrollableTabView>
-		);
+				*/
+				
+class OutputsTab extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'Outputs', index: 0},
+			{title: 'Output Details', index: 1},
+			{title: 'Add Output', index: 2}
+		];
+	}
+		  
+	renderScene(route, navigator) {
+		switch (route.index) {
+			case 0: return <Outputs routes={this.routes} navigator={navigator} />
+					break;			
+			case 1: return <OutputDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;
+			case 2: return <OutputAdd data={route.data} routes={this.routes} navigator={navigator} />
+					break
+ 		}
+ 	}	
+	
+	render() {
+		return (
+	  		<Navigator
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
+		)
 	}
 }
 

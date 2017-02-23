@@ -16,7 +16,7 @@ import {
 	Alert
 } from 'react-native';
 
-class InputDetails extends Component {
+class OutputDetails extends Component {
     constructor(props) {
         super(props);
 		
@@ -75,7 +75,7 @@ class InputDetails extends Component {
 			bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'api/inputs/delete', {
+        fetch(appConfig.url + 'api/outputs/delete', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
@@ -104,7 +104,7 @@ class InputDetails extends Component {
             .then((responseData)=> {
 				console.log(responseData);
 				if (responseData) {
-					appConfig.inputs.refresh = true;
+					appConfig.outputs.refresh = true;
 					appConfig.assets.refresh = true;
 					this.props.navigator.pop();
 				} else {
@@ -387,4 +387,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default InputDetails;
+export default OutputDetails;

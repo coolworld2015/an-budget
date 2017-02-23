@@ -15,7 +15,7 @@ import {
     Alert
 } from 'react-native';
 
-class Store extends Component {
+class Outputs extends Component {
     constructor(props) {
         super(props);
 
@@ -38,8 +38,8 @@ class Store extends Component {
 	}
 	
     componentWillUpdate() {
-        if (appConfig.assets.refresh) {
-            appConfig.assets.refresh = false;
+        if (appConfig.outputs.refresh) {
+            appConfig.outputs.refresh = false;
 
             this.setState({
                 showProgress: true,
@@ -49,9 +49,9 @@ class Store extends Component {
             this.getItems();
         }
     }
-	
+
     getItems() {
-        fetch(appConfig.url + 'api/goods/get', {			
+        fetch(appConfig.url + 'api/outputs/get', {			
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -61,14 +61,12 @@ class Store extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				let arr = [].concat(responseData.sort(this.sort));
-				let items = arr.filter((el) => el.store == true);
-				
+
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(items),
-                    resultsCount: items.length,
-                    responseData: items,
-                    filteredItems: items
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.reverse().slice(0, 25)),
+                    resultsCount: responseData.length,
+                    responseData: responseData,
+                    filteredItems: responseData
                 });
             })
             .catch((error)=> {
@@ -83,17 +81,6 @@ class Store extends Component {
             });
     }
 
-    sort(a, b) {
-        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
-        if (nameA < nameB) {
-            return -1
-        }
-        if (nameA > nameB) {
-            return 1
-        }
-        return 0;
-    }
-
     showDetails(rowData) {
 		this.props.navigator.push({
 			index: 1,
@@ -102,6 +89,7 @@ class Store extends Component {
     }
 	
     addItem() {
+		appConfig.outputs.outputsCount = (this.state.resultsCount + 1).toString();
 		this.props.navigator.push({
 			index: 2
 		});
@@ -110,6 +98,7 @@ class Store extends Component {
     renderRow(rowData) {
         return (
             <TouchableHighlight
+                onPress={()=> this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
 				<View style={{
@@ -121,11 +110,11 @@ class Store extends Component {
 						backgroundColor: '#fff'
 					}}>              
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							{rowData.name}
+							{rowData.invoiceID} - {rowData.project} - {rowData.date}
 						</Text>						
 						
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							Quantity: {(+rowData.quantity).toFixed(2)}
+							Total: {(+rowData.total).toFixed(2)}
 						</Text>
 				</View>
             </TouchableHighlight>
@@ -179,7 +168,7 @@ class Store extends Component {
         }
 
         var arr = [].concat(this.state.responseData);
-        var items = arr.filter((el) => el.name.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        var items = arr.filter((el) => el.invoiceID.toLowerCase().indexOf(text.toLowerCase()) != -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -247,16 +236,17 @@ class Store extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
-								marginRight: 60,
+								marginRight: 20,
 								fontWeight: 'bold',
 								color: 'black'
 							}}>
-								Assets
+								Outputs
 							</Text>
 						</TouchableHighlight>	
 					</View>						
 					<View>
 						<TouchableHighlight
+							onPress={()=> this.addItem()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
@@ -266,7 +256,7 @@ class Store extends Component {
 								fontWeight: 'bold',
 								color: 'darkblue'
 							}}>
-								 
+								Add
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -381,4 +371,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Store;
+export default Outputs;
