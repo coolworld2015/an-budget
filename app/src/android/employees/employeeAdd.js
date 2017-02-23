@@ -36,7 +36,6 @@ class EmployeeAdd extends Component {
         if (this.state.name == undefined ||
             this.state.address == undefined ||
             this.state.phone == undefined ||
-            this.state.sum == undefined ||
             this.state.description == undefined) {
             this.setState({
                 invalidValue: true

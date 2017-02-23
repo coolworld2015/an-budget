@@ -94,14 +94,14 @@ class Employees extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 1,
+			index: 2, //for OtherTab 2/1
 			data: rowData
 		});
     }
 	
     addItem() {
 		this.props.navigator.push({
-			index: 2
+			index: 3 //for OtherTab 3/2
 		});
     }
 	
@@ -196,6 +196,10 @@ class Employees extends Component {
 		this.getItems();
 	}
 	
+	goBack() {
+		this.props.navigator.pop();
+	}
+	
     render() {
         var errorCtrl, loader;
 
@@ -224,8 +228,8 @@ class Employees extends Component {
 					}}>
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.refreshDataAndroid()}
 							underlayColor='#ddd'
+							onPress={()=> this.refreshDataAndroid()}
 						>
 							<Text style={{
 								fontSize: 16,
@@ -241,6 +245,7 @@ class Employees extends Component {
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
+							onPress={()=> this.goBack()}
 						>
 							<Text style={{
 								fontSize: 20,

@@ -47,6 +47,8 @@ import Outputs from '../outputs/outputs';
 import OutputDetails from '../outputs/outputDetails';
 import OutputAdd from '../outputs/outputAdd';
 
+import Other from './other';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -61,11 +63,10 @@ class AppContainer extends Component {
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
 			>
+				<OtherTab tabLabel="Other" />
  				<AssetsTab tabLabel="Assets" />
  				<OutputsTab tabLabel="Output" />
- 				<InputsTab tabLabel="Input" />
-
-				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />
+ 				<InputsTab tabLabel="Input" /> 				
 			</ScrollableTabView>
 		);
 	}
@@ -77,7 +78,47 @@ class AppContainer extends Component {
  				<ResourcesTab tabLabel="Res" />
  				<UsersTab tabLabel="Users" />
 				<AuditTab tabLabel="Audit" />
+				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />				
 				*/
+				
+class OtherTab extends Component {
+	constructor(props) {
+		super(props);
+		this.routes = [
+			{title: 'Other', index: 0},
+			{title: 'Employees', index: 1},
+			{title: 'Employee Details', index: 2},
+			{title: 'Add Employee', index: 3}
+		];
+	}
+		  
+	renderScene(route, navigator) {
+		switch (route.index) {
+			case 0: return <Other routes={this.routes} navigator={navigator} />
+					break;			
+			case 1: return <Employees routes={this.routes} navigator={navigator} />
+					break;			
+			case 2: return <EmployeeDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;
+			case 3: return <EmployeeAdd data={route.data} routes={this.routes} navigator={navigator} />
+					break
+ 		}
+ 	}	
+	
+	render() {
+		return (
+	  		<Navigator
+				initialRoute={this.routes[0]}
+				initialRouteStack={this.routes}
+				renderScene={this.renderScene.bind(this)}
+				style={{padding: 0}}
+			  
+				configureScene={(route, routeStack) =>
+					Navigator.SceneConfigs.PushFromRight}
+			/>
+		)
+	}
+}
 				
 class OutputsTab extends Component {
 	constructor(props) {
