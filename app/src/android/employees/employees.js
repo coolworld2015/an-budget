@@ -94,14 +94,14 @@ class Employees extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 2, //for OtherTab 2/1
+			index: 41,
 			data: rowData
 		});
     }
 	
     addItem() {
 		this.props.navigator.push({
-			index: 3 //for OtherTab 3/2
+			index: 42
 		});
     }
 	

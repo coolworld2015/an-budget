@@ -94,14 +94,14 @@ class Users extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 1,
+			index: 51,
 			data: rowData
 		});
     }
 	
     addUser() {
 		this.props.navigator.push({
-			index: 2
+			index: 52
 		});
     }
 	
@@ -193,6 +193,10 @@ class Users extends Component {
 		this.getUsers();
 	}
 	
+	goBack() {
+		this.props.navigator.pop();
+	}
+	
     render() {
         var errorCtrl, loader;
 
@@ -238,6 +242,7 @@ class Users extends Component {
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
+							onPress={()=> this.goBack()}
 						>
 							<Text style={{
 								fontSize: 20,

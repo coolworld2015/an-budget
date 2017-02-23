@@ -25,16 +25,16 @@ class Other extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows([
-				{name: 'Projects', id: 1},
-				{name: 'Resources', id: 2},
-				{name: 'Departments', id: 3},
-				{name: 'Employees', id: 4},
-				{name: 'Users', id: 5},
-				{name: 'Audit', id: 6},
-				{name: 'Logout', id: 7}
+				{name: 'Projects', id: 10},
+				{name: 'Resources', id: 20},
+				{name: 'Departments', id: 30},
+				{name: 'Employees', id: 40},
+				{name: 'Users', id: 50},
+				{name: 'Audit', id: 60},
+				{name: 'Logout', id: 70}
 			]),
             showProgress: true,
-            resultsCount: 1,
+            resultsCount: 7,
             recordsCount: 25,
             positionY: 0
         };
@@ -72,50 +72,44 @@ class Other extends Component {
 
     showDetails(rowData) {
 		switch (rowData.id) {
-			case 1: this.props.navigator.push({
-						index: 1,
+			case 10: this.props.navigator.push({
+						index: 10,
+					});
+					break;		
+					
+			case 20: this.props.navigator.push({
+						index: 20,
 						data: rowData
 					});
 					break;		
 					
-			case 2: this.props.navigator.push({
-						index: 1,
+			case 30: this.props.navigator.push({
+						index: 30,
 						data: rowData
 					});
 					break;		
 					
-			case 3: this.props.navigator.push({
-						index: 1,
+			case 40: this.props.navigator.push({
+						index: 40,
 						data: rowData
 					});
 					break;		
 					
-			case 4: this.props.navigator.push({
-						index: 1,
+			case 50: this.props.navigator.push({
+						index: 50,
 						data: rowData
 					});
 					break;		
 					
-			case 5: this.props.navigator.push({
-						index: 1,
-						data: rowData
-					});
-					break;		
-					
-			case 6: this.props.navigator.push({
-						index: 1,
+			case 60: this.props.navigator.push({
+						index: 60,
 						data: rowData
 					});
 					break;	
 					
-			case 7: this.props.onLogOut();
+			case 70: this.props.onLogOut();
 					break;						
 		}					
- 
-		this.props.navigator.push({
-			index: 1,
-			data: rowData
-		});
     }
 
     renderRow(rowData) {

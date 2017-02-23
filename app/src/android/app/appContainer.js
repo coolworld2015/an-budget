@@ -63,33 +63,44 @@ class AppContainer extends Component {
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
 			>
-				<OtherTab onLogOut={this.onLogOut.bind(this)} tabLabel="Other" />
  				<AssetsTab tabLabel="Assets" />
  				<OutputsTab tabLabel="Output" />
  				<InputsTab tabLabel="Input" /> 				
+				<OtherTab onLogOut={this.onLogOut.bind(this)} tabLabel="Other" />
 			</ScrollableTabView>
 		);
 	}
 }
- 				/*
-				<EmployeesTab tabLabel="Emps" />
- 				<DepartmentsTab tabLabel="Deps" />
- 				<ProjectsTab tabLabel="Projs" />
- 				<ResourcesTab tabLabel="Res" />
- 				<UsersTab tabLabel="Users" />
-				<AuditTab tabLabel="Audit" />
-				<LogOut logOut={this.onLogOut.bind(this)} tabLabel="Out" />				
-				*/
 				
 class OtherTab extends Component {
 	constructor(props) {
 		super(props);
 		this.routes = [
 			{title: 'Other', index: 0},
-			{title: 'Employees', index: 1},
-			{title: 'Employee Details', index: 2},
-			{title: 'Add Employee', index: 3},
-			{title: 'LogOut', index: 4}
+			
+			{title: 'Projects', index: 1},
+			{title: 'Project Details', index: 2},
+			{title: 'Add Project', index: 3},
+			
+			{title: 'Resources', index: 4},
+			{title: 'Resource Details', index: 5},
+			{title: 'Add Resource', index: 6},		
+			
+			{title: 'Departments', index: 7},
+			{title: 'Department Details', index: 8},
+			{title: 'Add Department', index: 9},		
+			
+			{title: 'Employees', index: 10},
+			{title: 'Employee Details', index: 11},
+			{title: 'Add Employee', index: 12},		
+			
+			{title: 'Users', index: 13},
+			{title: 'User Details', index: 14},
+			{title: 'Add User', index: 15},	
+			
+			{title: 'Audit', index: 16},
+			{title: 'Audit Details', index: 17},
+			{title: 'Add Audit', index: 18}
 		];
 	}
 	
@@ -101,12 +112,47 @@ class OtherTab extends Component {
 		switch (route.index) {
 			case 0: return <Other routes={this.routes} onLogOut={this.onLogOut.bind(this)} navigator={navigator} />
 					break;			
-			case 1: return <Employees routes={this.routes} navigator={navigator} />
-					break;			
-			case 2: return <EmployeeDetails data={route.data} routes={this.routes} navigator={navigator} />
-					break;
-			case 3: return <EmployeeAdd data={route.data} routes={this.routes} navigator={navigator} />
-					break;
+			case 10: return <Projects routes={this.routes} navigator={navigator} />
+					 break;			
+			case 11: return <ProjectDetails data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
+			case 12: return <ProjectAdd data={route.data} routes={this.routes} navigator={navigator} />
+					 break;		
+					
+			case 20: return <Resources routes={this.routes} navigator={navigator} />
+					 break;			
+			case 21: return <ResourceDetails data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
+			case 22: return <ResourceAdd data={route.data} routes={this.routes} navigator={navigator} />
+					 break;	
+					
+			case 30: return <Departments routes={this.routes} navigator={navigator} />
+					 break;			
+			case 31: return <DepartmentDetails data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
+			case 32: return <DepartmentAdd data={route.data} routes={this.routes} navigator={navigator} />
+					 break;	
+					
+			case 40: return <Employees routes={this.routes} navigator={navigator} />
+					 break;			
+			case 41: return <EmployeeDetails data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
+			case 42: return <EmployeeAdd data={route.data} routes={this.routes} navigator={navigator} />
+					 break;	
+					 
+			case 50: return <Users routes={this.routes} navigator={navigator} />
+					 break;			
+			case 51: return <UserDetails data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
+			case 52: return <UserAdd data={route.data} routes={this.routes} navigator={navigator} />
+					 break;		
+					 
+			case 60: return <Audit routes={this.routes} navigator={navigator} />
+					 break;			
+			case 61: return <AuditDetails data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
+			case 62: return <AuditAdd data={route.data} routes={this.routes} navigator={navigator} />
+					 break;
  		}
  	}	
 	

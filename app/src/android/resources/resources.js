@@ -94,14 +94,14 @@ class Resources extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 1,
+			index: 21,
 			data: rowData
 		});
     }
 	
     addItem() {
 		this.props.navigator.push({
-			index: 2
+			index: 22
 		});
     }
 	
@@ -196,6 +196,10 @@ class Resources extends Component {
 		this.getItems();
 	}
 	
+	goBack() {
+		this.props.navigator.pop();
+	}
+	
     render() {
         var errorCtrl, loader;
 
@@ -241,6 +245,7 @@ class Resources extends Component {
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
+							onPress={()=> this.goBack()}
 						>
 							<Text style={{
 								fontSize: 20,

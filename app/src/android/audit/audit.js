@@ -70,11 +70,17 @@ class Audit extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 1,
+			index: 61,
 			data: rowData
 		});
     }
-
+	
+	addAudit() {
+		this.props.navigator.push({
+			index: 62
+		});
+    }
+	
     renderRow(rowData) {
         return (
             <TouchableHighlight
@@ -162,11 +168,9 @@ class Audit extends Component {
 		this.getAudit();
 	}
 	
-	addAudit() {
-		this.props.navigator.push({
-			index: 2
-		});
-    }
+	goBack() {
+		this.props.navigator.pop();
+	}
 	
     render() {
         var errorCtrl, loader;
@@ -213,6 +217,7 @@ class Audit extends Component {
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
+							onPress={()=> this.goBack()}
 						>
 							<Text style={{
 								fontSize: 20,
