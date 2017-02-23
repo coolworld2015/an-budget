@@ -63,7 +63,7 @@ class AppContainer extends Component {
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
 			>
-				<OtherTab tabLabel="Other" />
+				<OtherTab onLogOut={this.onLogOut.bind(this)} tabLabel="Other" />
  				<AssetsTab tabLabel="Assets" />
  				<OutputsTab tabLabel="Output" />
  				<InputsTab tabLabel="Input" /> 				
@@ -88,20 +88,25 @@ class OtherTab extends Component {
 			{title: 'Other', index: 0},
 			{title: 'Employees', index: 1},
 			{title: 'Employee Details', index: 2},
-			{title: 'Add Employee', index: 3}
+			{title: 'Add Employee', index: 3},
+			{title: 'LogOut', index: 4}
 		];
 	}
-		  
+	
+	onLogOut() {
+        this.props.onLogOut();
+    }		
+	
 	renderScene(route, navigator) {
 		switch (route.index) {
-			case 0: return <Other routes={this.routes} navigator={navigator} />
+			case 0: return <Other routes={this.routes} onLogOut={this.onLogOut.bind(this)} navigator={navigator} />
 					break;			
 			case 1: return <Employees routes={this.routes} navigator={navigator} />
 					break;			
 			case 2: return <EmployeeDetails data={route.data} routes={this.routes} navigator={navigator} />
 					break;
 			case 3: return <EmployeeAdd data={route.data} routes={this.routes} navigator={navigator} />
-					break
+					break;
  		}
  	}	
 	

@@ -18,23 +18,27 @@ import {
 class Other extends Component {
     constructor(props) {
         super(props);
-
+		
         var ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 != r2
         });
 
         this.state = {
-            dataSource: ds.cloneWithRows([{name:'Employees'}]),
+            dataSource: ds.cloneWithRows([
+				{name: 'Projects', id: 1},
+				{name: 'Resources', id: 2},
+				{name: 'Departments', id: 3},
+				{name: 'Employees', id: 4},
+				{name: 'Users', id: 5},
+				{name: 'Audit', id: 6},
+				{name: 'Logout', id: 7}
+			]),
             showProgress: true,
-            resultsCount: 0,
+            resultsCount: 1,
             recordsCount: 25,
             positionY: 0
         };
-    }
-	
-	componentDidMount() {
-		//this.getAudit();
-	}
+    }	
 	
     getAudit() {		
         fetch(appConfig.url + 'api/audit/get', {
@@ -67,6 +71,47 @@ class Other extends Component {
     }
 
     showDetails(rowData) {
+		switch (rowData.id) {
+			case 1: this.props.navigator.push({
+						index: 1,
+						data: rowData
+					});
+					break;		
+					
+			case 2: this.props.navigator.push({
+						index: 1,
+						data: rowData
+					});
+					break;		
+					
+			case 3: this.props.navigator.push({
+						index: 1,
+						data: rowData
+					});
+					break;		
+					
+			case 4: this.props.navigator.push({
+						index: 1,
+						data: rowData
+					});
+					break;		
+					
+			case 5: this.props.navigator.push({
+						index: 1,
+						data: rowData
+					});
+					break;		
+					
+			case 6: this.props.navigator.push({
+						index: 1,
+						data: rowData
+					});
+					break;	
+					
+			case 7: this.props.onLogOut();
+					break;						
+		}					
+ 
 		this.props.navigator.push({
 			index: 1,
 			data: rowData
@@ -88,7 +133,12 @@ class Other extends Component {
                     borderBottomWidth: 1,
                     backgroundColor: '#fff'
                 }}>
-                    <Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+                    <Text style={{
+						backgroundColor: '#fff', 
+						color: 'black', 
+						fontWeight: 'bold',
+						fontSize: 20
+						}}>
                         {rowData.name}
                     </Text>
                 </View>

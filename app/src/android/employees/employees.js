@@ -240,7 +240,7 @@ class Employees extends Component {
 							}}>
 								Reload
 							</Text>
-						</TouchableHighlight>	
+						</TouchableHighlight>
 					</View>
 					<View>
 						<TouchableHighlight
