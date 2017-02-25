@@ -121,12 +121,8 @@ class Store extends Component {
 						backgroundColor: '#fff'
 					}}>              
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							{rowData.name}
+							{rowData.name} - {(+rowData.quantity).toFixed(2)}
 						</Text>						
-						
-						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							Quantity: {(+rowData.quantity).toFixed(2)}
-						</Text>
 				</View>
             </TouchableHighlight>
         );
