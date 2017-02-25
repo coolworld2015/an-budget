@@ -110,8 +110,12 @@ class Inputs extends Component {
 						backgroundColor: '#fff'
 					}}>              
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							{rowData.invoiceID} - {rowData.project} - {rowData.date}
+							{rowData.invoiceID} - {rowData.project} - {(rowData.date).split(' ')[0]}
 						</Text>						
+												
+						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+							{rowData.description}
+						</Text>	
 						
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
 							Total: {(+rowData.total).toFixed(2)}
