@@ -63,7 +63,8 @@ class Inputs extends Component {
             .then((responseData)=> {
 
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.reverse().slice(0, 25)),
+                    //dataSource: this.state.dataSource.cloneWithRows(responseData.reverse().slice(0, 25)),
+				    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
                     resultsCount: responseData.length,
                     responseData: responseData,
                     filteredItems: responseData
@@ -81,6 +82,17 @@ class Inputs extends Component {
             });
     }
 
+    sort(a, b) {
+        var nameA = a.invoiceID.toLowerCase(), nameB = b.invoiceID.toLowerCase();
+        if (nameA < nameB) {
+            return 1
+        }
+        if (nameA > nameB) {
+            return -1
+        }
+        return 0;
+    }
+	
     showDetails(rowData) {
 		this.props.navigator.push({
 			index: 1,
