@@ -49,6 +49,9 @@ import OutputAdd from '../outputs/outputAdd';
 
 import Other from './other';
 
+import Search from '../search/search';
+import SearchResults from '../search/searchResults';
+
 class AppContainer extends Component {
 	constructor(props) {
 		super(props);				
@@ -100,7 +103,10 @@ class OtherTab extends Component {
 			
 			{title: 'Audit', index: 16},
 			{title: 'Audit Details', index: 17},
-			{title: 'Add Audit', index: 18}
+			{title: 'Add Audit', index: 18},
+			
+			{title: 'Search', index: 19},
+			{title: 'Search Results', index: 20},
 		];
 	}
 	
@@ -112,6 +118,12 @@ class OtherTab extends Component {
 		switch (route.index) {
 			case 0: return <Other routes={this.routes} onLogOut={this.onLogOut.bind(this)} navigator={navigator} />
 					break;			
+					
+			case 1: return <Search routes={this.routes} navigator={navigator} />
+					 break;			
+			case 2: return <SearchResults data={route.data} routes={this.routes} navigator={navigator} />
+					 break;	
+					 
 			case 10: return <Projects routes={this.routes} navigator={navigator} />
 					 break;			
 			case 11: return <ProjectDetails data={route.data} routes={this.routes} navigator={navigator} />

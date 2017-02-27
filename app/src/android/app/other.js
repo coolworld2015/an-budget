@@ -25,6 +25,7 @@ class Other extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows([
+				{name: 'Search', id: 1},
 				{name: 'Projects', id: 10},
 				{name: 'Resources', id: 20},
 				{name: 'Departments', id: 30},
@@ -72,6 +73,11 @@ class Other extends Component {
 
     showDetails(rowData) {
 		switch (rowData.id) {
+			case 1: this.props.navigator.push({
+						index: 1,
+					});
+					break;				
+					
 			case 10: this.props.navigator.push({
 						index: 10,
 					});
