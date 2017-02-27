@@ -184,7 +184,7 @@ class Inputs extends Component {
         }
 
         var arr = [].concat(this.state.responseData);
-        var items = arr.filter((el) => el.invoiceID.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        var items = arr.filter((el) => el.project.toLowerCase().indexOf(text.toLowerCase()) != -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,
@@ -200,6 +200,15 @@ class Inputs extends Component {
 		});
 
 		this.getItems();
+	}
+	
+	clearSearchQuery() {
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows(this.state.responseData),
+            resultsCount: this.state.responseData.length,
+            filteredItems: this.state.responseData,
+			searchQuery: ''
+		});
 	}
 	
     render() {
@@ -246,6 +255,7 @@ class Inputs extends Component {
 					</View>
 					<View>
 						<TouchableHighlight
+							onPress={()=> this.clearSearchQuery()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
