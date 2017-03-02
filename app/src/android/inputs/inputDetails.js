@@ -45,9 +45,9 @@ class InputDetails extends Component {
 				product: props.data.product,	
 				productID: props.data.productID,				
 				description: props.data.description,
-				price: (+props.data.price).toFixed(2),
-				quantity: (+props.data.quantity).toFixed(2),
-				total: (+props.data.total).toFixed(2),
+				price: ((+props.data.price).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				quantity: ((+props.data.quantity).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				total: ((+props.data.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
 				showProgress: false,
 				serverError: false
 			};

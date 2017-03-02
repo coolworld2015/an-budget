@@ -124,7 +124,7 @@ class Resources extends Component {
 						</Text>						
 						
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							Price: {(+rowData.price).toFixed(2)}
+							Price: {((+rowData.price).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 						</Text>
 				</View>
             </TouchableHighlight>

@@ -35,7 +35,7 @@ class ResourceDetails extends Component {
 			this.state = {
 				id: props.data.id,
 				name: props.data.name,
-				price: (+props.data.price).toFixed(2),
+				price: ((+props.data.price).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
 				quantity: props.data.quantity,
 				store: props.data.store,
 				description: props.data.description,

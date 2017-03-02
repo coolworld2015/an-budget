@@ -130,7 +130,7 @@ class Outputs extends Component {
 						</Text>						
 						
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							Total: {(+rowData.total).toFixed(2)}
+							Total: {((+rowData.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 						</Text>
 				</View>
             </TouchableHighlight>

@@ -121,7 +121,7 @@ class Login extends Component {
                         })}
                          style={{ 
 							height: 50,
-							width: this.state.width * .94,
+							width: this.state.width * .90,
 							marginTop: 10,
 							padding: 4,
 							fontSize: 18,
@@ -142,7 +142,7 @@ class Login extends Component {
                         })}
                         style={{ 
 							height: 50,
-							width: this.state.width * .94,
+							width: this.state.width * .90,
 							marginTop: 10,
 							padding: 4,
 							fontSize: 18,
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#48BBEC',
         borderColor: '#48BBEC',
         alignSelf: 'stretch',
-        marginTop: 10,
+        margin: 10,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5
