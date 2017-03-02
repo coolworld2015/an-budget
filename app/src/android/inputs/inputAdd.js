@@ -235,6 +235,9 @@ class InputAdd extends Component {
             .then((responseData)=> {
                 appConfig.inputs.refresh = true;
                 appConfig.assets.refresh = true;
+				appConfig.projects.refresh = true;
+				appConfig.departments.refresh = true;
+				appConfig.employees.refresh = true;
                 this.props.navigator.pop();
             })
             .catch((error)=> {

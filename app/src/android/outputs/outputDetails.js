@@ -45,9 +45,14 @@ class OutputDetails extends Component {
 				product: props.data.product,	
 				productID: props.data.productID,				
 				description: props.data.description,
-				price: ((+props.data.price).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
-				quantity: ((+props.data.quantity).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
-				total: ((+props.data.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				
+				priceShow: ((+props.data.price).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				quantityShow: ((+props.data.quantity).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				totalShow: ((+props.data.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),				
+				
+				price: props.data.price,
+				quantity: props.data.quantity,
+				total: props.data.total,
 				showProgress: false,
 				serverError: false
 			};
@@ -106,6 +111,9 @@ class OutputDetails extends Component {
 				if (responseData) {
 					appConfig.outputs.refresh = true;
 					appConfig.assets.refresh = true;
+					appConfig.projects.refresh = true;
+					appConfig.departments.refresh = true;
+					appConfig.employees.refresh = true;
 					this.props.navigator.pop();
 				} else {
 					this.setState({
@@ -270,14 +278,14 @@ class OutputDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.price}
+							value={this.state.priceShow}
 							placeholder="price">
 						</TextInput>	
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.quantity}
+							value={this.state.quantityShow}
 							placeholder="quantity">
 						</TextInput>
 
@@ -292,7 +300,7 @@ class OutputDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.total}
+							value={this.state.totalShow}
 							placeholder="Total">
 						</TextInput>
 						
