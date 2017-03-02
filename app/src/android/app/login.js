@@ -121,7 +121,7 @@ class Login extends Component {
                         })}
                          style={{ 
 							height: 50,
-							width: this.state.width * .92,
+							width: this.state.width * .90,
 							marginTop: 10,
 							padding: 4,
 							fontSize: 18,
@@ -142,7 +142,7 @@ class Login extends Component {
                         })}
                         style={{ 
 							height: 50,
-							width: this.state.width * .92,
+							width: this.state.width * .90,
 							marginTop: 10,
 							padding: 4,
 							fontSize: 18,
@@ -158,7 +158,18 @@ class Login extends Component {
                     <TouchableHighlight
                         //onPress={this.onLoginPressed.bind(this)}
                         onPress={()=> this.onLogin()}
-                        style={styles.button}>
+						style={{ 
+							height: 50,
+							//width: this.state.width * .92,
+							backgroundColor: '#48BBEC',
+							borderColor: '#48BBEC',
+							alignSelf: 'stretch',
+							marginTop: 10,
+							margin: 5,
+							justifyContent: 'center',
+							alignItems: 'center',
+							borderRadius: 5
+						}}>
                         <Text style={styles.buttonText}>Log in</Text>
                     </TouchableHighlight>
 

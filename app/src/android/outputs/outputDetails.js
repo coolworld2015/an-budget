@@ -191,7 +191,7 @@ class OutputDetails extends Component {
 								fontWeight: 'bold',
 								color: 'black'
 							}}>
-								{this.state.date}
+								{this.state.project}
 							</Text>
 						</TouchableHighlight>	
 					</View>						

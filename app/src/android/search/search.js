@@ -107,7 +107,9 @@ class Search extends Component {
                         borderColor: '#48BBEC',
                         alignSelf: 'stretch',
                         flex: 1,
-                        flexDirection: 'row'
+                        flexDirection: 'row',
+						borderRadius: 5,
+						width: this.state.width * .94
                     }}>
                         <View
                             style={{
@@ -115,7 +117,7 @@ class Search extends Component {
                                 flex: 1
                             }}>
                             <Text style={{
-                                fontSize: 18,
+                                fontSize: 18
                             }}>
                                 {this.state.textSwitchBase}
                             </Text>
@@ -152,7 +154,7 @@ class Search extends Component {
 							fontSize: 18,
 							borderWidth: 1,
 							borderColor: '#48BBEC',
-							borderRadius: 0,
+							borderRadius: 5,
 							color: 'black'
 						}} 
                         placeholder="Search phones">
