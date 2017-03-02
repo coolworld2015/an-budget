@@ -37,7 +37,7 @@ class App extends Component {
 		
         appConfig = {
             access_token: '',
-			url: 'http://jwt-budget2017.herokuapp.com/',
+			url: 'http://jwt-budget.herokuapp.com/',
 			users: {
                 refresh: false
             },

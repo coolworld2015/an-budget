@@ -244,10 +244,6 @@ class ProjectDetails extends Component {
 					}}>						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								name: text,
-								invalidValue: false
-							})}
 							style={styles.loginInput}
 							value={this.state.name}
 							placeholder="Name">
