@@ -83,7 +83,7 @@ class Outputs extends Component {
     }
 
     sort(a, b) {
-        var nameA = a.invoiceID.toLowerCase(), nameB = b.invoiceID.toLowerCase();
+        var nameA = +a.invoiceID.toLowerCase(), nameB = +b.invoiceID.toLowerCase();
         if (nameA < nameB) {
             return 1
         }

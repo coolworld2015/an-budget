@@ -53,7 +53,7 @@ class Search extends Component {
         }
 		 
 		this.props.navigator.push({
-			index: 1,
+			index: 2,
 			data: {
 				searchQuery: this.state.searchQuery,
 				searchType: this.state.textSwitchBase

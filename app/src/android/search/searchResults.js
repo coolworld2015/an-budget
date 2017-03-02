@@ -268,17 +268,18 @@ class SearchResults extends Component {
 
 				<View style={{marginTop: 0}}>
 					<TextInput style={{
-						height: 45,
+                        height: 45,
 						marginTop: 4,
-						padding: 5,
-						backgroundColor: 'whitesmoke',
-						borderWidth: 3,
-						borderColor: 'whitesmoke',
-						borderRadius: 0,
+                        padding: 5,
+                        backgroundColor: 'whitesmoke',
+                        borderWidth: 3,
+                        borderColor: 'lightgray',
+                        borderRadius: 0,
 					}}
-							   onChangeText={this.onChangeText.bind(this)}
-							   value={this.state.searchQuery}
-							   placeholder="Search">
+						underlineColorAndroid='rgba(0,0,0,0)'
+						onChangeText={this.onChangeText.bind(this)}
+						value={this.state.searchQuery}
+						placeholder="Search">
 					</TextInput>
 
 					{errorCtrl}
