@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderWidth: 1,
         borderColor: '#48BBEC',
-        borderRadius: 0,
+        borderRadius: 5,
         color: 'black'
     },
     button: {

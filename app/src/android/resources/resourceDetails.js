@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderWidth: 1,
         borderColor: 'lightgray',
-        borderRadius: 0,
+        borderRadius: 5,
         color: 'black'
     },
     loginInput1: {
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderWidth: 1,
         borderColor: 'lightgray',
-        borderRadius: 0,
+        borderRadius: 5,
         color: 'black'
     },	
     button: {

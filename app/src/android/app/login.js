@@ -121,13 +121,13 @@ class Login extends Component {
                         })}
                          style={{ 
 							height: 50,
-							width: this.state.width * .90,
+							width: this.state.width * .92,
 							marginTop: 10,
 							padding: 4,
 							fontSize: 18,
 							borderWidth: 1,
 							borderColor: 'lightgray',
-							borderRadius: 0,
+							borderRadius: 5,
 							color: 'black',
 							backgroundColor: 'white'
 						}} 
@@ -142,13 +142,13 @@ class Login extends Component {
                         })}
                         style={{ 
 							height: 50,
-							width: this.state.width * .90,
+							width: this.state.width * .92,
 							marginTop: 10,
 							padding: 4,
 							fontSize: 18,
 							borderWidth: 1,
 							borderColor: 'lightgray',
-							borderRadius: 0,
+							borderRadius: 5,
 							color: 'black',
 							backgroundColor: 'white'
 						}} 
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#48BBEC',
         borderColor: '#48BBEC',
         alignSelf: 'stretch',
-        margin: 10,
+        marginTop: 10,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 5
