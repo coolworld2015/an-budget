@@ -38,7 +38,8 @@ class DepartmentDetails extends Component {
 				address: props.data.address,
 				phone: props.data.phone,
 				description: props.data.description,
-				sum: ((+props.data.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				sumShow: ((+props.data.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				sum: props.data.sum,
 				showProgress: false
 			};
 		}		
@@ -286,7 +287,7 @@ class DepartmentDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.sum}
+							value={this.state.sumShow}
 							placeholder="Total">
 						</TextInput>
 						
@@ -375,7 +376,7 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-        marginTop: 40
+        marginTop: 20
     },
     error: {
         color: 'red',

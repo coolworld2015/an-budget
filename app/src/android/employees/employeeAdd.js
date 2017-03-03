@@ -12,7 +12,8 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-	BackAndroid
+	BackAndroid,
+	Picker
 } from 'react-native';
 
 class EmployeeAdd extends Component {
@@ -28,14 +29,62 @@ class EmployeeAdd extends Component {
 		
         this.state = {
             showProgress: false,
+			departments: [],
 			bugANDROID: ''
         }
     }
+	
+	componentDidMount() {
+		this.getDepartments();
+	}
 
+    getDepartments() {
+        fetch(appConfig.url + 'api/departments/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'Select department'});
+                this.setState({
+                    departments: items,
+					serverError: false
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    //showProgress: false
+                });
+            });
+    }
+
+    sort(a, b) {
+        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+        if (nameA < nameB) {
+            return -1
+        }
+        if (nameA > nameB) {
+            return 1
+        }
+        return 0;
+    }
+	
     addItem() {
         if (this.state.name == undefined ||
             this.state.address == undefined ||
             this.state.phone == undefined ||
+            this.state.departmentID == undefined ||
+            this.state.departmentName == undefined ||			
             this.state.description == undefined) {
             this.setState({
                 invalidValue: true
@@ -56,6 +105,8 @@ class EmployeeAdd extends Component {
                 address: this.state.address,
                 phone: this.state.phone,
                 description: this.state.description,
+                departmentID: this.state.departmentID,
+                department: this.state.departmentName,
 				sum: 0,
 				authorization: appConfig.access_token
             }),
@@ -158,11 +209,42 @@ class EmployeeAdd extends Component {
 				</View>
 					
 				<ScrollView>
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
+                                selectedValue={this.state.department}
+
+                                onValueChange={(value) => {
+									let arr = [].concat(this.state.departments);
+ 									let department = arr.filter((el) => el.id == value);
+ 
+                                    this.setState({
+                                        department: value,
+                                        departmentID: department[0].id,
+                                        departmentName: department[0].name,
+										invalidValue: false
+                                    })
+                                }}>
+
+								{this.state.departments.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>
+					
 					<View style={{
 						flex: 1,
 						padding: 10,
-						justifyContent: 'flex-start',
-						paddingBottom: 90,
+						paddingTop: 0,
+						marginTop: 0,
 						backgroundColor: 'white'
 					}}>
 						<TextInput

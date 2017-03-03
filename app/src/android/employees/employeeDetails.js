@@ -37,8 +37,11 @@ class EmployeeDetails extends Component {
 				name: props.data.name,
 				address: props.data.address,
 				phone: props.data.phone,
+				departmentID: props.data.departmentID,
+				department: props.data.department,
 				description: props.data.description,
-				sum: ((+props.data.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				sumShow: ((+props.data.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
+				sum: props.data.sum,
 				showProgress: false
 			};
 		}		
@@ -49,6 +52,8 @@ class EmployeeDetails extends Component {
             this.state.address == '' ||
             this.state.phone == '' ||
             this.state.sum == '' ||
+            this.state.departmentID == '' ||
+            this.state.department == '' ||
             this.state.description == '') {
             this.setState({
                 invalidValue: true
@@ -68,6 +73,8 @@ class EmployeeDetails extends Component {
                 name: this.state.name,
 				address: this.state.address,
 				phone: this.state.phone,
+                department: this.state.department,
+                departmentID: this.state.departmentID,
                 description: this.state.description,
                 sum: this.state.sum,
 				authorization: appConfig.access_token
@@ -274,6 +281,13 @@ class EmployeeDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							multiline={true}
+							style={styles.loginInput}
+							value={this.state.department}
+							placeholder="Department">
+						</TextInput>
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false
@@ -286,7 +300,7 @@ class EmployeeDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							style={styles.loginInput}
-							value={this.state.sum}
+							value={this.state.sumShow}
 							placeholder="Total">
 						</TextInput>
 						
@@ -375,7 +389,7 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-        marginTop: 40
+        marginTop: 20
     },
     error: {
         color: 'red',

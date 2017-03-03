@@ -13,12 +13,20 @@ import {
     NavigatorIOS,
     TextInput,
     Picker,
-	Alert
+	Alert,
+	BackAndroid
 } from 'react-native';
 
 class InputAdd extends Component {
     constructor(props) {
         super(props);
+		
+		BackAndroid.addEventListener('hardwareBackPress', () => {
+			if (this.props.navigator) {
+				this.props.navigator.pop();
+			}
+			return true;
+		});
 		
         let d = new Date;
         let todayDate = d.getMonth() + 1 + '/' + (d.getDate()) + '/' + d.getFullYear();
