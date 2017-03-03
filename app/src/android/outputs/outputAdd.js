@@ -40,6 +40,7 @@ class OutputAdd extends Component {
             projects: [],
             departments: [],
             employees: [],
+            employeesFiltered: [{name: 'Select employee'}],			
             goods: [],
 			invoiceID: (appConfig.outputs.outputsCount).toString(),
 			date: date,
@@ -424,11 +425,15 @@ class OutputAdd extends Component {
 									let arr = [].concat(this.state.departments);
  									let department = arr.filter((el) => el.id == value);
  
+ 									let arrEmployees = [].concat(this.state.employees);
+ 									let employees = arrEmployees.filter((el) => el.departmentID == value);
+									
                                     this.setState({
                                         department: value,
                                         departmentID: department[0].id,
                                         departmentName: department[0].name,
-										invalidValue: false
+										invalidValue: false,
+										employeesFiltered: employees										
                                     })
                                 }}>
 
@@ -452,7 +457,7 @@ class OutputAdd extends Component {
                                 selectedValue={this.state.employee}
 
                                 onValueChange={(value) => {
-									let arr = [].concat(this.state.employees);
+									let arr = [].concat(this.state.employeesFiltered);
  									let employee = arr.filter((el) => el.id == value);
  
                                     this.setState({
@@ -463,7 +468,7 @@ class OutputAdd extends Component {
                                     })
                                 }}>
 
-								{this.state.employees.map((item, i) =>
+								{this.state.employeesFiltered.map((item, i) =>
 									<Picker.Item value={item.id} label={item.name} key={i}/>
 								)}
 							</Picker>
