@@ -25,7 +25,7 @@ class Other extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows([
-				{name: 'Search', id: 1},
+				{name: 'Reports', id: 1},
 				{name: 'Projects', id: 10},
 				{name: 'Resources', id: 20},
 				{name: 'Departments', id: 30},

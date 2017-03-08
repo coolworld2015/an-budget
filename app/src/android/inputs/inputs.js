@@ -63,7 +63,6 @@ class Inputs extends Component {
             .then((responseData)=> {
 
                 this.setState({
-                    //dataSource: this.state.dataSource.cloneWithRows(responseData.reverse().slice(0, 25)),
 				    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
                     resultsCount: responseData.length,
                     responseData: responseData,

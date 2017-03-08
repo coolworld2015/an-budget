@@ -21,12 +21,15 @@ import {
 class Search extends Component {
     constructor(props) {
         super(props);
-
+		
+		var width = Dimensions.get('window').width;
+		
         this.state = {
             showProgress: false,
             eventSwitchTitle: true,
 			eventSwitchBase: true,
             textSwitchBase: 'Search by number',
+			searchQuery: 'Reports',
 			bugANDROID: ''
         }
     }
@@ -39,7 +42,7 @@ class Search extends Component {
 	
     clearSearch() {
         this.setState({
-            searchQuery: '',
+            searchQuery: 'Reports',
             invalidValue: false
         })
     }
@@ -96,7 +99,7 @@ class Search extends Component {
                     <TouchableHighlight
                         onPress={this.clearSearch.bind(this)}
                         style={styles.button}>
-                        <Text style={styles.buttonText}>Search phones</Text>
+                        <Text style={styles.buttonText}>Reports</Text>
                     </TouchableHighlight>
 
                     <View style={{

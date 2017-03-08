@@ -33,35 +33,33 @@ class SearchResults extends Component {
         });
 		
 		this.state = {
-			dataSource: ds.cloneWithRows([])
+			dataSource1: ds.cloneWithRows([]),
+			dataSource2: ds.cloneWithRows([])
 		}	
 		
 		if (props.data) {
 			this.state = {
-				dataSource: ds.cloneWithRows([]),
+				dataSource1: ds.cloneWithRows([]),
+				dataSource2: ds.cloneWithRows([]),
 				searchQueryHttp: props.data.searchQuery,
 				searchType: props.data.searchType,
 				showProgress: true,
-				resultsCount: 0,
-				recordsCount: 25,
+				resultsCount1: 0,
+				recordsCount1: 25,				
+				resultsCount2: 0,
+				recordsCount2: 25,
 				positionY: 0
 			};
 		}
     }
 	
 	componentDidMount() {
-		this.findByPhone();
+		this.getInputs();
+		this.getOutputs();
 	}
 	
-    findByPhone() {
-		var webUrl;
-		if (this.state.searchType == 'Search by number') {
-			webUrl = 'api/items/findByPhone/'
-		} else {
-			webUrl = 'api/items/findByName/'
-		}
-		
-		fetch(appConfig.url + webUrl + this.state.searchQueryHttp, {
+    getInputs() {
+        fetch(appConfig.url + 'api/inputs/get', {			
             method: 'get',
             headers: {
                 'Accept': 'application/json',
@@ -71,13 +69,13 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-                this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
-                    resultsCount: responseData.length,
-                    responseData: responseData.sort(this.sort),
-                    filteredItems: responseData.sort(this.sort)
-                });
 
+                this.setState({
+				    dataSource1: this.state.dataSource1.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
+                    resultsCount1: responseData.length,
+                    responseData1: responseData,
+                    filteredItems: responseData
+                });
             })
             .catch((error)=> {
                 this.setState({
@@ -91,13 +89,44 @@ class SearchResults extends Component {
             });
     }
 
+    getOutputs() {
+        fetch(appConfig.url + 'api/outputs/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+
+                this.setState({
+				    dataSource2: this.state.dataSource2.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
+                    resultsCount2: responseData.length,
+                    responseData2: responseData,
+                    filteredItems: responseData
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false
+                });
+            });
+    }
+	
     sort(a, b) {
-        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+        var nameA = +a.invoiceID.toLowerCase(), nameB = +b.invoiceID.toLowerCase();
         if (nameA < nameB) {
-            return -1
+            return 1
         }
         if (nameA > nameB) {
-            return 1
+            return -1
         }
         return 0;
     }
@@ -115,24 +144,31 @@ class SearchResults extends Component {
                 onPress={()=> this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    padding: 20,
-                    alignItems: 'center',
-                    borderColor: '#D7D7D7',
-                    borderBottomWidth: 1,
-                    backgroundColor: '#fff'
-                }}>
-                    <Text style={{backgroundColor: '#fff', color: 'black'}}>
-                        {rowData.name} - {rowData.phone}
-                    </Text>
-                </View>
+				<View style={{
+						flex: 1,
+						flexDirection: 'column',
+						padding: 12,
+						borderColor: '#D7D7D7',
+						borderBottomWidth: 1,
+						backgroundColor: '#fff'
+					}}>              
+						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+							{rowData.invoiceID} - {rowData.project} - {(rowData.date).split(' ')[0]}
+						</Text>						
+						
+						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+							{rowData.description}
+						</Text>						
+						
+						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+							Total: {((+rowData.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+						</Text>
+				</View>
             </TouchableHighlight>
         );
     }
 
-    refreshData(event) {
+    refreshData1(event) {
         if (this.state.showProgress == true) {
             return;
         }
@@ -147,7 +183,7 @@ class SearchResults extends Component {
             });
 
             setTimeout(() => {
-                this.findByPhone()
+                //this.findByPhone()
             }, 300);
         }
 
@@ -156,7 +192,7 @@ class SearchResults extends Component {
         }
 
         var items, positionY, recordsCount;
-        recordsCount = this.state.recordsCount;
+        recordsCount = this.state.recordsCount1;
         positionY = this.state.positionY;
         items = this.state.filteredItems.slice(0, recordsCount);
 
@@ -165,8 +201,48 @@ class SearchResults extends Component {
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
             console.log(items.length);
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(items),
-                recordsCount: recordsCount + 20,
+                dataSource1: this.state.dataSource1.cloneWithRows(items),
+                recordsCount1: recordsCount + 20,
+                positionY: positionY + 1000
+            });
+        }
+    }
+	
+    refreshData2(event) {
+        if (this.state.showProgress == true) {
+            return;
+        }
+
+        if (event.nativeEvent.contentOffset.y <= -150) {
+            this.setState({
+                showProgress: true,
+                resultsCount: 0,
+                recordsCount: 25,
+                positionY: 0,
+                searchQuery: ''
+            });
+
+            setTimeout(() => {
+                //this.findByPhone()
+            }, 300);
+        }
+
+        if (this.state.filteredItems == undefined) {
+            return;
+        }
+
+        var items, positionY, recordsCount;
+        recordsCount = this.state.recordsCount2;
+        positionY = this.state.positionY;
+        items = this.state.filteredItems.slice(0, recordsCount);
+
+        console.log(positionY + ' - ' + recordsCount + ' - ' + items.length);
+
+        if (event.nativeEvent.contentOffset.y >= positionY - 10) {
+            console.log(items.length);
+            this.setState({
+                dataSource2: this.state.dataSource2.cloneWithRows(items),
+                recordsCount2: recordsCount + 20,
                 positionY: positionY + 1000
             });
         }
@@ -260,47 +336,63 @@ class SearchResults extends Component {
 								fontWeight: 'bold',
 								color: 'darkblue'
 							}}>
-								Done 
+								
 							</Text>
 						</TouchableHighlight>	
 					</View>
 				</View>
-
-				<View style={{marginTop: 0}}>
-					<TextInput style={{
-                        height: 45,
-						marginTop: 4,
-                        padding: 5,
-                        backgroundColor: 'whitesmoke',
-                        borderWidth: 3,
-                        borderColor: 'lightgray',
-                        borderRadius: 0,
-					}}
-						underlineColorAndroid='rgba(0,0,0,0)'
-						onChangeText={this.onChangeText.bind(this)}
-						value={this.state.searchQuery}
-						placeholder="Search">
-					</TextInput>
-
-					{errorCtrl}
-
+				
+				<View style={{
+						flex: 1,
+						flexDirection: 'row',
+						justifyContent: 'space-between'
+					}}>
+ 
+					{loader}
+					
+					<ScrollView
+						onScroll={this.refreshData1.bind(this)} scrollEventThrottle={16}>
+	
+						<ListView
+							enableEmptySections={true}
+							style={{marginTop: 0, marginBottom: 0}}
+							dataSource={this.state.dataSource1}
+							renderRow={this.renderRow.bind(this)}
+						/>
+					</ScrollView>				
+ 
+					<ScrollView
+						onScroll={this.refreshData2.bind(this)} scrollEventThrottle={16}>
+					
+						<ListView
+							enableEmptySections={true}
+							style={{marginTop: 0, marginBottom: 0}}
+							dataSource={this.state.dataSource2}
+							renderRow={this.renderRow.bind(this)}
+						/>
+					</ScrollView>				
 				</View>
-
-				{loader}
-
-				<ScrollView
-					onScroll={this.refreshData.bind(this)} scrollEventThrottle={16}>
-					<ListView
-						enableEmptySections={true}
-						style={{marginTop: 0, marginBottom: 0}}
-						dataSource={this.state.dataSource}
-						renderRow={this.renderRow.bind(this)}
-					/>
-				</ScrollView>
-
+				
+				<View style={{
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						backgroundColor: 'lightgray'
+					}}>
+					<View style={{marginBottom: 0}}>
+						<Text style={styles.countFooter}>
+							{this.state.resultsCount1} entries were found.
+						</Text>
+					</View>	
+					<View style={{marginBottom: 0}}>
+						<Text style={styles.countFooter}>
+							{this.state.resultsCount2} entries were found.
+						</Text>
+					</View>	
+				</View>
+				
 				<View style={{marginBottom: 0}}>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount} entries were found.
+						{this.state.resultsCount1} entries were found.
 					</Text>
 				</View>
             </View>
