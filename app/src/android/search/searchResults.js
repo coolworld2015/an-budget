@@ -77,7 +77,7 @@ class SearchResults extends Component {
 				if (this.state.searchQueryHttp == null) {
 					var items = arr;
 				} else {
-					var items = arr.filter((el) => el.project == this.state.searchQueryHttp);
+					var items = arr.filter((el) => el.project.toLowerCase() == this.state.searchQueryHttp.toLowerCase());
 				}
 				
 				items.forEach((el) => this.state.inputsTotal = +this.state.inputsTotal + +el.total)
@@ -120,7 +120,7 @@ class SearchResults extends Component {
 						searchQueryHttp: 'All projects'
 					});
 				} else {
-					var items = arr.filter((el) => el.project == this.state.searchQueryHttp);
+					var items = arr.filter((el) => el.project.toLowerCase() == this.state.searchQueryHttp.toLowerCase());
 				}
 				
 				items.forEach((el) => this.state.outputsTotal = +this.state.outputsTotal + +el.total)
@@ -346,21 +346,29 @@ class SearchResults extends Component {
 						backgroundColor: 'lightgray'
 					}}>
 					<View style={{marginBottom: 0}}>
-						<Text style={styles.countFooter}>
-							Outputs({this.state.resultsCount2}): {((+this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+						<Text style={styles.countFooter1}>
+							Outputs: {this.state.resultsCount2}
 						</Text>
+						<Text style={styles.countFooter1}>
+							{((+this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+						</Text>						
 					</View>	
 					<View style={{marginBottom: 0}}>
-						<Text style={styles.countFooter}>
-							Inputs({this.state.resultsCount1}): {((+this.state.inputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+						<Text style={styles.countFooter2}>
+							Total:
+						</Text>						
+						<Text style={styles.countFooter2}>
+							{((+this.state.inputsTotal - +this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+						</Text>
+					</View>					
+					<View style={{marginBottom: 0}}>
+						<Text style={styles.countFooter3}>
+							Inputs: {this.state.resultsCount1}
+						</Text>						
+						<Text style={styles.countFooter3}>
+							{((+this.state.inputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 						</Text>
 					</View>	
-				</View>
-				
-				<View style={{marginBottom: 0}}>
-					<Text style={styles.countFooter}>
-						Total: {((+this.state.inputsTotal - +this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
-					</Text>
 				</View>
             </View>
         );
@@ -384,6 +392,33 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         padding: 10,
+        borderColor: '#D7D7D7',
+        backgroundColor: 'lightgray',
+		color: 'black',
+		fontWeight: 'bold'
+    },    
+	countFooter1: {
+        fontSize: 16,
+        textAlign: 'left',
+        margin: 3,
+        borderColor: '#D7D7D7',
+        backgroundColor: 'lightgray',
+		color: 'black',
+		fontWeight: 'bold'
+    },	
+	countFooter2: {
+        fontSize: 16,
+        textAlign: 'center',
+        margin: 3,
+        borderColor: '#D7D7D7',
+        backgroundColor: 'lightgray',
+		color: 'black',
+		fontWeight: 'bold'
+    },	
+	countFooter3: {
+        fontSize: 16,
+        textAlign: 'right',
+        margin: 3,
         borderColor: '#D7D7D7',
         backgroundColor: 'lightgray',
 		color: 'black',
