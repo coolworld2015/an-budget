@@ -48,7 +48,8 @@ class SearchResults extends Component {
 				recordsCount1: 25,				
 				resultsCount2: 0,
 				recordsCount2: 25,
-				positionY: 0
+				positionY1: 0,
+				positionY2: 0
 			};
 		}
     }
@@ -74,7 +75,7 @@ class SearchResults extends Component {
 				    dataSource1: this.state.dataSource1.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
                     resultsCount1: responseData.length,
                     responseData1: responseData,
-                    filteredItems: responseData
+                    filteredItems1: responseData
                 });
             })
             .catch((error)=> {
@@ -105,7 +106,7 @@ class SearchResults extends Component {
 				    dataSource2: this.state.dataSource2.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
                     resultsCount2: responseData.length,
                     responseData2: responseData,
-                    filteredItems: responseData
+                    filteredItems2: responseData
                 });
             })
             .catch((error)=> {
@@ -173,37 +174,16 @@ class SearchResults extends Component {
             return;
         }
 
-        if (event.nativeEvent.contentOffset.y <= -150) {
-            this.setState({
-                showProgress: true,
-                resultsCount: 0,
-                recordsCount: 25,
-                positionY: 0,
-                searchQuery: ''
-            });
-
-            setTimeout(() => {
-                //this.findByPhone()
-            }, 300);
-        }
-
-        if (this.state.filteredItems == undefined) {
-            return;
-        }
-
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount1;
-        positionY = this.state.positionY;
-        items = this.state.filteredItems.slice(0, recordsCount);
-
-        console.log(positionY + ' - ' + recordsCount + ' - ' + items.length);
+        positionY = this.state.positionY1;
+        items = this.state.filteredItems1;
 
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
-            console.log(items.length);
             this.setState({
                 dataSource1: this.state.dataSource1.cloneWithRows(items),
                 recordsCount1: recordsCount + 20,
-                positionY: positionY + 1000
+                positionY1: positionY + 1000
             });
         }
     }
@@ -213,54 +193,18 @@ class SearchResults extends Component {
             return;
         }
 
-        if (event.nativeEvent.contentOffset.y <= -150) {
-            this.setState({
-                showProgress: true,
-                resultsCount: 0,
-                recordsCount: 25,
-                positionY: 0,
-                searchQuery: ''
-            });
-
-            setTimeout(() => {
-                //this.findByPhone()
-            }, 300);
-        }
-
-        if (this.state.filteredItems == undefined) {
-            return;
-        }
-
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount2;
-        positionY = this.state.positionY;
-        items = this.state.filteredItems.slice(0, recordsCount);
-
-        console.log(positionY + ' - ' + recordsCount + ' - ' + items.length);
+        positionY = this.state.positionY2;
+        items = this.state.filteredItems2;
 
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
-            console.log(items.length);
             this.setState({
                 dataSource2: this.state.dataSource2.cloneWithRows(items),
                 recordsCount2: recordsCount + 20,
-                positionY: positionY + 1000
+                positionY2: positionY + 1000
             });
         }
-    }
-
-    onChangeText(text) {
-        if (this.state.dataSource == undefined) {
-            //return;
-        }
-
-        var arr = [].concat(this.state.responseData);
-        var items = arr.filter((el) => el.phone.toLowerCase().indexOf(text.toLowerCase()) != -1);
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(items),
-            resultsCount: items.length,
-            filteredItems: items,
-            searchQuery: text
-        })
     }
 	
     goBack(rowData) {
@@ -317,6 +261,7 @@ class SearchResults extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
+								marginRight: 60,
 								fontWeight: 'bold',
 								color: 'black'
 							}}>
@@ -351,23 +296,23 @@ class SearchResults extends Component {
 					{loader}
 					
 					<ScrollView
-						onScroll={this.refreshData1.bind(this)} scrollEventThrottle={16}>
+						onScroll={this.refreshData2.bind(this)} scrollEventThrottle={16}>
 	
 						<ListView
 							enableEmptySections={true}
 							style={{marginTop: 0, marginBottom: 0}}
-							dataSource={this.state.dataSource1}
+							dataSource={this.state.dataSource2}
 							renderRow={this.renderRow.bind(this)}
 						/>
 					</ScrollView>				
  
 					<ScrollView
-						onScroll={this.refreshData2.bind(this)} scrollEventThrottle={16}>
+						onScroll={this.refreshData1.bind(this)} scrollEventThrottle={16}>
 					
 						<ListView
 							enableEmptySections={true}
 							style={{marginTop: 0, marginBottom: 0}}
-							dataSource={this.state.dataSource2}
+							dataSource={this.state.dataSource1}
 							renderRow={this.renderRow.bind(this)}
 						/>
 					</ScrollView>				
@@ -380,12 +325,12 @@ class SearchResults extends Component {
 					}}>
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter}>
-							{this.state.resultsCount1} entries were found.
+							{this.state.resultsCount2} entries were found.
 						</Text>
 					</View>	
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter}>
-							{this.state.resultsCount2} entries were found.
+							{this.state.resultsCount1} entries were found.
 						</Text>
 					</View>	
 				</View>
