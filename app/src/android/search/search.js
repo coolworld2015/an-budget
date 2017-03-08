@@ -28,8 +28,8 @@ class Search extends Component {
             showProgress: false,
             eventSwitchTitle: true,
 			eventSwitchBase: true,
-            textSwitchBase: 'Search by number',
-			searchQuery: 'Reports',
+            textSwitchBase: 'Choose project',
+			searchQuery: null,
 			bugANDROID: ''
         }
     }
@@ -42,7 +42,7 @@ class Search extends Component {
 	
     clearSearch() {
         this.setState({
-            searchQuery: 'Reports',
+            searchQuery: null,
             invalidValue: false
         })
     }
@@ -50,9 +50,9 @@ class Search extends Component {
     onSearchPressed() {
         if (this.state.searchQuery == undefined) {
             this.setState({
-                invalidValue: true
+                //invalidValue: true
             });
-            return;
+            //return;
         }
 		 
 		this.props.navigator.push({
@@ -67,11 +67,11 @@ class Search extends Component {
     toggleTypeChange() {
         if (!this.state.eventSwitchBase) {
             this.setState({
-                textSwitchBase: 'Search by number'
+                textSwitchBase: 'Choose project'
             });
         } else {
             this.setState({
-                textSwitchBase: 'Search by name'
+                textSwitchBase: 'Choose project'
             });
         }
     }
@@ -160,7 +160,7 @@ class Search extends Component {
 							borderRadius: 5,
 							color: 'black'
 						}} 
-                        placeholder="Search phones">
+                        placeholder="All projects">
                     </TextInput>
 
                     {validCtrl}

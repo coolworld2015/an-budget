@@ -49,7 +49,9 @@ class SearchResults extends Component {
 				resultsCount2: 0,
 				recordsCount2: 25,
 				positionY1: 0,
-				positionY2: 0
+				positionY2: 0,
+				inputsTotal: 0,
+				outputsTotal: 0
 			};
 		}
     }
@@ -70,12 +72,21 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-
+				var arr = [].concat(responseData.sort(this.sort));
+			
+				if (this.state.searchQueryHttp == null) {
+					var items = arr;
+				} else {
+					var items = arr.filter((el) => el.project == this.state.searchQueryHttp);
+				}
+				
+				items.forEach((el) => this.state.inputsTotal = +this.state.inputsTotal + +el.total)
+				
                 this.setState({
-				    dataSource1: this.state.dataSource1.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
-                    resultsCount1: responseData.length,
-                    responseData1: responseData,
-                    filteredItems1: responseData
+				    dataSource1: this.state.dataSource1.cloneWithRows(items.slice(0, 25)),
+                    resultsCount1: items.length,
+                    responseData1: items,
+                    filteredItems1: items
                 });
             })
             .catch((error)=> {
@@ -101,12 +112,24 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-
+				var arr = [].concat(responseData.sort(this.sort));
+			
+				if (this.state.searchQueryHttp == null) {
+					var items = arr;
+					this.setState({
+						searchQueryHttp: 'All projects'
+					});
+				} else {
+					var items = arr.filter((el) => el.project == this.state.searchQueryHttp);
+				}
+				
+				items.forEach((el) => this.state.outputsTotal = +this.state.outputsTotal + +el.total)
+								
                 this.setState({
-				    dataSource2: this.state.dataSource2.cloneWithRows(responseData.sort(this.sort).slice(0, 25)),
-                    resultsCount2: responseData.length,
-                    responseData2: responseData,
-                    filteredItems2: responseData
+				    dataSource2: this.state.dataSource2.cloneWithRows(items.slice(0, 25)),
+                    resultsCount2: items.length,
+                    responseData2: items,
+                    filteredItems2: items
                 });
             })
             .catch((error)=> {
@@ -142,7 +165,6 @@ class SearchResults extends Component {
     renderRow(rowData) {
         return (
             <TouchableHighlight
-                onPress={()=> this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
 				<View style={{
@@ -325,19 +347,19 @@ class SearchResults extends Component {
 					}}>
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter}>
-							{this.state.resultsCount2} entries were found.
+							Outputs({this.state.resultsCount2}): {((+this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 						</Text>
 					</View>	
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter}>
-							{this.state.resultsCount1} entries were found.
+							Inputs({this.state.resultsCount1}): {((+this.state.inputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 						</Text>
 					</View>	
 				</View>
 				
 				<View style={{marginBottom: 0}}>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount1} entries were found.
+						Total: {((+this.state.inputsTotal - +this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 					</Text>
 				</View>
             </View>
@@ -364,7 +386,8 @@ const styles = StyleSheet.create({
         padding: 10,
         borderColor: '#D7D7D7',
         backgroundColor: 'lightgray',
-		color: 'black'
+		color: 'black',
+		fontWeight: 'bold'
     },
     countHeader1: {
         fontSize: 16,
