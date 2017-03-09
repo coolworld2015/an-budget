@@ -193,11 +193,14 @@ class Audit extends Component {
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
-					<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.refreshDataAndroid()}
@@ -208,7 +211,7 @@ class Audit extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Reload
 							</Text>
@@ -225,7 +228,7 @@ class Audit extends Component {
 								margin: 10,
 								marginRight: 20,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								Audit
 							</Text>
@@ -241,7 +244,7 @@ class Audit extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Add
 							</Text>
@@ -252,9 +255,9 @@ class Audit extends Component {
                 <View style={{marginTop: 0}}>
                     <TextInput style={{
                         height: 45,
-                        marginTop: 4,
+                        marginTop: 0,
                         padding: 5,
-                        backgroundColor: 'whitesmoke',
+                        backgroundColor: 'white',
                         borderWidth: 3,
                         borderColor: 'lightgray',
                         borderRadius: 0,
@@ -310,8 +313,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black'
+        backgroundColor: '#48BBEC',
+		color: 'white',
+		fontWeight: 'bold'
     },
     welcome: {
         fontSize: 20,

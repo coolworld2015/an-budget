@@ -251,7 +251,7 @@ class SearchResults extends Component {
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
 						flexDirection: 'row',
 						justifyContent: 'space-between',
@@ -309,14 +309,14 @@ class SearchResults extends Component {
 									
 				{errorCtrl}
 				
+				{loader}
+				
 				<View style={{
 						flex: 1,
 						flexDirection: 'row',
 						justifyContent: 'space-between'
 					}}>
- 
-					{loader}
-					
+	
 					<ScrollView
 						onScroll={this.refreshData2.bind(this)} scrollEventThrottle={16}>
 	

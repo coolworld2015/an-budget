@@ -148,7 +148,7 @@ class Other extends Component {
 
     render() {
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
 					flexDirection: 'row',
 					justifyContent: 'space-between',

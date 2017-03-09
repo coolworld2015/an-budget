@@ -223,7 +223,7 @@ class Store extends Component {
         }
 
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
 					flexDirection: 'row',
 					justifyContent: 'space-between',
@@ -286,7 +286,7 @@ class Store extends Component {
                         height: 45,
 						marginTop: 0,
                         padding: 5,
-                        backgroundColor: 'whitesmoke',
+                        backgroundColor: 'white',
                         borderWidth: 3,
                         borderColor: 'lightgray',
                         borderRadius: 0,
