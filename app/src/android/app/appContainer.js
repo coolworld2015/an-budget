@@ -51,6 +51,7 @@ import Other from './other';
 
 import Search from '../search/search';
 import SearchResults from '../search/searchResults';
+import SearchDetails from '../search/searchDetails';
 
 class AppContainer extends Component {
 	constructor(props) {
@@ -109,6 +110,7 @@ class OtherTab extends Component {
 			
 			{title: 'Search', index: 19},
 			{title: 'Search Results', index: 20},
+			{title: 'Search Details', index: 21},
 		];
 	}
 	
@@ -122,9 +124,11 @@ class OtherTab extends Component {
 					break;			
 					
 			case 1: return <Search routes={this.routes} navigator={navigator} />
-					 break;			
+					break;			
 			case 2: return <SearchResults data={route.data} routes={this.routes} navigator={navigator} />
-					 break;	
+					break;				
+			case 3: return <SearchDetails data={route.data} routes={this.routes} navigator={navigator} />
+					break;	
 					 
 			case 10: return <Projects routes={this.routes} navigator={navigator} />
 					 break;			

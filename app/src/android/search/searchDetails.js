@@ -16,7 +16,7 @@ import {
 	Alert
 } from 'react-native';
 
-class InputDetails extends Component {
+class SearchDetails extends Component {
     constructor(props) {
         super(props);
 		
@@ -80,7 +80,7 @@ class InputDetails extends Component {
 			bugANDROID: ' '
         });
 
-        fetch(appConfig.url + 'api/inputs/delete', {
+        fetch(appConfig.url + 'api/outputs/delete', {
             method: 'post',
             body: JSON.stringify({
                 id: this.state.id,
@@ -109,7 +109,7 @@ class InputDetails extends Component {
             .then((responseData)=> {
 				console.log(responseData);
 				if (responseData) {
-					appConfig.inputs.refresh = true;
+					appConfig.outputs.refresh = true;
 					appConfig.assets.refresh = true;
 					appConfig.projects.refresh = true;
 					appConfig.departments.refresh = true;
@@ -199,6 +199,7 @@ class InputDetails extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
+								marginRight: 60,
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
@@ -208,7 +209,6 @@ class InputDetails extends Component {
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.deleteItemDialog()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
@@ -218,7 +218,7 @@ class InputDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Delete
+								
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -231,7 +231,7 @@ class InputDetails extends Component {
 						paddingBottom: 40,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
-					}}>				
+					}}>					
 						
 						{loader}
 						
@@ -367,77 +367,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default InputDetails;
-
-/*
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.invoiceID}
-							placeholder="invoiceID">
-						</TextInput>
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.date}
-							placeholder="date">
-						</TextInput>
-												
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.project}
-							placeholder="project">
-						</TextInput>		
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.department}
-							placeholder="department">
-						</TextInput>				
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.employee}
-							placeholder="employee">
-						</TextInput>		
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.product}
-							placeholder="product">
-						</TextInput>		
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.priceShow}
-							placeholder="price">
-						</TextInput>	
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.quantityShow}
-							placeholder="quantity">
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							multiline={true}
-							style={styles.loginInput1}
-							value={this.state.description}
-							placeholder="Description">
-						</TextInput>
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.totalShow}
-							placeholder="Total">
-						</TextInput>
-*/						
+export default SearchDetails;

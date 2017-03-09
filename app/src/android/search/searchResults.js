@@ -154,7 +154,7 @@ class SearchResults extends Component {
 
     showDetails(rowData) {
 		this.props.navigator.push({
-			index: 2,
+			index: 3,
 			data: rowData
 		});
     }
@@ -162,6 +162,7 @@ class SearchResults extends Component {
     renderRow(rowData) {
         return (
             <TouchableHighlight
+				onPress={()=> this.showDetails(rowData)}
                 underlayColor='#ddd'
             >
 				<View style={{

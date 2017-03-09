@@ -231,83 +231,51 @@ class OutputDetails extends Component {
 						paddingBottom: 40,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
-					}}>				
-						{errorCtrl}				
+					}}>					
 						
 						{loader}
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.invoiceID}
-							placeholder="invoiceID">
-						</TextInput>
+						<View>
+							<Text style={styles.itemText}>
+								ID: {this.state.invoiceID}
+							</Text>		
+						</View>
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.date}
-							placeholder="date">
-						</TextInput>
-												
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.project}
-							placeholder="project">
-						</TextInput>		
+						<Text style={styles.itemText}>
+							Date: {this.state.date}
+						</Text>		
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.department}
-							placeholder="department">
-						</TextInput>				
+						<Text style={styles.itemText}>
+							Project: {this.state.project}
+						</Text>			
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.employee}
-							placeholder="employee">
-						</TextInput>		
+						<Text style={styles.itemText}>
+							Department: {this.state.department}
+						</Text>		
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.product}
-							placeholder="product">
-						</TextInput>		
+						<Text style={styles.itemText}>
+							Employee: {this.state.employee}
+						</Text>		
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.priceShow}
-							placeholder="price">
-						</TextInput>	
+						<Text style={styles.itemText}>
+							Product: {this.state.product}
+						</Text>		
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.quantityShow}
-							placeholder="quantity">
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							multiline={true}
-							style={styles.loginInput1}
-							value={this.state.description}
-							placeholder="Description">
-						</TextInput>
+						<Text style={styles.itemText}>
+							Price: {this.state.price}
+						</Text>			
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.totalShow}
-							placeholder="Total">
-						</TextInput>
+						<Text style={styles.itemText}>
+							Quantity: {this.state.quantity}
+						</Text>			
 						
-						{validCtrl}
+						<Text style={styles.itemText}>
+							Description: {this.state.description}
+						</Text>				
+						
+						<Text style={styles.itemText}>
+							Total: {this.state.totalShow}
+						</Text>
 
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -324,11 +292,12 @@ class OutputDetails extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'gray',
+    itemText: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 5,
+		fontWeight: 'bold',
+		color: 'black'
     },
     countHeader: {
         fontSize: 16,
@@ -399,3 +368,75 @@ const styles = StyleSheet.create({
 });
 
 export default OutputDetails;
+/*
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.invoiceID}
+							placeholder="invoiceID">
+						</TextInput>
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.date}
+							placeholder="date">
+						</TextInput>
+												
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.project}
+							placeholder="project">
+						</TextInput>		
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.department}
+							placeholder="department">
+						</TextInput>				
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.employee}
+							placeholder="employee">
+						</TextInput>		
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.product}
+							placeholder="product">
+						</TextInput>		
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.priceShow}
+							placeholder="price">
+						</TextInput>	
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.quantityShow}
+							placeholder="quantity">
+						</TextInput>
+
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
+							style={styles.loginInput1}
+							value={this.state.description}
+							placeholder="Description">
+						</TextInput>
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.totalShow}
+							placeholder="Total">
+						</TextInput>
+*/
