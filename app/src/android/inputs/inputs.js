@@ -233,9 +233,12 @@ class Inputs extends Component {
         return (
             <View style={{flex: 1, justifyContent: 'center'}}>
 				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.refreshDataAndroid()}
@@ -246,7 +249,7 @@ class Inputs extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Reload
 							</Text>
@@ -263,7 +266,7 @@ class Inputs extends Component {
 								margin: 10,
 								marginRight: 20,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								Inputs
 							</Text>
@@ -279,7 +282,7 @@ class Inputs extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Add
 							</Text>
@@ -290,7 +293,7 @@ class Inputs extends Component {
                 <View style={{marginTop: 0}}>
                     <TextInput style={{
                         height: 45,
-						marginTop: 4,
+						marginTop: 0,
                         padding: 5,
                         backgroundColor: 'whitesmoke',
                         borderWidth: 3,
@@ -348,8 +351,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black'
+        backgroundColor: '#48BBEC',
+		color: 'white',
+		fontWeight: 'bold'
     },
     welcome: {
         fontSize: 20,

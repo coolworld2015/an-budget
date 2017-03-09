@@ -341,7 +341,8 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 24
+        fontSize: 24,
+		fontWeight: 'bold'
     },
     loader: {
         marginTop: 40

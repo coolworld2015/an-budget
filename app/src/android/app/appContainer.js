@@ -61,10 +61,12 @@ class AppContainer extends Component {
         this.props.onLogOut();
     }
 	
+	//backgroundColor='rgba(255, 255, 255, 0.7)'
 	render() {
+		
 		return (
 			<ScrollableTabView 
-				renderTabBar={() => <DefaultTabBar backgroundColor='rgba(255, 255, 255, 0.7)' />}
+				renderTabBar={() => <DefaultTabBar backgroundColor='white' />}
 			>
  				<AssetsTab tabLabel="Assets" />
  				<OutputsTab tabLabel="Output" />

@@ -149,10 +149,13 @@ class Other extends Component {
     render() {
         return (
             <View style={{flex: 1, justifyContent: 'center'}}>
-					<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							underlayColor='#ddd'
@@ -178,7 +181,7 @@ class Other extends Component {
 								margin: 10,
 								marginRight: 20,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								Other
 							</Text>
@@ -239,8 +242,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black'
+        backgroundColor: '#48BBEC',
+		color: 'white',
+		fontWeight: 'bold'
     },
     welcome: {
         fontSize: 20,

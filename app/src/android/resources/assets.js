@@ -193,6 +193,15 @@ class Store extends Component {
 		this.getItems();
 	}
 	
+	clearSearchQuery() {
+		this.setState({
+			dataSource: this.state.dataSource.cloneWithRows(this.state.responseData),
+            resultsCount: this.state.responseData.length,
+            filteredItems: this.state.responseData,
+			searchQuery: ''
+		});
+	}
+	
     render() {
         var errorCtrl, loader;
 
@@ -219,7 +228,7 @@ class Store extends Component {
 					flexDirection: 'row',
 					justifyContent: 'space-between',
 					backgroundColor: '#48BBEC',
-					borderWidth: 3,
+					borderWidth: 0,
 					borderColor: 'whitesmoke'
 				}}>
 					<View>
@@ -240,6 +249,7 @@ class Store extends Component {
 					</View>
 					<View>
 						<TouchableHighlight
+							onPress={()=> this.clearSearchQuery()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
