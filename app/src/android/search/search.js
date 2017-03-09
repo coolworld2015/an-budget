@@ -29,7 +29,7 @@ class Search extends Component {
             eventSwitchTitle: true,
 			eventSwitchBase: true,
             textSwitchBase: 'Choose project',
-			searchQuery: null,
+			searchQuery: '',
 			bugANDROID: ''
         }
     }
@@ -42,23 +42,22 @@ class Search extends Component {
 	
     clearSearch() {
         this.setState({
-            searchQuery: null,
+            searchQuery: '',
             invalidValue: false
         })
     }
 
     onSearchPressed() {
-        if (this.state.searchQuery == undefined) {
-            this.setState({
-                //invalidValue: true
-            });
-            //return;
+		var searchQuery = this.state.searchQuery;
+		
+        if (this.state.searchQuery == '') {
+			searchQuery = 'All projects'
         }
 		 
 		this.props.navigator.push({
 			index: 2,
 			data: {
-				searchQuery: this.state.searchQuery,
+				searchQuery: searchQuery,
 				searchType: this.state.textSwitchBase
 			}
 		});

@@ -74,7 +74,7 @@ class SearchResults extends Component {
             .then((responseData)=> {
 				var arr = [].concat(responseData.sort(this.sort));
 			
-				if (this.state.searchQueryHttp == null) {
+				if (this.state.searchQueryHttp == 'All projects') {
 					var items = arr;
 				} else {
 					var items = arr.filter((el) => el.project.toLowerCase() == this.state.searchQueryHttp.toLowerCase());
@@ -114,11 +114,8 @@ class SearchResults extends Component {
             .then((responseData)=> {
 				var arr = [].concat(responseData.sort(this.sort));
 			
-				if (this.state.searchQueryHttp == null) {
+				if (this.state.searchQueryHttp == 'All projects') {
 					var items = arr;
-					this.setState({
-						searchQueryHttp: 'All projects'
-					});
 				} else {
 					var items = arr.filter((el) => el.project.toLowerCase() == this.state.searchQueryHttp.toLowerCase());
 				}
@@ -308,6 +305,8 @@ class SearchResults extends Component {
 						</TouchableHighlight>	
 					</View>
 				</View>
+									
+				{errorCtrl}
 				
 				<View style={{
 						flex: 1,
@@ -400,6 +399,7 @@ const styles = StyleSheet.create({
 	countFooter1: {
         fontSize: 16,
         textAlign: 'left',
+		marginTop: 1,   
         margin: 3,
         borderColor: '#D7D7D7',
         backgroundColor: 'lightgray',
@@ -409,7 +409,8 @@ const styles = StyleSheet.create({
 	countFooter2: {
         fontSize: 16,
         textAlign: 'center',
-        margin: 3,
+        marginTop: 1,        
+		margin: 3,
         borderColor: '#D7D7D7',
         backgroundColor: 'lightgray',
 		color: 'black',
@@ -418,6 +419,7 @@ const styles = StyleSheet.create({
 	countFooter3: {
         fontSize: 16,
         textAlign: 'right',
+		marginTop: 1,
         margin: 3,
         borderColor: '#D7D7D7',
         backgroundColor: 'lightgray',
