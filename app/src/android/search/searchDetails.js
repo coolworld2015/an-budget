@@ -262,11 +262,11 @@ class SearchDetails extends Component {
 						</Text>		
 						
 						<Text style={styles.itemText}>
-							Price: {this.state.price}
+							Price: {this.state.priceShow}
 						</Text>			
 						
 						<Text style={styles.itemText}>
-							Quantity: {this.state.quantity}
+							Quantity: {this.state.quantityShow}
 						</Text>			
 						
 						<Text style={styles.itemText}>

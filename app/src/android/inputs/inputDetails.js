@@ -262,12 +262,12 @@ class InputDetails extends Component {
 						</Text>		
 						
 						<Text style={styles.itemText}>
-							Price: {this.state.price}
+							Price: {this.state.priceShow}
 						</Text>			
 						
 						<Text style={styles.itemText}>
-							Quantity: {this.state.quantity}
-						</Text>			
+							Quantity: {this.state.quantityShow}
+						</Text>		
 						
 						<Text style={styles.itemText}>
 							Description: {this.state.description}
