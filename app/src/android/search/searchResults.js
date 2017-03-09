@@ -165,24 +165,24 @@ class SearchResults extends Component {
                 underlayColor='#ddd'
             >
 				<View style={{
-						flex: 1,
-						flexDirection: 'column',
-						padding: 12,
-						borderColor: '#D7D7D7',
-						borderBottomWidth: 1,
-						backgroundColor: '#fff'
-					}}>              
-						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							{rowData.invoiceID} - {rowData.project} - {(rowData.date).split(' ')[0]}
-						</Text>						
-						
-						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							{rowData.description}
-						</Text>						
-						
-						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							Total: {((+rowData.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
-						</Text>
+					flex: 1,
+					flexDirection: 'column',
+					padding: 12,
+					borderColor: '#D7D7D7',
+					borderBottomWidth: 1,
+					backgroundColor: '#fff'
+				}}>              
+					<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+						{rowData.invoiceID} - {rowData.project} - {(rowData.date).split(' ')[0]}
+					</Text>						
+					
+					<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+						{rowData.description}
+					</Text>						
+					
+					<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
+						Total: {((+rowData.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+					</Text>
 				</View>
             </TouchableHighlight>
         );
@@ -226,7 +226,7 @@ class SearchResults extends Component {
         }
     }
 	
-    goBack(rowData) {
+    goBack() {
 		this.props.navigator.pop();
 	}
 	
@@ -254,7 +254,8 @@ class SearchResults extends Component {
             <View style={{flex: 1, justifyContent: 'center'}}>
 				<View style={{
 						flexDirection: 'row',
-						justifyContent: 'space-between'
+						justifyContent: 'space-between',
+						backgroundColor: '#48BBEC'
 					}}>
 					<View>
 						<TouchableHighlight
@@ -266,7 +267,7 @@ class SearchResults extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								 Back
 							</Text>
@@ -282,7 +283,7 @@ class SearchResults extends Component {
 								margin: 10,
 								marginRight: 60,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								{this.state.searchQueryHttp}
 							</Text>
@@ -298,7 +299,7 @@ class SearchResults extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								
 							</Text>
@@ -342,7 +343,7 @@ class SearchResults extends Component {
 				<View style={{
 						flexDirection: 'row',
 						justifyContent: 'space-between',
-						backgroundColor: 'lightgray'
+						backgroundColor: '#48BBEC'
 					}}>
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter1}>
@@ -392,8 +393,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black',
+        //backgroundColor: 'lightgray',
+		color: 'white',
 		fontWeight: 'bold'
     },    
 	countFooter1: {
@@ -402,8 +403,8 @@ const styles = StyleSheet.create({
 		marginTop: 1,   
         margin: 3,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black',
+        //backgroundColor: 'lightgray',
+		color: 'white',
 		fontWeight: 'bold'
     },	
 	countFooter2: {
@@ -412,8 +413,8 @@ const styles = StyleSheet.create({
         marginTop: 1,        
 		margin: 3,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black',
+        //backgroundColor: 'lightgray',
+		color: 'white',
 		fontWeight: 'bold'
     },	
 	countFooter3: {
@@ -422,8 +423,8 @@ const styles = StyleSheet.create({
 		marginTop: 1,
         margin: 3,
         borderColor: '#D7D7D7',
-        backgroundColor: 'lightgray',
-		color: 'black',
+        //backgroundColor: 'lightgray',
+		color: 'white',
 		fontWeight: 'bold'
     },
     countHeader1: {

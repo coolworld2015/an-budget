@@ -40,6 +40,10 @@ class Search extends Component {
         });
 	}
 	
+    goBack() {
+		this.props.navigator.pop();
+	}
+	
     clearSearch() {
         this.setState({
             searchQuery: '',
@@ -96,7 +100,7 @@ class Search extends Component {
             <ScrollView>
                 <View style={styles.container}>
                     <TouchableHighlight
-                        onPress={this.clearSearch.bind(this)}
+                        onPress={this.goBack.bind(this)}
                         style={styles.button}>
                         <Text style={styles.buttonText}>Reports</Text>
                     </TouchableHighlight>
@@ -113,11 +117,10 @@ class Search extends Component {
 						borderRadius: 5,
 						width: this.state.width * .94
                     }}>
-                        <View
-                            style={{
-                                marginTop: 3,
-                                flex: 1
-                            }}>
+                        <View style={{
+							marginTop: 0,
+							flex: 1
+						}}>
                             <Text style={{
                                 fontSize: 18
                             }}>
@@ -125,10 +128,85 @@ class Search extends Component {
                             </Text>
                         </View>
 
-                        <View
-                            style={{
-                                marginTop: -1
+                        <View style={{
+							marginTop: -1
+						}}>
+                            <Switch
+                                onValueChange={(value) => {
+                                    this.toggleTypeChange();
+                                    this.setState({
+                                        eventSwitchBase: value
+                                    });
+                                }}
+                                value={this.state.eventSwitchBase}
+                            />
+                        </View>
+                    </View>
+					
+                    <View style={{
+                        height: 50,
+                        marginTop: 10,
+                        padding: 10,
+                        borderWidth: 1,
+                        borderColor: '#48BBEC',
+                        alignSelf: 'stretch',
+                        flex: 1,
+                        flexDirection: 'row',
+						borderRadius: 5,
+						width: this.state.width * .94
+                    }}>
+                        <View style={{
+							marginTop: 0,
+							flex: 1
+						}}>
+                            <Text style={{
+                                fontSize: 18
                             }}>
+                                {this.state.textSwitchBase}
+                            </Text>
+                        </View>
+
+                        <View style={{
+							marginTop: -1
+						}}>
+                            <Switch
+                                onValueChange={(value) => {
+                                    this.toggleTypeChange();
+                                    this.setState({
+                                        eventSwitchBase: value
+                                    });
+                                }}
+                                value={this.state.eventSwitchBase}
+                            />
+                        </View>
+                    </View>		
+					
+                    <View style={{
+                        height: 50,
+                        marginTop: 10,
+                        padding: 10,
+                        borderWidth: 1,
+                        borderColor: '#48BBEC',
+                        alignSelf: 'stretch',
+                        flex: 1,
+                        flexDirection: 'row',
+						borderRadius: 5,
+						width: this.state.width * .94
+                    }}>
+                        <View style={{
+							marginTop: 0,
+							flex: 1
+						}}>
+                            <Text style={{
+                                fontSize: 18
+                            }}>
+                                {this.state.textSwitchBase}
+                            </Text>
+                        </View>
+
+                        <View style={{
+							marginTop: -1
+						}}>
                             <Switch
                                 onValueChange={(value) => {
                                     this.toggleTypeChange();
@@ -141,27 +219,35 @@ class Search extends Component {
                         </View>
                     </View>
 
-                    <TextInput
-						underlineColorAndroid='rgba(0,0,0,0)'
-                        onChangeText={(text)=> this.setState({
-                            searchQuery: text,
-                            invalidValue: false
-                        })}
-                        value={this.state.searchQuery}
-                        style={{ 
-							height: 50,
-							width: this.state.width * .94,
-							marginTop: 10,
-							padding: 4,
-							fontSize: 18,
-							borderWidth: 1,
-							borderColor: '#48BBEC',
-							borderRadius: 5,
-							color: 'black'
-						}} 
-                        placeholder="All projects">
-                    </TextInput>
-
+					<View style={{
+                        height: 50,
+                        marginTop: 10,
+                        padding: 10,
+                        borderWidth: 1,
+                        borderColor: '#48BBEC',
+                        alignSelf: 'stretch',
+                        flex: 1,
+                        flexDirection: 'row',
+						borderRadius: 5,
+						width: this.state.width * .94
+                    }}>
+						<View style={{
+							marginBottom: -10,
+							flex: 1
+						}}>
+							<TextInput
+								underlineColorAndroid='rgba(0,0,0,0)'
+								onChangeText={(text)=> this.setState({
+									searchQuery: text,
+									invalidValue: false
+								})}
+								value={this.state.searchQuery}
+								style={{fontSize: 18}}
+								placeholder="All projects">
+							</TextInput>
+						</View>
+					</View>
+					
                     {validCtrl}
 
                     <TouchableHighlight
