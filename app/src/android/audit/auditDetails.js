@@ -50,11 +50,14 @@ class AuditDetails extends Component {
 	
     render() {
         return (
-            <ScrollView>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -65,7 +68,7 @@ class AuditDetails extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Back 
 							</Text>
@@ -79,8 +82,9 @@ class AuditDetails extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
+								marginRight: 20,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								{this.state.date}
 							</Text>
@@ -101,51 +105,46 @@ class AuditDetails extends Component {
 						</TouchableHighlight>	
 					</View>
 				</View>
-					
-				<View style={{
-					flex: 1,
-					padding: 10,
-					paddingBottom: 115,
-					justifyContent: 'flex-start',
-					backgroundColor: 'white'
-				}}>
-					<TextInput
-						underlineColorAndroid='rgba(0,0,0,0)'
-						style={styles.loginInput}
-						value={this.state.name}
-						placeholder="Name">
-					</TextInput>
-					
-					<TextInput
-						underlineColorAndroid='rgba(0,0,0,0)'
-						style={styles.loginInput}
-						value={this.state.id}
-						placeholder="ID">
-					</TextInput>
-					
-					<TextInput
-						underlineColorAndroid='rgba(0,0,0,0)'
-						style={styles.loginInput}
-						value={this.state.ip}
-						placeholder="IP">
-					</TextInput>
+				
+				<ScrollView>	
+					<View style={{
+						flex: 1,
+						padding: 10,
+						paddingBottom: 115,
+						justifyContent: 'flex-start',
+						backgroundColor: 'white'
+					}}>
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.name}
+							placeholder="Name">
+						</TextInput>
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput}
+							value={this.state.ip}
+							placeholder="IP">
+						</TextInput>
 
-					<TextInput
-						underlineColorAndroid='rgba(0,0,0,0)'
-						style={styles.loginInput1}
-						value={this.state.description}
-						multiline={true}
-						placeholder="Description">
-					</TextInput>
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							style={styles.loginInput1}
+							value={this.state.description}
+							multiline={true}
+							placeholder="Description">
+						</TextInput>
 
-					<TouchableHighlight
-						onPress={()=> this.goBack()}
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
 
-						style={styles.button}>
-						<Text style={styles.buttonText}>Back</Text>
-					</TouchableHighlight>
-				</View>
-            </ScrollView>
+							style={styles.button}>
+							<Text style={styles.buttonText}>Back</Text>
+						</TouchableHighlight>
+					</View>
+				</ScrollView>
+			</View>
         );
     }
 }

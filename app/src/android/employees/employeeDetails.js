@@ -187,11 +187,14 @@ class EmployeeDetails extends Component {
         }
 
         return (
- 			<View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -202,7 +205,7 @@ class EmployeeDetails extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Back
 							</Text>
@@ -217,7 +220,7 @@ class EmployeeDetails extends Component {
 								textAlign: 'center',
 								margin: 10,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								{this.state.name}
 							</Text>
@@ -233,7 +236,7 @@ class EmployeeDetails extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Delete
 							</Text>
@@ -292,7 +295,7 @@ class EmployeeDetails extends Component {
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInput1}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>

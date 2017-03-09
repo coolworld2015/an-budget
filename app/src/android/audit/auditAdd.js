@@ -117,11 +117,14 @@ class AuditAdd extends Component {
         }
 
         return (            
-			<View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -132,7 +135,7 @@ class AuditAdd extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Back
 							</Text>
@@ -148,7 +151,7 @@ class AuditAdd extends Component {
 								margin: 10,
 								marginRight: 40,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								 New
 							</Text>
@@ -241,11 +244,12 @@ class AuditAdd extends Component {
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInput1}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>
@@ -316,6 +320,16 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         color: 'black'
     },
+	loginInput1: {
+        height: 100,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 5,
+        color: 'black'
+    },		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',

@@ -103,11 +103,14 @@ class ResourceAdd extends Component {
         }
 
         return (
-			<View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -118,7 +121,7 @@ class ResourceAdd extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Back
 							</Text>
@@ -134,7 +137,7 @@ class ResourceAdd extends Component {
 								margin: 10,
 								marginRight: 40,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								 New
 							</Text>

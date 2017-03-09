@@ -155,11 +155,14 @@ class EmployeeAdd extends Component {
         }
 
         return (
-			<View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between'
-					}}>
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -170,7 +173,7 @@ class EmployeeAdd extends Component {
 								textAlign: 'center',
 								margin: 14,
 								fontWeight: 'bold',
-								color: 'darkblue'
+								color: 'white'
 							}}>
 								Back
 							</Text>
@@ -186,7 +189,7 @@ class EmployeeAdd extends Component {
 								margin: 10,
 								marginRight: 40,
 								fontWeight: 'bold',
-								color: 'black'
+								color: 'white'
 							}}>
 								 New
 							</Text>
@@ -287,7 +290,7 @@ class EmployeeAdd extends Component {
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInput1}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>

@@ -101,60 +101,63 @@ class UserAdd extends Component {
         }
 
         return (
-            <ScrollView>
-				<View style={{flex: 1, justifyContent: 'center'}}>
-					<View style={{
-							flexDirection: 'row',
-							justifyContent: 'space-between'
-						}}>
-						<View>
-							<TouchableHighlight
-								onPress={()=> this.goBack()}
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 16,
-									textAlign: 'center',
-									margin: 14,
-									fontWeight: 'bold',
-									color: 'darkblue'
-								}}>
-									Back
-								</Text>
-							</TouchableHighlight>	
-						</View>
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 20,
-									textAlign: 'center',
-									margin: 10,
-									marginRight: 40,
-									fontWeight: 'bold',
-									color: 'black'
-								}}>
-									 New
-								</Text>
-							</TouchableHighlight>	
-						</View>						
-						<View>
-							<TouchableHighlight
-								underlayColor='#ddd'
-							>
-								<Text style={{
-									fontSize: 16,
-									textAlign: 'center',
-									margin: 14,
-									fontWeight: 'bold'
-								}}>
-									 
-								</Text>
-							</TouchableHighlight>	
-						</View>
+            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								Back
+							</Text>
+						</TouchableHighlight>	
 					</View>
-					
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 20,
+								textAlign: 'center',
+								margin: 10,
+								marginRight: 40,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								 New
+							</Text>
+						</TouchableHighlight>	
+					</View>						
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold'
+							}}>
+								 
+							</Text>
+						</TouchableHighlight>	
+					</View>
+				</View>
+				
+				<ScrollView>	
 					<View style={{
 						flex: 1,
 						padding: 10,
@@ -186,11 +189,12 @@ class UserAdd extends Component {
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
 							onChangeText={(text)=> this.setState({
 								description: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInput1}
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>
@@ -213,8 +217,8 @@ class UserAdd extends Component {
 						
 						<Text>{this.state.bugANDROID}</Text>
 					</View>
-				</View>
-            </ScrollView>
+				</ScrollView>
+			</View>
         )
     }
 }
@@ -254,6 +258,16 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'black'
     },
+	loginInput1: {
+        height: 100,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 5,
+        color: 'black'
+    },	
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
