@@ -15,7 +15,9 @@ import {
     NavigatorIOS,
     TextInput,
     Switch,
-	Dimensions
+	Dimensions,
+	Picker,
+	DatePickerAndroid
 } from 'react-native';
 
 class Search extends Component {
@@ -24,13 +26,20 @@ class Search extends Component {
 		
 		var width = Dimensions.get('window').width;
 		
+        var ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => r1 != r2
+        });
+		
         this.state = {
             showProgress: false,
             eventSwitchTitle: true,
 			eventSwitchBase: true,
             textSwitchBase: 'Choose project',
-			searchQuery: '',
-			bugANDROID: ''
+			searchQuery: 'All projects',
+			bugANDROID: '',
+			items: [],
+            item: 'New item',
+            dataSource: ds.cloneWithRows([])
         }
     }
 	
@@ -38,7 +47,49 @@ class Search extends Component {
 		this.setState({
 			width: Dimensions.get('window').width
         });
+		this.getProjects();
 	}
+
+    getProjects() {
+        fetch(appConfig.url + 'api/projects/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'All projects'});
+                this.setState({
+                    items: items
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    showProgress: false,
+                    serverError: false
+                });
+            });
+    }
+
+    sort(a, b) {
+        var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+        if (nameA < nameB) {
+            return -1
+        }
+        if (nameA > nameB) {
+            return 1
+        }
+        return 0;
+    }
 	
     goBack() {
 		this.props.navigator.pop();
@@ -97,6 +148,227 @@ class Search extends Component {
         }
 
         return (
+			<View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					backgroundColor: '#48BBEC',
+					borderWidth: 0,
+					borderColor: 'whitesmoke'
+				}}>
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								
+							</Text>
+						</TouchableHighlight>	
+					</View>
+					<View>
+						<TouchableHighlight
+							onPress={()=> this.goBack()}
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 20,
+								textAlign: 'center',
+								margin: 10,
+								//marginRight: 40,
+								fontWeight: 'bold',
+								color: 'white'
+							}}>
+								 Reports
+							</Text>
+						</TouchableHighlight>	
+					</View>						
+					<View>
+						<TouchableHighlight
+							underlayColor='#ddd'
+						>
+							<Text style={{
+								fontSize: 16,
+								textAlign: 'center',
+								margin: 14,
+								fontWeight: 'bold'
+							}}>
+								 
+							</Text>
+						</TouchableHighlight>	
+					</View>
+				</View>
+				<ScrollView>
+					<View style={{backgroundColor: 'white',         
+						flex: 1,
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center'
+					}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 15,
+							margin: 5,
+							marginBottom: 0,
+							width: 360
+						}}>
+							<Picker style={{marginTop: 0}}
+                                selectedValue={this.state.item}
+
+                                onValueChange={(value) => {
+									let arr = [].concat(this.state.items);
+ 									let item = arr.filter((el) => el.id == value);
+ 
+                                    this.setState({
+                                        item: value,
+                                        id: item[0].id,
+                                        searchQuery: item[0].name,
+										pass: item[0].pass,
+										description: item[0].description,
+										invalidValue: false
+                                    })
+                                }}>
+
+								{this.state.items.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>
+
+					<View style={{
+						flex: 1,
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center'
+					}}>
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							onChangeText={(text)=> this.setState({
+								searchQuery: text,
+								invalidValue: false
+							})}
+							style={styles.loginInput}
+							value={this.state.searchQuery}
+							placeholder="Search query">
+						</TextInput>
+
+						{validCtrl}
+
+						<TouchableHighlight
+							onPress={this.onSearchPressed.bind(this)}
+							style={styles.button}>
+							<Text style={styles.buttonText}>Search</Text>
+						</TouchableHighlight>
+						
+						{errorCtrl}
+
+						<ActivityIndicator
+							animating={this.state.showProgress}
+							size="large"
+							style={styles.loader}
+						/>
+					</View>
+				</ScrollView>
+			</View>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    AppContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+    },
+    countHeader: {
+        fontSize: 16,
+        textAlign: 'center',
+        padding: 15,
+        backgroundColor: '#F5FCFF',
+    },
+    countFooter: {
+        fontSize: 16,
+        textAlign: 'center',
+        padding: 10,
+        borderColor: '#D7D7D7',
+        backgroundColor: 'whitesmoke'
+    },
+    countHeader1: {
+        fontSize: 16,
+        textAlign: 'center',
+        padding: 15,
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 20,
+    },
+    container: {
+		padding: 10,
+        paddingBottom: 210,
+        alignItems: 'center',
+        flex: 1,
+		backgroundColor: 'white',
+    },
+    logo: {
+        width: 66,
+        height: 65
+    },
+    heading: {
+        fontSize: 30,
+        margin: 10,
+        marginBottom: 20
+    },
+    loginInput: {
+        height: 50,
+		width: 360,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: '#48BBEC',
+        borderRadius: 5,
+        color: 'black'
+    },
+    button: {
+        height: 50,
+        backgroundColor: '#48BBEC',
+        borderColor: '#48BBEC',
+        alignSelf: 'stretch',
+        margin: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 24,
+		fontWeight: 'bold'
+    },
+    loader: {
+        marginTop: 40
+    },
+    error: {
+        color: 'red',
+        paddingTop: 10,
+        textAlign: 'center'
+    }
+});
+
+export default Search;
+
+/*
+ 
             <ScrollView>
                 <View style={styles.container}>
                     <TouchableHighlight
@@ -267,91 +539,5 @@ class Search extends Component {
 					<Text>{this.state.bugANDROID}</Text>
                 </View>
             </ScrollView>
-        )
-    }
-}
-
-const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
-    countHeader: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    countFooter: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 10,
-        borderColor: '#D7D7D7',
-        backgroundColor: 'whitesmoke'
-    },
-    countHeader1: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-    container: {
-		padding: 10,
-        paddingBottom: 210,
-        alignItems: 'center',
-        flex: 1,
-		backgroundColor: 'white',
-    },
-    logo: {
-        width: 66,
-        height: 65
-    },
-    heading: {
-        fontSize: 30,
-        margin: 10,
-        marginBottom: 20
-    },
-    loginInput: {
-        height: 50,
-		width: 360,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: '#48BBEC',
-        borderRadius: 5,
-        color: 'black'
-    },
-    button: {
-        height: 50,
-        backgroundColor: '#48BBEC',
-        borderColor: '#48BBEC',
-        alignSelf: 'stretch',
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 5
-    },
-    buttonText: {
-        color: '#fff',
-        fontSize: 24,
-		fontWeight: 'bold'
-    },
-    loader: {
-        marginTop: 40
-    },
-    error: {
-        color: 'red',
-        paddingTop: 10,
-        textAlign: 'center'
-    }
-});
-
-export default Search;
+			</View>
+*/			
