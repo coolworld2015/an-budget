@@ -17,7 +17,8 @@ import {
     Switch,
 	Dimensions,
 	Picker,
-	DatePickerAndroid
+	DatePickerAndroid,
+	TouchableWithoutFeedback,
 } from 'react-native';
 
 class Search extends Component {
@@ -30,6 +31,9 @@ class Search extends Component {
             rowHasChanged: (r1, r2) => r1 != r2
         });
 		
+		let d = new Date;
+		var todayDate = d.toLocaleDateString();
+		
         this.state = {
             showProgress: false,
             eventSwitchTitle: true,
@@ -39,7 +43,24 @@ class Search extends Component {
 			bugANDROID: '',
 			items: [],
             item: 'New item',
-            dataSource: ds.cloneWithRows([])
+            dataSource: ds.cloneWithRows([]),
+			
+			presetDate: new Date(),
+			simpleDate: new Date(),
+			spinnerDate: new Date(),
+			calendarDate: new Date(),
+			defaultDate: new Date(),
+			allDate: new Date(),
+			startText: '01/01/17',
+			endText: todayDate,
+			simpleText: 'pick a date',
+			spinnerText: 'pick a date',
+			calendarText: 'pick a date',
+			defaultText: 'pick a date',
+			minText: 'pick a date, no earlier than today',
+			maxText: 'pick a date, no later than today',
+			presetText: 'pick a date, preset to 2020/5/5',
+			allText: 'pick a date between 2020/5/1 and 2020/5/10'
         }
     }
 	
@@ -130,6 +151,23 @@ class Search extends Component {
         }
     }
 	
+	showPicker = async (stateKey, options) => {
+		try {
+			var newState = {};
+			const {action, year, month, day} = await DatePickerAndroid.open(options);
+			if (action === DatePickerAndroid.dismissedAction) {
+				//newState[stateKey + 'Text'] = 'dismissed';
+			} else {
+				var date = new Date(year, month, day);
+				newState[stateKey + 'Text'] = date.toLocaleDateString();
+				newState[stateKey + 'Date'] = date;
+			}
+			this.setState(newState);
+		} catch ({code, message}) {
+			console.warn(`Error in example '${stateKey}': `, message);
+		}
+	};
+
     render() {
         var errorCtrl = <View />;
 
@@ -168,7 +206,7 @@ class Search extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								
+							
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -204,6 +242,8 @@ class Search extends Component {
 						</TouchableHighlight>	
 					</View>
 				</View>
+
+				
 				<ScrollView>
 					<View style={{backgroundColor: 'white',         
 						flex: 1,
@@ -219,6 +259,7 @@ class Search extends Component {
 							marginBottom: 0,
 							width: 360
 						}}>
+
 							<Picker style={{marginTop: 0}}
                                 selectedValue={this.state.item}
 
@@ -258,8 +299,20 @@ class Search extends Component {
 							style={styles.loginInput}
 							value={this.state.searchQuery}
 							placeholder="Search query">
-						</TextInput>
-
+						</TextInput>	
+						
+						<TouchableHighlight
+							onPress={this.showPicker.bind(this, 'start', {date: this.state.simpleDate})}
+							style={styles.button1}>
+							<Text style={styles.buttonText1}>Begin: {this.state.startText}</Text>
+						</TouchableHighlight>						
+						
+						<TouchableHighlight
+							onPress={this.showPicker.bind(this, 'end', {date: this.state.simpleDate})}
+							style={styles.button1}>
+							<Text style={styles.buttonText1}>End: {this.state.endText}</Text>
+						</TouchableHighlight>	
+										
 						{validCtrl}
 
 						<TouchableHighlight
@@ -283,12 +336,9 @@ class Search extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
-    },
+	text: {
+		color: 'black',
+	},
     countHeader: {
         fontSize: 16,
         textAlign: 'center',
@@ -340,7 +390,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'black'
     },
-    button: {
+	button: {
         height: 50,
         backgroundColor: '#48BBEC',
         borderColor: '#48BBEC',
@@ -350,10 +400,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5
     },
+    button1: {
+        height: 50,
+        borderWidth: 1,
+        borderColor: '#48BBEC',
+        alignSelf: 'stretch',
+        margin: 10,
+        marginBottom: 0,
+        justifyContent: 'center',
+        //alignItems: 'center',
+        borderRadius: 5
+    },    
     buttonText: {
         color: '#fff',
         fontSize: 24,
 		fontWeight: 'bold'
+    },    
+	buttonText1: {
+        fontSize: 20,
+		fontWeight: 'bold',
+		color: 'gray',
+		textAlign: 'left',
+		marginLeft: 5,
     },
     loader: {
         marginTop: 40
@@ -367,6 +435,54 @@ const styles = StyleSheet.create({
 
 export default Search;
 
+/*
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'spinner', {date: this.state.spinnerDate, mode: 'spinner'})}>
+							<Text style={styles.text}>{this.state.spinnerText}</Text>
+						</TouchableWithoutFeedback>
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'calendar', {date: this.state.calendarDate, mode: 'calendar'})}>
+							<Text style={styles.text}>{this.state.calendarText}</Text>
+						</TouchableWithoutFeedback>
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'default', {date: this.state.defaultDate, mode: 'default'})}>
+							<Text style={styles.text}>{this.state.defaultText}</Text>
+						</TouchableWithoutFeedback>
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'preset', {date: this.state.presetDate})}>
+							<Text style={styles.text}>{this.state.presetText}</Text>
+						</TouchableWithoutFeedback>
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'min', {
+							date: this.state.minDate,
+							minDate: new Date(),
+						})}>
+							<Text style={styles.text}>{this.state.minText}</Text>
+						</TouchableWithoutFeedback>
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'max', {
+							date: this.state.maxDate,
+							maxDate: new Date(),
+						})}>
+							<Text style={styles.text}>{this.state.maxText}</Text>
+						</TouchableWithoutFeedback>
+
+						<TouchableWithoutFeedback
+							onPress={this.showPicker.bind(this, 'all', {
+							date: this.state.allDate,
+							minDate: new Date(2020, 4, 1),
+						maxDate: new Date(2020, 4, 10),
+						})}>
+							<Text style={styles.text}>{this.state.allText}</Text>
+						</TouchableWithoutFeedback>
+*/
+						
 /*
  
             <ScrollView>
