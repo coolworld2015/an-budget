@@ -235,45 +235,106 @@ class InputDetails extends Component {
 						
 						{loader}
 						
-						<View>
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								ID:
+							</Text>									
 							<Text style={styles.itemText}>
-								ID: {this.state.invoiceID}
+								{this.state.invoiceID}
 							</Text>		
 						</View>
 						
-						<Text style={styles.itemText}>
-							Date: {this.state.date}
-						</Text>		
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Date:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.date}
+							</Text>		
+						</View>
 						
-						<Text style={styles.itemText}>
-							Project: {this.state.project}
-						</Text>			
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Project:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.project}
+							</Text>		
+						</View>	
+												
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Department:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.department}
+							</Text>		
+						</View>		
 						
-						<Text style={styles.itemText}>
-							Department: {this.state.department}
-						</Text>		
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Employee:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.employee}
+							</Text>		
+						</View>	
 						
-						<Text style={styles.itemText}>
-							Employee: {this.state.employee}
-						</Text>		
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Product:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.product}
+							</Text>		
+						</View>		
 						
-						<Text style={styles.itemText}>
-							Product: {this.state.product}
-						</Text>		
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Price:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.priceShow}
+							</Text>		
+						</View>			
 						
-						<Text style={styles.itemText}>
-							Price: {this.state.priceShow}
-						</Text>			
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Quantity:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.quantityShow}
+							</Text>		
+						</View>			
 						
-						<Text style={styles.itemText}>
-							Quantity: {this.state.quantityShow}
-						</Text>		
-						
-						<Text style={styles.itemText}>
-							Description: {this.state.description}
-						</Text>				
-						
-						<Text style={styles.itemText}>
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Description:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.description}
+							</Text>		
+						</View>			
+									
+						<Text style={styles.itemTextBold}>
 							Total: {this.state.totalShow}
 						</Text>
 
@@ -292,11 +353,18 @@ class InputDetails extends Component {
 }
 
 const styles = StyleSheet.create({
-    itemText: {
+    itemTextBold: {
 		fontSize: 20,
 		textAlign: 'left',
 		margin: 5,
 		fontWeight: 'bold',
+		color: 'black'
+    },    
+	itemText: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 5,
+		marginLeft: 2,
 		color: 'black'
     },
     countHeader: {
