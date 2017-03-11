@@ -41,7 +41,11 @@ class SearchResults extends Component {
 			this.state = {
 				dataSource1: ds.cloneWithRows([]),
 				dataSource2: ds.cloneWithRows([]),
-				searchQueryHttp: props.data.searchQuery,
+				
+				projectName: props.data.projectName,
+				departmentName: props.data.projectName,
+				employeeName: props.data.employeeName,
+				
 				searchType: props.data.searchType,
 				showProgress: true,
 				resultsCount1: 0,
@@ -74,10 +78,10 @@ class SearchResults extends Component {
             .then((responseData)=> {
 				var arr = [].concat(responseData.sort(this.sort));
 			
-				if (this.state.searchQueryHttp == 'All projects') {
+				if (this.state.projectName == 'All projects') {
 					var items = arr;
 				} else {
-					var items = arr.filter((el) => el.project.toLowerCase() == this.state.searchQueryHttp.toLowerCase());
+					var items = arr.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
 				}
 				
 				items.forEach((el) => this.state.inputsTotal = +this.state.inputsTotal + +el.total)
@@ -114,10 +118,10 @@ class SearchResults extends Component {
             .then((responseData)=> {
 				var arr = [].concat(responseData.sort(this.sort));
 			
-				if (this.state.searchQueryHttp == 'All projects') {
+				if (this.state.projectName == 'All projects') {
 					var items = arr;
 				} else {
-					var items = arr.filter((el) => el.project.toLowerCase() == this.state.searchQueryHttp.toLowerCase());
+					var items = arr.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
 				}
 				
 				items.forEach((el) => this.state.outputsTotal = +this.state.outputsTotal + +el.total)

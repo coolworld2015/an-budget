@@ -36,13 +36,17 @@ class Search extends Component {
 		
         this.state = {
             showProgress: false,
+			serverError: false,
             eventSwitchTitle: true,
 			eventSwitchBase: true,
             textSwitchBase: 'Choose project',
-			searchQuery: 'All projects',
+			projectName: 'All projects',
+			departmentName: 'All departments',
+			employeeName: 'All employees',
 			bugANDROID: '',
-			items: [],
-            item: 'New item',
+            projects: [],
+            departments: [],
+            employees: [],
             dataSource: ds.cloneWithRows([]),
 			
 			presetDate: new Date(),
@@ -69,9 +73,11 @@ class Search extends Component {
 			width: Dimensions.get('window').width
         });
 		this.getProjects();
+		this.getDepartments();
+		this.getEmployees();
 	}
-
-    getProjects() {
+	
+	getProjects() {
         fetch(appConfig.url + 'api/projects/get', {			
             method: 'get',
             headers: {
@@ -85,7 +91,8 @@ class Search extends Component {
 				var items = responseData.sort(this.sort);
 				items.unshift({name: 'All projects'});
                 this.setState({
-                    items: items
+                    projects: items,
+					serverError: false
                 });
             })
             .catch((error)=> {
@@ -95,12 +102,71 @@ class Search extends Component {
             })
             .finally(()=> {
                 this.setState({
-                    showProgress: false,
-                    serverError: false
+                    //showProgress: false
                 });
             });
     }
 
+    getDepartments() {
+        fetch(appConfig.url + 'api/departments/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'All departments'});
+                this.setState({
+                    departments: items,
+					serverError: false
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    //showProgress: false
+                });
+            });
+    }
+
+	getEmployees() {
+        fetch(appConfig.url + 'api/employees/get', {			
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+				'Authorization': appConfig.access_token
+            }
+        })
+            .then((response)=> response.json())
+            .then((responseData)=> {
+				var items = responseData.sort(this.sort);
+				items.unshift({name: 'All employees'});
+                this.setState({
+                    employees: items,
+					serverError: false
+                });
+            })
+            .catch((error)=> {
+                this.setState({
+                    serverError: true
+                });
+            })
+            .finally(()=> {
+                this.setState({
+                    //showProgress: false
+                });
+            });
+    }
+	
     sort(a, b) {
         var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
         if (nameA < nameB) {
@@ -123,17 +189,13 @@ class Search extends Component {
         })
     }
 
-    onSearchPressed() {
-		var searchQuery = this.state.searchQuery;
-		
-        if (this.state.searchQuery == '') {
-			searchQuery = 'All projects'
-        }
-		 
+    onSearchPressed() { 
 		this.props.navigator.push({
 			index: 2,
 			data: {
-				searchQuery: searchQuery,
+				projectName: this.state.projectName,
+				departmentName: this.state.departmentName,
+				employeeName: this.state.employeeName,
 				searchType: this.state.textSwitchBase
 			}
 		});
@@ -184,7 +246,16 @@ class Search extends Component {
                 Value required - please provide.
             </Text>;
         }
+		
+		var loader = <View />;
 
+        if (this.state.showProgress) {
+			loader = <ActivityIndicator
+				animating={true}
+				size="large"
+			/>
+		}
+		
         return (
 			<View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
 				<View style={{
@@ -242,65 +313,111 @@ class Search extends Component {
 						</TouchableHighlight>	
 					</View>
 				</View>
-
 				
 				<ScrollView>
-					<View style={{backgroundColor: 'white',         
-						flex: 1,
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center'
-					}}>
+					<View style={{backgroundColor: 'white'}}>
+						{errorCtrl}
+						
+						{loader}
+						
 						<View style={{
 							borderColor: 'lightgray',
 							borderWidth: 5,
-							marginTop: 15,
-							margin: 5,
+							marginTop: 10,
+							margin: 10,
 							marginBottom: 0,
-							width: 360
+							flex: 1,
 						}}>
-
 							<Picker style={{marginTop: 0}}
-                                selectedValue={this.state.item}
+								selectedValue={this.state.project}
 
-                                onValueChange={(value) => {
-									let arr = [].concat(this.state.items);
- 									let item = arr.filter((el) => el.id == value);
- 
-                                    this.setState({
-                                        item: value,
-                                        id: item[0].id,
-                                        searchQuery: item[0].name,
-										pass: item[0].pass,
-										description: item[0].description,
+								onValueChange={(value) => {
+									let arr = [].concat(this.state.projects);
+									let project = arr.filter((el) => el.id == value);
+									
+									this.setState({
+										project: value,
+										projectID: project[0].id,
+										projectName: project[0].name,
 										invalidValue: false
-                                    })
-                                }}>
+									})
+								}}>
 
-								{this.state.items.map((item, i) =>
+								{this.state.projects.map((item, i) =>
 									<Picker.Item value={item.id} label={item.name} key={i}/>
 								)}
 							</Picker>
 						</View>
 					</View>
+					
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
+								selectedValue={this.state.department}
+
+								onValueChange={(value) => {
+									let arr = [].concat(this.state.departments);
+									let department = arr.filter((el) => el.id == value);
+									
+									this.setState({
+										department: value,
+										departmentID: department[0].id,
+										departmentName: department[0].name,
+										invalidValue: false
+									})
+								}}>
+
+								{this.state.departments.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>
+					
+					<View style={{backgroundColor: 'white'}}>
+						<View style={{
+							borderColor: 'lightgray',
+							borderWidth: 5,
+							marginTop: 10,
+							margin: 10,
+							marginBottom: 0,
+							flex: 1,
+						}}>
+							<Picker style={{marginTop: 0}}
+								selectedValue={this.state.employee}
+
+								onValueChange={(value) => {
+									let arr = [].concat(this.state.employees);
+									let employee = arr.filter((el) => el.id == value);
+ 
+									this.setState({
+										employee: value,
+										employeeID: employee[0].id,
+										employeeName: employee[0].name,
+										invalidValue: false
+									})
+								}}>
+
+								{this.state.employees.map((item, i) =>
+									<Picker.Item value={item.id} label={item.name} key={i}/>
+								)}
+							</Picker>
+						</View>
+					</View>					
 
 					<View style={{
 						flex: 1,
 						flexDirection: 'column',
 						justifyContent: 'center',
 						alignItems: 'center'
-					}}>
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							onChangeText={(text)=> this.setState({
-								searchQuery: text,
-								invalidValue: false
-							})}
-							style={styles.loginInput}
-							value={this.state.searchQuery}
-							placeholder="Search query">
-						</TextInput>	
-						
+					}}>				
 						<TouchableHighlight
 							onPress={this.showPicker.bind(this, 'start', {date: this.state.simpleDate})}
 							style={styles.button1}>
@@ -320,14 +437,6 @@ class Search extends Component {
 							style={styles.button}>
 							<Text style={styles.buttonText}>Search</Text>
 						</TouchableHighlight>
-						
-						{errorCtrl}
-
-						<ActivityIndicator
-							animating={this.state.showProgress}
-							size="large"
-							style={styles.loader}
-						/>
 					</View>
 				</ScrollView>
 			</View>
