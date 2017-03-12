@@ -421,13 +421,13 @@ class Search extends Component {
 						<TouchableHighlight
 							onPress={this.showPicker.bind(this, 'start', {date: this.state.simpleDate})}
 							style={styles.button1}>
-							<Text style={styles.buttonText1}>Begin: {this.state.startText}</Text>
+							<Text style={styles.buttonText1}>First day: {this.state.startText}</Text>
 						</TouchableHighlight>						
 						
 						<TouchableHighlight
 							onPress={this.showPicker.bind(this, 'end', {date: this.state.simpleDate})}
 							style={styles.button1}>
-							<Text style={styles.buttonText1}>End: {this.state.endText}</Text>
+							<Text style={styles.buttonText1}>Last day: {this.state.endText}</Text>
 						</TouchableHighlight>	
 										
 						{validCtrl}

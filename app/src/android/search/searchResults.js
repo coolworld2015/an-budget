@@ -43,7 +43,7 @@ class SearchResults extends Component {
 				dataSource2: ds.cloneWithRows([]),
 				
 				projectName: props.data.projectName,
-				departmentName: props.data.projectName,
+				departmentName: props.data.departmentName,
 				employeeName: props.data.employeeName,
 				
 				searchType: props.data.searchType,
@@ -290,7 +290,7 @@ class SearchResults extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								{this.state.searchQueryHttp}
+								{this.state.projectName}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
