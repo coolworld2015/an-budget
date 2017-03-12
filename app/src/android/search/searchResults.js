@@ -76,14 +76,24 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				var arr = [].concat(responseData.sort(this.sort));
-			
-				if (this.state.projectName == 'All projects') {
-					var items = arr;
-				} else {
-					var items = arr.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
-				}
+				var items, itemsProject, itemsDepartment, itemsEmployee;
 				
+				itemsProject = [].concat(responseData.sort(this.sort));	
+				if (this.state.projectName != 'All projects') {
+					itemsProject = itemsProject.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
+				}	
+					
+				itemsDepartment = [].concat(itemsProject);
+				if (this.state.departmentName != 'All departments') {
+					itemsDepartment = itemsProject.filter((el) => el.department.toLowerCase() == this.state.departmentName.toLowerCase());
+				}					
+				
+				itemsEmployee = [].concat(itemsDepartment);
+				if (this.state.employeeName != 'All employees') {
+					itemsEmployee = itemsDepartment.filter((el) => el.employee.toLowerCase() == this.state.employeeName.toLowerCase());
+				}
+
+				items = [].concat(itemsEmployee);
 				items.forEach((el) => this.state.inputsTotal = +this.state.inputsTotal + +el.total)
 				
                 this.setState({
@@ -116,14 +126,24 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				var arr = [].concat(responseData.sort(this.sort));
-			
-				if (this.state.projectName == 'All projects') {
-					var items = arr;
-				} else {
-					var items = arr.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
-				}
+				var items, itemsProject, itemsDepartment, itemsEmployee;
 				
+				itemsProject = [].concat(responseData.sort(this.sort));	
+				if (this.state.projectName != 'All projects') {
+					itemsProject = itemsProject.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
+				}	
+					
+				itemsDepartment = [].concat(itemsProject);
+				if (this.state.departmentName != 'All departments') {
+					itemsDepartment = itemsProject.filter((el) => el.department.toLowerCase() == this.state.departmentName.toLowerCase());
+				}					
+				
+				itemsEmployee = [].concat(itemsDepartment);
+				if (this.state.employeeName != 'All employees') {
+					itemsEmployee = itemsDepartment.filter((el) => el.employee.toLowerCase() == this.state.employeeName.toLowerCase());
+				}
+
+				items = [].concat(itemsEmployee);
 				items.forEach((el) => this.state.outputsTotal = +this.state.outputsTotal + +el.total)
 								
                 this.setState({
