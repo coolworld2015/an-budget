@@ -46,6 +46,9 @@ class SearchResults extends Component {
 				departmentName: props.data.departmentName,
 				employeeName: props.data.employeeName,
 				
+				startDate: props.data.startDate,
+				endDate: props.data.endDate,
+				
 				searchType: props.data.searchType,
 				showProgress: true,
 				resultsCount1: 0,
@@ -65,6 +68,15 @@ class SearchResults extends Component {
 		this.getOutputs();
 	}
 	
+	dateCheck(dateFrom, dateTo, dateCheck) {
+		var start = Date.parse(dateFrom);
+		var end = Date.parse(dateTo);
+		var check = Date.parse(dateCheck );
+		if((check <= end && check >= start)) {
+			return true;
+		}
+	}
+
     getInputs() {
         fetch(appConfig.url + 'api/inputs/get', {			
             method: 'get',
@@ -76,11 +88,14 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				var items, itemsProject, itemsDepartment, itemsEmployee;
+				var itemsDate, itemsProject, itemsDepartment, itemsEmployee, items;
 				
-				itemsProject = [].concat(responseData.sort(this.sort));	
+				itemsDate = [].concat(responseData.sort(this.sort));	
+				itemsDate = itemsDate.filter((el) => this.dateCheck(this.state.startDate, this.state.endDate, el.date.split(' ')[0]));
+				
+				itemsProject = [].concat(itemsDate);	
 				if (this.state.projectName != 'All projects') {
-					itemsProject = itemsProject.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
+					itemsProject = itemsDate.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
 				}	
 					
 				itemsDepartment = [].concat(itemsProject);
@@ -126,11 +141,14 @@ class SearchResults extends Component {
         })
             .then((response)=> response.json())
             .then((responseData)=> {
-				var items, itemsProject, itemsDepartment, itemsEmployee;
+				var itemsDate, itemsProject, itemsDepartment, itemsEmployee, items;
 				
-				itemsProject = [].concat(responseData.sort(this.sort));	
+				itemsDate = [].concat(responseData.sort(this.sort));	
+				itemsDate = itemsDate.filter((el) => this.dateCheck(this.state.startDate, this.state.endDate, el.date.split(' ')[0]));
+				
+				itemsProject = [].concat(itemsDate);	
 				if (this.state.projectName != 'All projects') {
-					itemsProject = itemsProject.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
+					itemsProject = itemsDate.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
 				}	
 					
 				itemsDepartment = [].concat(itemsProject);

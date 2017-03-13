@@ -196,7 +196,8 @@ class Search extends Component {
 				projectName: this.state.projectName,
 				departmentName: this.state.departmentName,
 				employeeName: this.state.employeeName,
-				searchType: this.state.textSwitchBase
+				startDate: this.state.startText,
+				endDate: this.state.endText
 			}
 		});
     }
