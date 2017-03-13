@@ -189,7 +189,11 @@ class InputAdd extends Component {
         return 0;
     }
 
-    addUser() {
+	isNumber(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+
+    addItem() {
         if (this.state.projectID == undefined ||
             this.state.projectName == undefined ||
             this.state.employeeID == undefined ||
@@ -202,7 +206,9 @@ class InputAdd extends Component {
             this.state.invoiceID == undefined ||
             this.state.date == undefined ||
             this.state.quantity == undefined ||
-            this.state.description == undefined) {
+            this.state.description == undefined ||
+			
+			this.isNumber(this.state.quantity) != true) {
             this.setState({
                 invalidValue: true
             });
@@ -558,7 +564,7 @@ class InputAdd extends Component {
 						{validCtrl}
 
 						<TouchableHighlight
-							onPress={()=> this.addUser()}
+							onPress={()=> this.addItem()}
 							style={styles.button}>
 							<Text style={styles.buttonText}>Add</Text>
 						</TouchableHighlight>
