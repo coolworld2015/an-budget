@@ -242,20 +242,13 @@ class ResourceDetails extends Component {
 						paddingBottom: 80,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
-					}}>						
-						<View style={{
-							flexDirection: 'row'
-						}}>
-							<Text style={styles.itemTextBold}>
-								Resource:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.name}
-							</Text>		
-						</View>
-
+					}}>	
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
+							onChangeText={(text)=> this.setState({
+								price: text,
+								invalidValue: false
+							})}
 							style={styles.loginInput}
 							value={this.state.price}
 							placeholder="Price">

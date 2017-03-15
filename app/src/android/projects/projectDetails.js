@@ -245,18 +245,7 @@ class ProjectDetails extends Component {
 						paddingBottom: 40,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
-					}}>											
-						<View style={{
-							flexDirection: 'row'
-						}}>
-							<Text style={styles.itemTextBold}>
-								Project:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.name}
-							</Text>		
-						</View>
-						
+					}}>																
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
@@ -292,7 +281,8 @@ class ProjectDetails extends Component {
 						</TextInput>
 						
 						<View style={{
-							flexDirection: 'row'
+							flexDirection: 'row',
+							marginTop: 10
 						}}>
 							<Text style={styles.itemTextBold}>
 								Total: {this.state.sumShow}

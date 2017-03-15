@@ -39,6 +39,7 @@ class EmployeeDetails extends Component {
 				phone: props.data.phone,
 				departmentID: props.data.departmentID,
 				department: props.data.department,
+				departmentShow: 'Department: ' + props.data.department,
 				description: props.data.description,
 				sumShow: ((+props.data.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "),
 				sum: props.data.sum,
@@ -248,20 +249,17 @@ class EmployeeDetails extends Component {
 					<View style={{
 						flex: 1,
 						padding: 10,
-						paddingBottom: 40,
+						paddingBottom: 0,
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
-					}}>						
-						<View style={{
-							flexDirection: 'row'
-						}}>
-							<Text style={styles.itemTextBold}>
-								Employee:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.name}
-							</Text>		
-						</View>
+					}}>					
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
+							style={styles.loginInputBold}
+							value={this.state.departmentShow}
+							placeholder="Department">
+						</TextInput>
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
@@ -284,14 +282,6 @@ class EmployeeDetails extends Component {
 							value={this.state.phone}
 							placeholder="Phone">
 						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							multiline={true}
-							style={styles.loginInput}
-							value={this.state.department}
-							placeholder="Department">
-						</TextInput>
 						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
@@ -305,7 +295,8 @@ class EmployeeDetails extends Component {
 						</TextInput>
 						
 						<View style={{
-							flexDirection: 'row'
+							flexDirection: 'row',
+							marginTop: 10
 						}}>
 							<Text style={styles.itemTextBold}>
 								Total: {this.state.sumShow}
@@ -379,6 +370,17 @@ const styles = StyleSheet.create({
         borderColor: 'lightgray',
         borderRadius: 5,
         color: 'black'
+    },    
+	loginInputBold: {
+        height: 50,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 5,
+        color: 'black',
+		fontWeight: 'bold'
     },
     loginInput1: {
         height: 100,
@@ -387,7 +389,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         borderWidth: 1,
         borderColor: 'lightgray',
-        borderRadius: 0,
+        borderRadius: 5,
         color: 'black'
     },	
     button: {
