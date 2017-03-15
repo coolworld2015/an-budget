@@ -114,27 +114,48 @@ class AuditDetails extends Component {
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
 					}}>
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.name}
-							placeholder="Name">
-						</TextInput>
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								User:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.name}
+							</Text>		
+						</View>
 						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.ip}
-							placeholder="IP">
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput1}
-							value={this.state.description}
-							multiline={true}
-							placeholder="Description">
-						</TextInput>
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Date:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.date}
+							</Text>		
+						</View>
+						
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								IP:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.ip}
+							</Text>		
+						</View>
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Description:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.description}
+							</Text>		
+						</View>
 
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
@@ -150,11 +171,19 @@ class AuditDetails extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'gray',
+    itemTextBold: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 10,
+		fontWeight: 'bold',
+		color: 'black'
+    },    
+	itemText: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 10,
+		marginLeft: 2,
+		color: 'black'
     },
     countHeader: {
         fontSize: 16,

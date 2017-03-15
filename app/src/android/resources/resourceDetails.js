@@ -243,12 +243,16 @@ class ResourceDetails extends Component {
 						justifyContent: 'flex-start',
 						backgroundColor: 'white'
 					}}>						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.name}
-							placeholder="Name">
-						</TextInput>
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								Resource:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.name}
+							</Text>		
+						</View>
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
@@ -295,11 +299,19 @@ class ResourceDetails extends Component {
 }
 
 const styles = StyleSheet.create({
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'gray',
+    itemTextBold: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 5,
+		fontWeight: 'bold',
+		color: 'black'
+    },    
+	itemText: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 5,
+		marginLeft: 2,
+		color: 'black'
     },
     countHeader: {
         fontSize: 16,
