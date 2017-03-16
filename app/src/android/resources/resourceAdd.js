@@ -31,11 +31,17 @@ class ResourceAdd extends Component {
 			bugANDROID: ''
         }
     }
-
+	
+	isNumber(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+	
     addItem() {
         if (this.state.name == undefined ||
             this.state.price == undefined ||
-            this.state.description == undefined) {
+            this.state.description == undefined ||
+			
+			this.isNumber(this.state.price) != true) {
             this.setState({
                 invalidValue: true
             });

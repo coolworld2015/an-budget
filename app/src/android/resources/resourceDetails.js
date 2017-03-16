@@ -43,11 +43,17 @@ class ResourceDetails extends Component {
 			};
 		}		
     }
-
+	
+	isNumber(n) {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+	
     updateItem() {
         if (this.state.name == '' ||
             this.state.price == '' ||
-            this.state.description == '') {
+            this.state.description == undefined ||
+			
+			this.isNumber(this.state.price) != true) {
             this.setState({
                 invalidValue: true
             });

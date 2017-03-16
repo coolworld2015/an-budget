@@ -31,7 +31,7 @@ class InputAdd extends Component {
         let d = new Date;
         let todayDate = d.getMonth() + 1 + '/' + (d.getDate()) + '/' + d.getFullYear();
 		let time = d.toTimeString().split(' ');
-		let date = todayDate+ ' ' + time[0];
+		let date = todayDate + ' ' + time[0];
 		
         this.state = {
             showProgress: true,
