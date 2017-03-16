@@ -375,14 +375,15 @@ class OutputAdd extends Component {
 								invoiceID: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInputBold}
 							value={this.state.invoiceID}
 							placeholder="invoiceID">
 						</TextInput>
 
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
+							editable={false}
+							style={styles.loginInputBold}
 							value={this.state.date}
 							placeholder="date">
 						</TextInput>
@@ -515,7 +516,7 @@ class OutputAdd extends Component {
 							</Picker>
 						</View>
 					</View>
-					
+										
 					<View style={{
 						flex: 1,
 						padding: 10,
@@ -525,7 +526,8 @@ class OutputAdd extends Component {
 					}}>
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
+							editable={false}
+							style={styles.loginInputBold}
 							value={this.state.price}
 							placeholder="Price">
 						</TextInput>
@@ -537,7 +539,7 @@ class OutputAdd extends Component {
 								total: ((+this.state.price)*(+text)).toFixed(2).toString(),								
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInputBold}
 							value={this.state.quantity}
 							placeholder="Quantity">
 						</TextInput>
@@ -553,13 +555,16 @@ class OutputAdd extends Component {
 							value={this.state.description}
 							placeholder="Description">
 						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.total}
-							placeholder="Total">
-						</TextInput>
+						
+						<View style={{
+							flexDirection: 'row',
+							marginTop: 10,
+							marginBottom: -15
+						}}>
+							<Text style={styles.itemTextBold}>
+								Total: {this.state.total}
+							</Text>		
+						</View>		
 						
 						{validCtrl}
 
@@ -593,12 +598,13 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         backgroundColor: '#fff'
     },
-    AppContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'gray',
-    },
+    itemTextBold: {
+		fontSize: 20,
+		textAlign: 'left',
+		margin: 5,
+		fontWeight: 'bold',
+		color: 'black'
+    },  
     countHeader: {
         fontSize: 16,
         textAlign: 'center',
@@ -627,7 +633,18 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'black'
     },
-    loginInput1: {
+	loginInputBold: {
+        height: 50,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 5,
+        color: 'black',
+		fontWeight: 'bold'
+    },	
+	loginInput1: {
         height: 100,
         marginTop: 10,
         padding: 4,
@@ -635,7 +652,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'lightgray',
         borderRadius: 5,
-        color: 'black'
+        color: 'black',
+		fontWeight: 'bold'
     },		
     button: {
         height: 50,
