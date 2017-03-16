@@ -245,7 +245,7 @@ class UserDetails extends Component {
 								name: text,
 								invalidValue: false
 							})}
-							style={styles.loginInput}
+							style={styles.loginInputBold}
 							value={this.state.name}
 							placeholder="Name">
 						</TextInput>
@@ -333,6 +333,17 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'black'
     },
+	loginInputBold: {
+        height: 50,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 5,
+        color: 'black',
+		fontWeight: 'bold'
+    },		
 	loginInput1: {
         height: 100,
         marginTop: 10,

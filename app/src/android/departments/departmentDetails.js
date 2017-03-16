@@ -248,6 +248,14 @@ class DepartmentDetails extends Component {
 					}}>						
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
+							style={styles.loginInputBold}
+							value={this.state.name}
+							placeholder="Name">						
+						</TextInput>	
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
 							onChangeText={(text)=> this.setState({
 								address: text,
 								invalidValue: false
@@ -357,6 +365,17 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         color: 'black'
     },
+	loginInputBold: {
+        height: 50,
+        marginTop: 10,
+        padding: 4,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: 'lightgray',
+        borderRadius: 5,
+        color: 'black',
+		fontWeight: 'bold'
+    },	
     loginInput1: {
         height: 100,
         marginTop: 10,

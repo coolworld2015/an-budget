@@ -257,7 +257,15 @@ class EmployeeDetails extends Component {
 							underlineColorAndroid='rgba(0,0,0,0)'
 							multiline={true}
 							style={styles.loginInputBold}
-							value={this.state.departmentShow}
+							value={this.state.name}
+							placeholder="Name">						
+						</TextInput>	
+						
+						<TextInput
+							underlineColorAndroid='rgba(0,0,0,0)'
+							multiline={true}
+							style={styles.loginInputBold}
+							value={this.state.department}
 							placeholder="Department">
 						</TextInput>
 						

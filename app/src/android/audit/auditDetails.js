@@ -145,7 +145,19 @@ class AuditDetails extends Component {
 							<Text style={styles.itemText}>
 								{this.state.ip}
 							</Text>		
+						</View>		
+						
+						<View style={{
+							flexDirection: 'row'
+						}}>
+							<Text style={styles.itemTextBold}>
+								ID:
+							</Text>									
+							<Text style={styles.itemText}>
+								{this.state.id}
+							</Text>		
 						</View>
+						
 						<View style={{
 							flexDirection: 'row'
 						}}>
