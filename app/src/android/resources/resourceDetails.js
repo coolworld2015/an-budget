@@ -252,6 +252,7 @@ class ResourceDetails extends Component {
 						<TextInput
 							underlineColorAndroid='rgba(0,0,0,0)'
 							multiline={true}
+							editable={false}
 							style={styles.loginInputBold}
 							value={this.state.name}
 							placeholder="Name">						
