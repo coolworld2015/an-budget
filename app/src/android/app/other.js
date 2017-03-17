@@ -25,14 +25,14 @@ class Other extends Component {
 
         this.state = {
             dataSource: ds.cloneWithRows([
-				{name: 'Reports', id: 1},
-				{name: 'Projects', id: 10},
-				{name: 'Resources', id: 20},
-				{name: 'Departments', id: 30},
-				{name: 'Employees', id: 40},
-				{name: 'Users', id: 50},
-				{name: 'Audit', id: 60},
-				{name: 'Logout', id: 70}
+				{name: appConfig.language.reports, id: 1},
+				{name: appConfig.language.projects, id: 10},
+				{name: appConfig.language.resources, id: 20},
+				{name: appConfig.language.departments, id: 30},
+				{name: appConfig.language.employees, id: 40},
+				{name: appConfig.language.users, id: 50},
+				{name: appConfig.language.audit, id: 60},
+				{name: appConfig.language.logout, id: 70}
 			]),
             showProgress: true,
             resultsCount: 7,
@@ -183,7 +183,7 @@ class Other extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Other
+								{appConfig.language.other}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -215,7 +215,7 @@ class Other extends Component {
 
                 <View style={{marginBottom: 0}}>
                     <Text style={styles.countFooter}>
-                        {this.state.resultsCount} entries were found.
+                        {this.state.resultsCount} {appConfig.language.records}
                     </Text>
                 </View>
 
