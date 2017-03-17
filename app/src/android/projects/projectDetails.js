@@ -103,8 +103,8 @@ class ProjectDetails extends Component {
 
     deleteItemDialog() {
 		Alert.alert(
-			'Delete record',
-			'Are you sure you want to delete record ' + this.state.name + '?',
+			appConfig.language.delrec,
+			appConfig.language.conform + this.state.name + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
@@ -201,7 +201,7 @@ class ProjectDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -232,7 +232,7 @@ class ProjectDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Delete
+								{appConfig.language.delete}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -263,7 +263,7 @@ class ProjectDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.address}
-							placeholder="Address">
+							placeholder={appConfig.language.address}>
 						</TextInput>
 												
 						<TextInput
@@ -274,7 +274,7 @@ class ProjectDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.phone}
-							placeholder="Phone">
+							placeholder={appConfig.language.phone}>
 						</TextInput>
 
 						<TextInput
@@ -286,7 +286,7 @@ class ProjectDetails extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 						
 						<View style={{
@@ -294,7 +294,7 @@ class ProjectDetails extends Component {
 							marginTop: 10
 						}}>
 							<Text style={styles.itemTextBold}>
-								Total: {this.state.sumShow}
+								{appConfig.language.total}: {this.state.sumShow}
 							</Text>		
 						</View>
 
@@ -304,7 +304,7 @@ class ProjectDetails extends Component {
 							onPress={()=> this.updateItem()}
 
 							style={styles.button}>
-							<Text style={styles.buttonText}>Submit</Text>
+							<Text style={styles.buttonText}>{appConfig.language.submit}</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}

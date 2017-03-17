@@ -124,7 +124,7 @@ class Projects extends Component {
 						</Text>						
 						
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							Total: {((+rowData.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+							{appConfig.language.total}: {((+rowData.sum).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 						</Text>
 				</View>
             </TouchableHighlight>
@@ -241,7 +241,7 @@ class Projects extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Reload
+								{appConfig.language.reload}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -258,7 +258,7 @@ class Projects extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Projects
+								{appConfig.language.projects}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -274,7 +274,7 @@ class Projects extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Add
+								{appConfig.language.add}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -293,7 +293,7 @@ class Projects extends Component {
 						underlineColorAndroid='rgba(0,0,0,0)'
 						onChangeText={this.onChangeText.bind(this)}
 						value={this.state.searchQuery}
-						placeholder="Search">
+						placeholder={appConfig.language.search}>
                     </TextInput>    
 
 					{errorCtrl}
@@ -314,7 +314,7 @@ class Projects extends Component {
 				
 				<View style={{marginBottom: 0}}>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount} entries were found.
+						{this.state.resultsCount} {appConfig.language.records}
 					</Text>
 				</View>
 

@@ -94,22 +94,22 @@ class UserDetails extends Component {
             });
     }
 
-    deleteUserDialog() {
+    deleteItemDialog() {
 		Alert.alert(
-			'Delete user',
-			'Are you sure you want to delete user ' + this.state.name + '?',
+			appConfig.language.delrec,
+			appConfig.language.conform + this.state.name + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
 					text: 'OK', onPress: () => {
-					this.deleteUser();
+					this.deleteItem();
 					}
 				},
 			]
 		);	
 	}
 	
-    deleteUser() {		
+    deleteItem() {		
         this.setState({
             showProgress: true,
 			bugANDROID: ' '
@@ -215,7 +215,7 @@ class UserDetails extends Component {
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.deleteUserDialog()}
+							onPress={()=> this.deleteItemDialog()}
 							underlayColor='#ddd'
 						>
 							<Text style={{

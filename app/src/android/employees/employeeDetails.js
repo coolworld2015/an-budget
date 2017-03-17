@@ -110,8 +110,8 @@ class EmployeeDetails extends Component {
 
     deleteItemDialog() {
 		Alert.alert(
-			'Delete record',
-			'Are you sure you want to delete record ' + this.state.name + '?',
+			appConfig.language.delrec,
+			appConfig.language.conform + this.state.name + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
