@@ -178,7 +178,7 @@ class App extends Component {
 				log: 'Login',
 				login: 'Login',
 				pass: 'Password',
-				enter: 'Enter',
+				enter: 'Log in',
 				error: 'Error. Wrong name or password !!!',
 				back: 'Back',
 				assets: 'Assets',
@@ -221,6 +221,7 @@ class App extends Component {
     }
 	
 	componentWillMount() {
+		appConfig.lang = 'Русский';
 		appConfig.language = appConfig.rus; // RUS !!!
 	}
 	

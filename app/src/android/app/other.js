@@ -30,47 +30,18 @@ class Other extends Component {
 				{name: appConfig.language.resources, id: 20},
 				{name: appConfig.language.departments, id: 30},
 				{name: appConfig.language.employees, id: 40},
+				{name: appConfig.language.config, id: 70},
 				{name: appConfig.language.users, id: 50},
 				{name: appConfig.language.audit, id: 60},
-				{name: appConfig.language.logout, id: 70}
+				{name: appConfig.language.logout, id: 80}
 			]),
             showProgress: true,
-            resultsCount: 7,
+            resultsCount: 9,
             recordsCount: 25,
             positionY: 0
         };
     }	
 	
-    getAudit() {		
-        fetch(appConfig.url + 'api/audit/get', {
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-				'Authorization': appConfig.access_token
-            }
-        })
-            .then((response)=> response.json())
-            .then((responseData)=> {			
-                this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.slice(0, 25)),
-                    resultsCount: responseData.length,
-                    responseData: responseData,
-                    filteredItems: responseData
-                });
-            })
-            .catch((error)=> {
-                this.setState({
-                    serverError: true
-                });
-            })
-            .finally(()=> {
-                this.setState({
-                    showProgress: false
-                });
-            });
-    }
-
     showDetails(rowData) {
 		switch (rowData.id) {
 			case 1: this.props.navigator.push({
@@ -111,9 +82,15 @@ class Other extends Component {
 						index: 60,
 						data: rowData
 					});
+					break;				
+					
+			case 70: this.props.navigator.push({
+						index: 70,
+						data: rowData
+					});
 					break;	
 					
-			case 70: this.props.onLogOut();
+			case 80: this.props.onLogOut();
 					break;						
 		}					
     }

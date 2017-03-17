@@ -48,6 +48,7 @@ import OutputDetails from '../outputs/outputDetails';
 import OutputAdd from '../outputs/outputAdd';
 
 import Other from './other';
+import Config from './config';
 
 import Search from '../search/search';
 import SearchResults from '../search/searchResults';
@@ -111,6 +112,8 @@ class OtherTab extends Component {
 			{title: 'Search', index: 19},
 			{title: 'Search Results', index: 20},
 			{title: 'Search Details', index: 21},
+			
+			{title: 'Config', index: 22}
 		];
 	}
 	
@@ -171,6 +174,9 @@ class OtherTab extends Component {
 					 break;
 			case 62: return <AuditAdd data={route.data} routes={this.routes} navigator={navigator} />
 					 break;
+					 
+			case 70: return <Config onLogOut={this.onLogOut.bind(this)} routes={this.routes} navigator={navigator} />
+					 break;			 
  		}
  	}	
 	
