@@ -65,10 +65,16 @@ class App extends Component {
 				outputsCount: 0
             },
 			rus: {
+				firstday: 'Начало периода',
+				lastday: 'Конец периода',
 				selectdep: 'Выбор подразделения',
+				alldep: 'Все подразделения',
 				selectproj: 'Выбор проекта',
+				allproj: 'Все проекты',
 				selectemp: 'Выбор сотрудника',
+				allemp: 'Все сотрудники',
 				selectres: 'Выбор ресурса',
+				allres: 'Все ресурсы',
 				delrec: 'Удаление записи',
 				reload: 'Загрузка',
 				other: 'Другое',		
@@ -133,10 +139,16 @@ class App extends Component {
 				total: 'Итого'
 			},
 			eng: {
+				firstday: 'First day',
+				lastday: 'Last day',
 				selectdep: 'Select department',
+				alldep: 'All departments',
 				selectproj: 'Select project',
+				allproj: 'All projects',
 				selectemp: 'Select employee',
+				allemp: 'All employees',
 				selectres: 'Select resource',
+				allres: 'All resources',
 				delrec: 'Delete record',
 				reload: 'Reload',
 				other: 'Other',

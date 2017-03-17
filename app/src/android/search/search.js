@@ -40,9 +40,9 @@ class Search extends Component {
             eventSwitchTitle: true,
 			eventSwitchBase: true,
             textSwitchBase: 'Choose project',
-			projectName: 'All projects',
-			departmentName: 'All departments',
-			employeeName: 'All employees',
+			projectName: appConfig.language.allproj,
+			departmentName: appConfig.language.alldep,
+			employeeName: appConfig.language.allemp,
 			bugANDROID: '',
             projects: [],
             departments: [],
@@ -89,7 +89,7 @@ class Search extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'All projects'});
+				items.unshift({name: appConfig.language.allproj});
                 this.setState({
                     projects: items,
 					serverError: false
@@ -119,7 +119,7 @@ class Search extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'All departments'});
+				items.unshift({name: appConfig.language.alldep});
                 this.setState({
                     departments: items,
 					serverError: false
@@ -149,7 +149,7 @@ class Search extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'All employees'});
+				items.unshift({name: appConfig.language.allemp});
                 this.setState({
                     employees: items,
 					serverError: false
@@ -295,7 +295,7 @@ class Search extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 Reports
+								{appConfig.language.reports} 
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -422,13 +422,13 @@ class Search extends Component {
 						<TouchableHighlight
 							onPress={this.showPicker.bind(this, 'start', {date: this.state.simpleDate})}
 							style={styles.button1}>
-							<Text style={styles.buttonText1}>First day: {this.state.startText}</Text>
+							<Text style={styles.buttonText1}>{appConfig.language.firstday}: {this.state.startText}</Text>
 						</TouchableHighlight>						
 						
 						<TouchableHighlight
 							onPress={this.showPicker.bind(this, 'end', {date: this.state.simpleDate})}
 							style={styles.button1}>
-							<Text style={styles.buttonText1}>Last day: {this.state.endText}</Text>
+							<Text style={styles.buttonText1}>{appConfig.language.lastday}: {this.state.endText}</Text>
 						</TouchableHighlight>	
 										
 						{validCtrl}
@@ -436,7 +436,7 @@ class Search extends Component {
 						<TouchableHighlight
 							onPress={this.onSearchPressed.bind(this)}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Search</Text>
+							<Text style={styles.buttonText}>{appConfig.language.search}</Text>
 						</TouchableHighlight>
 					</View>
 				</ScrollView>

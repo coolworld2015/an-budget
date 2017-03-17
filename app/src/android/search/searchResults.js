@@ -94,17 +94,17 @@ class SearchResults extends Component {
 				itemsDate = itemsDate.filter((el) => this.dateCheck(this.state.startDate, this.state.endDate, el.date.split(' ')[0]));
 				
 				itemsProject = [].concat(itemsDate);	
-				if (this.state.projectName != 'All projects') {
+				if (this.state.projectName != appConfig.language.allproj) {
 					itemsProject = itemsDate.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
 				}	
 					
 				itemsDepartment = [].concat(itemsProject);
-				if (this.state.departmentName != 'All departments') {
+				if (this.state.departmentName != appConfig.language.alldep) {
 					itemsDepartment = itemsProject.filter((el) => el.department.toLowerCase() == this.state.departmentName.toLowerCase());
 				}					
 				
 				itemsEmployee = [].concat(itemsDepartment);
-				if (this.state.employeeName != 'All employees') {
+				if (this.state.employeeName != appConfig.language.allemp) {
 					itemsEmployee = itemsDepartment.filter((el) => el.employee.toLowerCase() == this.state.employeeName.toLowerCase());
 				}
 
@@ -147,17 +147,17 @@ class SearchResults extends Component {
 				itemsDate = itemsDate.filter((el) => this.dateCheck(this.state.startDate, this.state.endDate, el.date.split(' ')[0]));
 				
 				itemsProject = [].concat(itemsDate);	
-				if (this.state.projectName != 'All projects') {
+				if (this.state.projectName != appConfig.language.allproj) {
 					itemsProject = itemsDate.filter((el) => el.project.toLowerCase() == this.state.projectName.toLowerCase());
 				}	
 					
 				itemsDepartment = [].concat(itemsProject);
-				if (this.state.departmentName != 'All departments') {
+				if (this.state.departmentName != appConfig.language.alldep) {
 					itemsDepartment = itemsProject.filter((el) => el.department.toLowerCase() == this.state.departmentName.toLowerCase());
 				}					
 				
 				itemsEmployee = [].concat(itemsDepartment);
-				if (this.state.employeeName != 'All employees') {
+				if (this.state.employeeName != appConfig.language.allemp) {
 					itemsEmployee = itemsDepartment.filter((el) => el.employee.toLowerCase() == this.state.employeeName.toLowerCase());
 				}
 
@@ -312,7 +312,7 @@ class SearchResults extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -390,7 +390,7 @@ class SearchResults extends Component {
 					}}>
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter1}>
-							Outputs: {this.state.resultsCount2}
+							{appConfig.language.outputs}: {this.state.resultsCount2}
 						</Text>
 						<Text style={styles.countFooter1}>
 							{((+this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
@@ -398,7 +398,7 @@ class SearchResults extends Component {
 					</View>	
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter2}>
-							Total:
+							{appConfig.language.total}:
 						</Text>						
 						<Text style={styles.countFooter2}>
 							{((+this.state.inputsTotal - +this.state.outputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
@@ -406,7 +406,7 @@ class SearchResults extends Component {
 					</View>					
 					<View style={{marginBottom: 0}}>
 						<Text style={styles.countFooter3}>
-							Inputs: {this.state.resultsCount1}
+							{appConfig.language.inputs}: {this.state.resultsCount1}
 						</Text>						
 						<Text style={styles.countFooter3}>
 							{((+this.state.inputsTotal).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
