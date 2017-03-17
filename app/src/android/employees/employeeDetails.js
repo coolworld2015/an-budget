@@ -208,7 +208,7 @@ class EmployeeDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -239,7 +239,7 @@ class EmployeeDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Delete
+								{appConfig.language.delete}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -279,7 +279,7 @@ class EmployeeDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.address}
-							placeholder="Address">
+							placeholder={appConfig.language.address}>
 						</TextInput>
 												
 						<TextInput
@@ -290,7 +290,7 @@ class EmployeeDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.phone}
-							placeholder="Phone">
+							placeholder={appConfig.language.phone}>
 						</TextInput>
 						
 						<TextInput
@@ -301,7 +301,7 @@ class EmployeeDetails extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 						
 						<View style={{
@@ -319,7 +319,7 @@ class EmployeeDetails extends Component {
 							onPress={()=> this.updateItem()}
 
 							style={styles.button}>
-							<Text style={styles.buttonText}>Submit</Text>
+							<Text style={styles.buttonText}>{appConfig.language.submit}</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}

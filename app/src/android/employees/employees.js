@@ -120,7 +120,7 @@ class Employees extends Component {
 						backgroundColor: '#fff'
 					}}>              
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-							{rowData.name}
+							{rowData.name} - {rowData.department}
 						</Text>						
 						
 						<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
@@ -241,7 +241,7 @@ class Employees extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Reload
+								{appConfig.language.reload}
 							</Text>
 						</TouchableHighlight>
 					</View>
@@ -258,7 +258,7 @@ class Employees extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Employees
+								{appConfig.language.employees}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -274,7 +274,7 @@ class Employees extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Add
+								{appConfig.language.add}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -293,7 +293,7 @@ class Employees extends Component {
 						underlineColorAndroid='rgba(0,0,0,0)'
 						onChangeText={this.onChangeText.bind(this)}
 						value={this.state.searchQuery}
-						placeholder="Search">
+						placeholder={appConfig.language.search}>
                     </TextInput>    
 
 					{errorCtrl}
@@ -314,7 +314,7 @@ class Employees extends Component {
 				
 				<View style={{marginBottom: 0}}>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount} entries were found.
+						{this.state.resultsCount} {appConfig.language.records}
 					</Text>
 				</View>
 
