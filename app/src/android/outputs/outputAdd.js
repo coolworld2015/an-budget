@@ -40,7 +40,7 @@ class OutputAdd extends Component {
             projects: [],
             departments: [],
             employees: [],
-            employeesFiltered: [{name: 'Select employee'}],			
+            employeesFiltered: [{name: appConfig.language.selectemp}],			
             goods: [],
 			invoiceID: (appConfig.outputs.outputsCount).toString(),
 			date: date,
@@ -69,7 +69,7 @@ class OutputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select resource'});
+				items.unshift({name: appConfig.language.selectres});
                 this.setState({
                     goods: items,
 					serverError: false
@@ -100,7 +100,7 @@ class OutputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select employee'});
+				items.unshift({name: appConfig.language.selectemp});
                 this.setState({
                     employees: items,
 					serverError: false
@@ -130,7 +130,7 @@ class OutputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select project'});
+				items.unshift({name: appConfig.language.selectproj});
                 this.setState({
                     projects: items,
 					serverError: false
@@ -160,7 +160,7 @@ class OutputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select department'});
+				items.unshift({name: appConfig.language.selectdep});
                 this.setState({
                     departments: items,
 					serverError: false

@@ -65,6 +65,10 @@ class App extends Component {
 				outputsCount: 0
             },
 			rus: {
+				selectdep: 'Выбор подразделения',
+				selectproj: 'Выбор проекта',
+				selectemp: 'Выбор сотрудника',
+				selectres: 'Выбор ресурса',
 				delrec: 'Удаление записи',
 				reload: 'Загрузка',
 				other: 'Другое',		
@@ -129,6 +133,10 @@ class App extends Component {
 				total: 'Итого'
 			},
 			eng: {
+				selectdep: 'Select department',
+				selectproj: 'Select project',
+				selectemp: 'Select employee',
+				selectres: 'Select resource',
 				delrec: 'Delete record',
 				reload: 'Reload',
 				other: 'Other',
