@@ -112,7 +112,7 @@ class Login extends Component {
                     <Image style={styles.logo}
                            source={require('../../../logo.jpg')}
                     />
-                    <Text style={styles.heading}>AN-Budget</Text>
+                    <Text style={styles.heading}>{appConfig.language.title}</Text>
                     <TextInput
 						underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text)=> this.setState({
@@ -131,7 +131,7 @@ class Login extends Component {
 							color: 'black',
 							backgroundColor: 'white'
 						}} 
-                        placeholder="Login">1
+                        placeholder={appConfig.language.login}>1
                     </TextInput>
 
                     <TextInput
@@ -152,7 +152,8 @@ class Login extends Component {
 							color: 'black',
 							backgroundColor: 'white'
 						}} 
-                        placeholder="Password" secureTextEntry={true}>1
+                        placeholder={appConfig.language.pass} 
+						secureTextEntry={true}>1
                     </TextInput>
 
                     <TouchableHighlight
@@ -170,7 +171,7 @@ class Login extends Component {
 							alignItems: 'center',
 							borderRadius: 5
 						}}>
-                        <Text style={styles.buttonText}>Log in</Text>
+                        <Text style={styles.buttonText}>{appConfig.language.enter}</Text>
                     </TouchableHighlight>
 
                     {errorCtrl}

@@ -63,16 +63,16 @@ class AppContainer extends Component {
     }
 	
 	//backgroundColor='rgba(255, 255, 255, 0.7)'
+	
 	render() {
-		
 		return (
 			<ScrollableTabView 
 				renderTabBar={() => <DefaultTabBar backgroundColor='white' />}
 			>
- 				<AssetsTab tabLabel="Assets" />
- 				<OutputsTab tabLabel="Output" />
- 				<InputsTab tabLabel="Input" /> 				
-				<OtherTab onLogOut={this.onLogOut.bind(this)} tabLabel="Other" />
+ 				<AssetsTab tabLabel={appConfig.language.assets} />
+ 				<OutputsTab tabLabel={appConfig.language.outputs} />
+ 				<InputsTab tabLabel={appConfig.language.inputs} /> 				
+				<OtherTab onLogOut={this.onLogOut.bind(this)} tabLabel={appConfig.language.other} />
 			</ScrollableTabView>
 		);
 	}
