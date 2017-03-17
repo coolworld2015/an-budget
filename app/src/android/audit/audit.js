@@ -213,7 +213,7 @@ class Audit extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Reload
+								{appConfig.language.reload}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -226,17 +226,17 @@ class Audit extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
-								marginRight: 20,
+								marginRight: 60,
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Audit
+								{appConfig.language.audit}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
 					<View>
 						<TouchableHighlight
-							onPress={()=> this.addAudit()}
+							//onPress={()=> this.addAudit()}
 							underlayColor='#ddd'
 						>
 							<Text style={{
@@ -246,7 +246,7 @@ class Audit extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Add
+								
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -265,7 +265,7 @@ class Audit extends Component {
 						underlineColorAndroid='rgba(0,0,0,0)'
 						onChangeText={this.onChangeText.bind(this)}
 						value={this.state.searchQuery}
-						placeholder="Search">
+						placeholder={appConfig.language.search}>
                     </TextInput>
 
                     {errorCtrl}
@@ -286,7 +286,7 @@ class Audit extends Component {
 
                 <View style={{marginBottom: 0}}>
                     <Text style={styles.countFooter}>
-                        {this.state.resultsCount} entries were found.
+                        {this.state.resultsCount} {appConfig.language.records}
                     </Text>
                 </View>
 

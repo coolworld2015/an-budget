@@ -70,7 +70,7 @@ class AuditDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back 
+								{appConfig.language.back} 
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -118,7 +118,7 @@ class AuditDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								User:
+								{appConfig.language.user}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.name}
@@ -129,7 +129,7 @@ class AuditDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Date:
+								{appConfig.language.date}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.date}
@@ -162,7 +162,7 @@ class AuditDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Description:
+								{appConfig.language.description}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.description}
@@ -173,7 +173,7 @@ class AuditDetails extends Component {
 							onPress={()=> this.goBack()}
 
 							style={styles.button}>
-							<Text style={styles.buttonText}>Back</Text>
+							<Text style={styles.buttonText}>{appConfig.language.back}</Text>
 						</TouchableHighlight>
 					</View>
 				</ScrollView>
