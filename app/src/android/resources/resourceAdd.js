@@ -129,7 +129,7 @@ class ResourceAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -145,7 +145,7 @@ class ResourceAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 New
+								{appConfig.language.newrec}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -181,7 +181,7 @@ class ResourceAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.name}
-							placeholder="Name">
+							placeholder={appConfig.language.name}>
 						</TextInput>
 
 						<TextInput
@@ -192,7 +192,7 @@ class ResourceAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.price}
-							placeholder="Price">
+							placeholder={appConfig.language.price}>
 						</TextInput>
 
 						<TextInput
@@ -204,7 +204,7 @@ class ResourceAdd extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 
 						{validCtrl}
@@ -212,7 +212,7 @@ class ResourceAdd extends Component {
 						<TouchableHighlight
 							onPress={()=> this.addItem()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Add</Text>
+							<Text style={styles.buttonText}>{appConfig.language.add}</Text>
 						</TouchableHighlight>
 
 						{errorCtrl}
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
         fontSize: 24
     },
     loader: {
-        marginTop: 40
+        marginTop: 20
     },
     error: {
         color: 'red',

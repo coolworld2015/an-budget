@@ -204,7 +204,7 @@ class ResourceDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -235,7 +235,7 @@ class ResourceDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Delete
+								{appConfig.language.delete}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -255,7 +255,7 @@ class ResourceDetails extends Component {
 							editable={false}
 							style={styles.loginInputBold}
 							value={this.state.name}
-							placeholder="Name">						
+							placeholder={appConfig.language.name}>						
 						</TextInput>	
 						
 						<TextInput
@@ -266,7 +266,7 @@ class ResourceDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.price}
-							placeholder="Price">
+							placeholder={appConfig.language.price}>
 						</TextInput>
 
 						<TextInput
@@ -278,7 +278,7 @@ class ResourceDetails extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 
 						{validCtrl}
@@ -287,7 +287,7 @@ class ResourceDetails extends Component {
 							onPress={()=> this.updateItem()}
 
 							style={styles.button}>
-							<Text style={styles.buttonText}>Submit</Text>
+							<Text style={styles.buttonText}>{appConfig.language.submit}</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}
