@@ -280,7 +280,8 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: '#fff',
-        fontSize: 24
+        fontSize: 20,
+		fontWeight: 'bold'
     },
     loader: {
         marginTop: 20
