@@ -243,7 +243,7 @@ class Store extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Reload
+								{appConfig.language.reload}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -260,7 +260,7 @@ class Store extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Assets
+								{appConfig.language.assets}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -294,7 +294,7 @@ class Store extends Component {
 						underlineColorAndroid='rgba(0,0,0,0)'
 						onChangeText={this.onChangeText.bind(this)}
 						value={this.state.searchQuery}
-						placeholder="Search">
+						placeholder={appConfig.language.search}>
                     </TextInput>    
 
 					{errorCtrl}
@@ -315,7 +315,7 @@ class Store extends Component {
 				
 				<View style={{marginBottom: 0}}>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount} entries were found.
+						{this.state.resultsCount} {appConfig.language.records}
 					</Text>
 				</View>
 

@@ -65,6 +65,7 @@ class App extends Component {
 				outputsCount: 0
             },
 			rus: {
+				reload: 'Загрузка',
 				other: 'Другое',		
 				results: 'Результаты для ',
 				quantity: 'Количесто',
@@ -95,7 +96,7 @@ class App extends Component {
 				reports: 'Отчеты',
 				resource: 'Ресурс',
 				resources: 'Ресурсы',
-				find : 'Поиск',
+				search : 'Поиск',
 				outputs : 'Расход',
 				inputs : 'Приход',
 				project : 'Проект',
@@ -117,7 +118,7 @@ class App extends Component {
 				size : 'Размер: ',
 				in_count : 'Количесто приходов: ',
 				out_count : 'Количесто расходов: ',
-				records : 'Количесто записей на странице: ',
+				records : ' записей найдено',
 				name : 'Наименование',
 				sum : 'Сумма',
 				add : 'Добавить',
@@ -127,6 +128,7 @@ class App extends Component {
 				total : 'Итого'
 			},
 			eng: {
+				reload: 'Reload',
 				other: 'Other',
 				results: 'Results for ',
 				quantity: 'Quantity',
@@ -157,7 +159,7 @@ class App extends Component {
 				reports: 'Reports',
 				resource: 'Resource',
 				resources: 'Resources',
-				find : 'Search here',
+				search : 'Search here',
 				outputs : 'Outputs',
 				inputs : 'Inputs',
 				project : 'Project',
@@ -179,7 +181,7 @@ class App extends Component {
 				size : 'Total: ',
 				in_count : 'Inputs: ',
 				out_count : 'Outputs: ',
-				records : 'Records per page: ',
+				records : ' entries were found',
 				name : 'Name',
 				sum : 'Total',
 				add : 'Add',
