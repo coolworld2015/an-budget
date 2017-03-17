@@ -311,7 +311,7 @@ class Users extends Component {
 				
 				<View style={{marginBottom: 0}}>
 					<Text style={styles.countFooter}>
-						{this.state.resultsCount} {appConfig.language.records}
+						{appConfig.language.records} {this.state.resultsCount} 
 					</Text>
 				</View>
 

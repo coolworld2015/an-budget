@@ -112,7 +112,14 @@ class Login extends Component {
                     <Image style={styles.logo}
                            source={require('../../../logo.jpg')}
                     />
-                    <Text style={styles.heading}>{appConfig.language.title}</Text>
+					<View style={{ 
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+						<Text style={styles.heading}>
+							{appConfig.language.title}
+						</Text>
+					</View>
                     <TextInput
 						underlineColorAndroid='rgba(0,0,0,0)'
                         onChangeText={(text)=> this.setState({
@@ -222,7 +229,8 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginTop: 10,
 		color: 'black',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+		textAlign: 'center'
     },
 	footer: {
         fontSize: 30,

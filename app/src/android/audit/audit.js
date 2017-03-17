@@ -285,9 +285,9 @@ class Audit extends Component {
                 </ScrollView>
 
                 <View style={{marginBottom: 0}}>
-                    <Text style={styles.countFooter}>
-                        {this.state.resultsCount} {appConfig.language.records}
-                    </Text>
+					<Text style={styles.countFooter}>
+						{appConfig.language.records} {this.state.resultsCount} 
+					</Text>
                 </View>
 
             </View>
