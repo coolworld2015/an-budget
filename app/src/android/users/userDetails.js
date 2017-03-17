@@ -194,7 +194,7 @@ class UserDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -225,7 +225,7 @@ class UserDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Delete
+								{appConfig.language.delete}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -247,7 +247,7 @@ class UserDetails extends Component {
 							})}
 							style={styles.loginInputBold}
 							value={this.state.name}
-							placeholder="Name">
+							placeholder={appConfig.language.login}>
 						</TextInput>
 
 						<TextInput
@@ -258,7 +258,7 @@ class UserDetails extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.pass}
-							placeholder="Password">
+							placeholder={appConfig.language.pass}>
 						</TextInput>
 
 						<TextInput
@@ -270,7 +270,7 @@ class UserDetails extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 
 						{validCtrl}
@@ -279,7 +279,7 @@ class UserDetails extends Component {
 							onPress={()=> this.updateUser()}
 
 							style={styles.button}>
-							<Text style={styles.buttonText}>Submit</Text>
+							<Text style={styles.buttonText}>{appConfig.language.submit}</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}

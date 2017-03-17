@@ -66,6 +66,7 @@ class App extends Component {
             },
 			rus: {
 				user: 'Пользователь',
+				users: 'Пользователи',
 				firstday: 'Начало периода',
 				lastday: 'Конец периода',
 				selectdep: 'Выбор подразделения',
@@ -141,6 +142,7 @@ class App extends Component {
 			},
 			eng: {
 				user: 'User',
+				users: 'Users',
 				firstday: 'First day',
 				lastday: 'Last day',
 				selectdep: 'Select department',

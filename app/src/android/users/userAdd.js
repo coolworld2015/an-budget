@@ -121,7 +121,7 @@ class UserAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -137,7 +137,7 @@ class UserAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 New
+								{appConfig.language.newrec}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -173,7 +173,7 @@ class UserAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.name}
-							placeholder="Name">
+							placeholder={appConfig.language.login}>
 						</TextInput>
 
 						<TextInput
@@ -184,7 +184,7 @@ class UserAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.pass}
-							placeholder="Password">
+							placeholder={appConfig.language.pass}>
 						</TextInput>
 
 						<TextInput
@@ -196,7 +196,7 @@ class UserAdd extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 
 						{validCtrl}
@@ -204,7 +204,7 @@ class UserAdd extends Component {
 						<TouchableHighlight
 							onPress={()=> this.addUser()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Add</Text>
+							<Text style={styles.buttonText}>{appConfig.language.add}</Text>
 						</TouchableHighlight>
 
 						{errorCtrl}
