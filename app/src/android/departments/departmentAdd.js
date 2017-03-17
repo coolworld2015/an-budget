@@ -124,7 +124,7 @@ class DepartmentAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -140,7 +140,7 @@ class DepartmentAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 New
+								{appConfig.language.newrec}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -176,7 +176,7 @@ class DepartmentAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.name}
-							placeholder="Name">
+							placeholder={appConfig.language.name}>
 						</TextInput>
 
 						<TextInput
@@ -187,7 +187,7 @@ class DepartmentAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.address}
-							placeholder="Address">
+							placeholder={appConfig.language.address}>
 						</TextInput>						
 						
 						<TextInput
@@ -198,7 +198,7 @@ class DepartmentAdd extends Component {
 							})}
 							style={styles.loginInput}
 							value={this.state.phone}
-							placeholder="Phone">
+							placeholder={appConfig.language.phone}>
 						</TextInput>						
 
 						<TextInput
@@ -210,7 +210,7 @@ class DepartmentAdd extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 
 						{validCtrl}
@@ -218,7 +218,7 @@ class DepartmentAdd extends Component {
 						<TouchableHighlight
 							onPress={()=> this.addItem()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Add</Text>
+							<Text style={styles.buttonText}>{appConfig.language.add}</Text>
 						</TouchableHighlight>
 
 						{errorCtrl}
