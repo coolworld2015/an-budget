@@ -335,7 +335,7 @@ class OutputAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 {appConfig.language.newrec}
+								{appConfig.language.newrec}
 							</Text>
 						</TouchableHighlight>	
 					</View>						

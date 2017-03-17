@@ -40,7 +40,7 @@ class InputAdd extends Component {
             projects: [],
             departments: [],
             employees: [],
-            employeesFiltered: [{name: 'Select employee'}],
+            employeesFiltered: [{name: appConfig.language.selectemp}],
             goods: [],
 			invoiceID: (appConfig.inputs.inputsCount).toString(),
 			date: date,
@@ -69,7 +69,7 @@ class InputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select resource'});
+				items.unshift({name: appConfig.language.selectres});
                 this.setState({
                     goods: items,
 					serverError: false
@@ -100,7 +100,7 @@ class InputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select employee'});
+				items.unshift({name: appConfig.language.selectemp});
                 this.setState({
                     employees: items,
 					serverError: false
@@ -130,7 +130,7 @@ class InputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select project'});
+				items.unshift({name: appConfig.language.selectproj});
                 this.setState({
                     projects: items,
 					serverError: false
@@ -160,7 +160,7 @@ class InputAdd extends Component {
             .then((response)=> response.json())
             .then((responseData)=> {
 				var items = responseData.sort(this.sort);
-				items.unshift({name: 'Select department'});
+				items.unshift({name: appConfig.language.selectdep});
                 this.setState({
                     departments: items,
 					serverError: false
@@ -319,7 +319,7 @@ class InputAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -335,7 +335,7 @@ class InputAdd extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								 New
+								{appConfig.language.newrec}
 							</Text>
 						</TouchableHighlight>	
 					</View>						
@@ -377,7 +377,7 @@ class InputAdd extends Component {
 							})}
 							style={styles.loginInputBold}
 							value={this.state.invoiceID}
-							placeholder="invoiceID">
+							placeholder="ID">
 						</TextInput>
 
 						<TextInput
@@ -529,7 +529,7 @@ class InputAdd extends Component {
 							editable={false}
 							style={styles.loginInputBold}
 							value={this.state.price}
-							placeholder="Price">
+							placeholder={appConfig.language.price}>
 						</TextInput>
 						
 						<TextInput
@@ -541,7 +541,7 @@ class InputAdd extends Component {
 							})}
 							style={styles.loginInputBold}
 							value={this.state.quantity}
-							placeholder="Quantity">
+							placeholder={appConfig.language.quantity}>
 						</TextInput>
 
 						<TextInput
@@ -553,7 +553,7 @@ class InputAdd extends Component {
 							})}
 							style={styles.loginInput1}
 							value={this.state.description}
-							placeholder="Description">
+							placeholder={appConfig.language.description}>
 						</TextInput>
 						
 						<View style={{
@@ -562,7 +562,7 @@ class InputAdd extends Component {
 							marginBottom: -15
 						}}>
 							<Text style={styles.itemTextBold}>
-								Total: {this.state.total}
+								{appConfig.language.total}: {this.state.total}
 							</Text>		
 						</View>		
 						
@@ -571,7 +571,7 @@ class InputAdd extends Component {
 						<TouchableHighlight
 							onPress={()=> this.addItem()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Add</Text>
+							<Text style={styles.buttonText}>{appConfig.language.add}</Text>
 						</TouchableHighlight>
 						
 						{errorCtrl}

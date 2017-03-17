@@ -61,8 +61,8 @@ class InputDetails extends Component {
 
     deleteItemDialog() {
 		Alert.alert(
-			'Delete record',
-			'Are you sure you want to delete record ' + this.state.invoiceID + '?',
+			appConfig.language.delrec,
+			appConfig.language.conform + this.state.invoiceID + '?',
 			[
 				{text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
 				{
@@ -187,7 +187,7 @@ class InputDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Back
+								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -218,7 +218,7 @@ class InputDetails extends Component {
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
-								Delete
+								{appConfig.language.delete}
 							</Text>
 						</TouchableHighlight>	
 					</View>
@@ -250,7 +250,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Date:
+								{appConfig.language.date}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.date}
@@ -261,7 +261,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Project:
+								{appConfig.language.project}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.project}
@@ -272,7 +272,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Department:
+								{appConfig.language.department}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.department}
@@ -283,7 +283,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Employee:
+								{appConfig.language.employee}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.employee}
@@ -294,7 +294,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Product:
+								{appConfig.language.resource}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.product}
@@ -305,7 +305,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Price:
+								{appConfig.language.price}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.priceShow}
@@ -316,7 +316,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Quantity:
+								{appConfig.language.quantity}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.quantityShow}
@@ -327,7 +327,7 @@ class InputDetails extends Component {
 							flexDirection: 'row'
 						}}>
 							<Text style={styles.itemTextBold}>
-								Description:
+								{appConfig.language.description}:
 							</Text>									
 							<Text style={styles.itemText}>
 								{this.state.description}
@@ -335,13 +335,15 @@ class InputDetails extends Component {
 						</View>			
 									
 						<Text style={styles.itemTextBold}>
-							Total: {this.state.totalShow}
+							{appConfig.language.total}: {this.state.totalShow}
 						</Text>
 
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							style={styles.button}>
-							<Text style={styles.buttonText}>Back</Text>
+							<Text style={styles.buttonText}>
+								{appConfig.language.back}
+							</Text>
 						</TouchableHighlight>
 						
 						<Text>{this.state.bugANDROID}</Text>
