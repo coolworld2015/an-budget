@@ -12,7 +12,8 @@ import {
     TabBarIOS,
     NavigatorIOS,
     TextInput,
-	BackAndroid
+	BackAndroid,
+	AsyncStorage
 } from 'react-native';
 
 console.disableYellowBox = true;
@@ -221,9 +222,29 @@ class App extends Component {
     }
 	
 	componentWillMount() {
-		appConfig.lang = 'Русский';
-		appConfig.language = appConfig.rus; // RUS !!!
+		this.init();
 	}
+	
+    init() {
+		appConfig.lang = 'eng';
+		appConfig.language = appConfig.eng;
+
+        AsyncStorage.getItem('rn-budget.language')
+            .then(req => JSON.parse(req))
+            .then(json => {
+                if (json == undefined || json == null || json[0] == null) {
+					appConfig.lang = 'eng';
+					appConfig.language = appConfig.eng;
+					AsyncStorage.setItem('rn-budget.language', JSON.stringify('eng'))
+						.then(json => {})
+						.catch(error => console.log(error))
+                } else {
+					appConfig.lang = json;
+					appConfig.language = appConfig[json];
+                }
+            })
+            .catch(error => console.log(error))
+    }
 	
     render() {
         if (this.state.isLoggedIn) {

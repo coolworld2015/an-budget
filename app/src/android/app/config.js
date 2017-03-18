@@ -19,6 +19,7 @@ import {
 	Picker,
 	DatePickerAndroid,
 	TouchableWithoutFeedback,
+	AsyncStorage
 } from 'react-native';
 
 class Config extends Component {
@@ -26,10 +27,21 @@ class Config extends Component {
         super(props);
 		
 		var width = Dimensions.get('window').width;
- 
+		
+		var lang, check, language;
+		language = appConfig.lang;
+		
+		if (language == 'eng') {
+			lang = 'English',
+			check = true;
+		} else {
+			lang = 'Русский'
+			check = false;
+		}
+		
         this.state = {
-			eventSwitchBase: false,
-            textSwitchBase: appConfig.lang,
+			eventSwitchBase: check,
+            textSwitchBase: lang,
 			bugANDROID: '',
          }
     }
@@ -46,13 +58,13 @@ class Config extends Component {
 		
     toggleTypeChange() {
         if (!this.state.eventSwitchBase) {
-			appConfig.lang = 'English';
+			appConfig.lang = 'eng';
 			appConfig.language = appConfig.eng;
             this.setState({
                 textSwitchBase: 'English'
             });
         } else {
-			appConfig.lang = 'Русский';
+			appConfig.lang = 'rus';
 			appConfig.language = appConfig.rus;
             this.setState({
                 textSwitchBase: 'Русский'
@@ -60,6 +72,14 @@ class Config extends Component {
         }
     }
 
+	setLanguage() {
+		AsyncStorage.setItem('rn-budget.language', JSON.stringify(appConfig.lang))
+			.then(json => {
+				this.props.onLogOut();
+			})
+			.catch(error => console.log(error))
+	}
+	
     render() {	
         return (
 			<View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
@@ -165,7 +185,7 @@ class Config extends Component {
 						</View>
 						
 						<TouchableHighlight
-							onPress={()=> this.props.onLogOut()}
+							onPress={()=> this.setLanguage()}
 							style={styles.button}>
 							<Text style={styles.buttonText}>
 								{appConfig.language.submit}
