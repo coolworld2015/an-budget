@@ -29,7 +29,7 @@ RELEASE -> cd android -> assembleRelease -> \android\app\build\outputs\apk
 -------------------------------------------------------------------------------------------------
 PIC -> /android/app/src/main/res/mipmap
 -------------------------------------------------------------------------------------------------
-CONFIG -> android/app ->build.gradle
+CONFIG -> android/app ->build.gradle /applicationId + versionName
 -------------------------------------------------------------------------------------------------
 NAME -> android\app\src\main\res\values\strings
 -------------------------------------------------------------------------------------------------
