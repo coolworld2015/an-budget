@@ -224,7 +224,7 @@ class SearchResults extends Component {
 					</Text>						
 					
 					<Text style={{backgroundColor: '#fff', color: 'black', fontWeight: 'bold'}}>
-						Total: {((+rowData.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
+						{appConfig.language.total}: {((+rowData.total).toFixed(2)).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 ")}
 					</Text>
 				</View>
             </TouchableHighlight>

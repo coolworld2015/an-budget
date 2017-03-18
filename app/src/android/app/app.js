@@ -65,6 +65,7 @@ class App extends Component {
 				outputsCount: 0
             },
 			rus: {
+				title: 'RN-Budget',	
 				user: 'Пользователь',
 				users: 'Пользователи',
 				firstday: 'Начало',
@@ -96,7 +97,6 @@ class App extends Component {
 				app: 'Режим приложения',
 				lang: 'Выбор языка',
 				action: 'Применить',
-				title: 'Управление проектами',
 				menu: 'Главное меню',
 				config: 'Настройки',
 				log: 'Проверка полномочий',
@@ -141,6 +141,7 @@ class App extends Component {
 				total: 'Итого'
 			},
 			eng: {
+				title: 'RN-Budget',				
 				user: 'User',
 				users: 'Users',
 				firstday: 'First day',
@@ -172,7 +173,6 @@ class App extends Component {
 				app: 'Application mode',			
 				lang: 'Language mode',
 				action: 'Action',
-				title: 'Project management',
 				menu: 'Main menu',
 				config: 'Configurations',
 				log: 'Login',
