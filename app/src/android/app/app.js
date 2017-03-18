@@ -13,7 +13,8 @@ import {
     NavigatorIOS,
     TextInput,
 	BackAndroid,
-	AsyncStorage
+	AsyncStorage,
+	ActivityIndicator
 } from 'react-native';
 
 console.disableYellowBox = true;
@@ -33,7 +34,8 @@ class App extends Component {
 		});
 		
         this.state = {
-            isLoggedIn: false
+            isLoggedIn: false,
+			isLoading: true
         };
 		
         appConfig = {
@@ -226,9 +228,6 @@ class App extends Component {
 	}
 	
     init() {
-		appConfig.lang = 'eng';
-		appConfig.language = appConfig.eng;
-
         AsyncStorage.getItem('rn-budget.language')
             .then(req => JSON.parse(req))
             .then(json => {
@@ -244,9 +243,28 @@ class App extends Component {
                 }
             })
             .catch(error => console.log(error))
+			.finally(()=> {
+                this.setState({
+					isLoading: false
+                });
+            });
     }
 	
     render() {
+		if (this.state.isLoading) {
+			return <View style={{
+						flex: 1,
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+						<ActivityIndicator
+							animating={true}
+							size="large"
+						/>
+					</View>;
+		}
+		
         if (this.state.isLoggedIn) {
             return (
                 <AppContainer onLogOut={this.onLogOut.bind(this)}/>
