@@ -1,16 +1,14 @@
+'use strict';
+
 import React, {Component} from 'react';
 import {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
-    Image,
     TouchableHighlight,
     ListView,
     ScrollView,
     ActivityIndicator,
-    TabBarIOS,
-    NavigatorIOS,
     TextInput,
 	BackAndroid,
 	Alert
@@ -139,69 +137,25 @@ class InputDetails extends Component {
 		this.props.navigator.pop();
 	}
 	
-    render() {
-        var errorCtrl = <View />;
-
-        if (this.state.serverError) {
-            errorCtrl = <Text style={styles.error}>
-                Something went wrong.
-            </Text>;
-        }
-
-        var validCtrl = <View />;
-
-        if (this.state.invalidValue) {
-            validCtrl = <Text style={styles.error}>
-                Value required - please provide.
-            </Text>;
-        }
-		
-		var loader = <View />;
-				
-		if (this.state.showProgress) {
-			loader = <ActivityIndicator
-				animating={true}
-				size="large"
-				style={styles.loader}
-			/>	
-		}
-		
+    render() {	
         return (
-            <View style={{flex: 1, justifyContent: 'center', backgroundColor: 'white'}}>
-				<View style={{
-					flexDirection: 'row',
-					justifyContent: 'space-between',
-					backgroundColor: '#48BBEC',
-					borderWidth: 0,
-					borderColor: 'whitesmoke'
-				}}>
+            <View style={styles.container}>
+				<View style={styles.header}>
 					<View>
 						<TouchableHighlight
 							onPress={()=> this.goBack()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textSmall}>
 								{appConfig.language.back}
 							</Text>
 						</TouchableHighlight>	
 					</View>
-					<View style={{flex:1,flexDirection:'column', flexWrap:'wrap'}}>
+					<View style={styles.itemWrap}>
 						<TouchableHighlight
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 20,
-								textAlign: 'center',
-								margin: 10,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textLarge}>
 								{this.state.project}
 							</Text>
 						</TouchableHighlight>	
@@ -211,13 +165,7 @@ class InputDetails extends Component {
 							onPress={()=> this.deleteItemDialog()}
 							underlayColor='#ddd'
 						>
-							<Text style={{
-								fontSize: 16,
-								textAlign: 'center',
-								margin: 14,
-								fontWeight: 'bold',
-								color: 'white'
-							}}>
+							<Text style={styles.textSmall}>
 								{appConfig.language.delete}
 							</Text>
 						</TouchableHighlight>	
@@ -225,19 +173,8 @@ class InputDetails extends Component {
 				</View>
 										
 				<ScrollView>
-					<View style={{
-						flex: 1,
-						padding: 10,
-						paddingBottom: 40,
-						justifyContent: 'flex-start',
-						backgroundColor: 'white'
-					}}>				
-						
-						{loader}
-						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+					<View style={styles.form}>								
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								ID:
 							</Text>									
@@ -246,9 +183,7 @@ class InputDetails extends Component {
 							</Text>		
 						</View>
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.date}:
 							</Text>									
@@ -257,53 +192,51 @@ class InputDetails extends Component {
 							</Text>		
 						</View>
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.project}:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.project}
-							</Text>		
+							</Text>				
+							<View style={styles.itemWrap}>	
+								<Text style={styles.itemText}>
+									{this.state.project}
+								</Text>		
+							</View>	
 						</View>	
 												
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.department}:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.department}
-							</Text>		
+							</Text>			
+							<View style={styles.itemWrap}>							
+								<Text style={styles.itemText}>
+									{this.state.department}
+								</Text>		
+							</View>		
 						</View>		
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.employee}:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.employee}
-							</Text>		
+							</Text>					
+							<View style={styles.itemWrap}>	
+								<Text style={styles.itemText}>
+									{this.state.employee}
+								</Text>		
+							</View>	
 						</View>	
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.resource}:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.product}
-							</Text>		
+							</Text>				
+							<View style={styles.itemWrap}>	
+								<Text style={styles.itemText}>
+									{this.state.product}
+								</Text>		
+							</View>		
 						</View>		
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.price}:
 							</Text>									
@@ -312,9 +245,7 @@ class InputDetails extends Component {
 							</Text>		
 						</View>			
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.quantity}:
 							</Text>									
@@ -323,15 +254,15 @@ class InputDetails extends Component {
 							</Text>		
 						</View>			
 						
-						<View style={{
-							flexDirection: 'row'
-						}}>
+						<View style={styles.itemBlock}>
 							<Text style={styles.itemTextBold}>
 								{appConfig.language.description}:
-							</Text>									
-							<Text style={styles.itemText}>
-								{this.state.description}
-							</Text>		
+							</Text>
+							<View style={styles.itemWrap}>								
+								<Text style={styles.itemText}>
+									{this.state.description}
+								</Text>		
+							</View>			
 						</View>			
 									
 						<Text style={styles.itemTextBold}>
@@ -355,6 +286,48 @@ class InputDetails extends Component {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1, 
+		justifyContent: 'center', 
+		backgroundColor: 'white'
+	},		
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		backgroundColor: '#48BBEC',
+		borderWidth: 0,
+		borderColor: 'whitesmoke'
+	},	
+	textSmall: {
+		fontSize: 16,
+		textAlign: 'center',
+		margin: 14,
+		fontWeight: 'bold',
+		color: 'white'
+	},		
+	textLarge: {
+		fontSize: 20,
+		textAlign: 'center',
+		margin: 10,
+		marginRight: 40,
+		fontWeight: 'bold',
+		color: 'white'
+	},
+    form: {
+		flex: 1,
+		padding: 10,
+		justifyContent: 'flex-start',
+		paddingBottom: 130,
+		backgroundColor: 'white'
+    },
+	itemBlock: {
+		flexDirection: 'row'
+    },
+ 	itemWrap: {
+		flex: 1,
+		flexDirection: 'column', 
+		flexWrap: 'wrap'
+    },	
     itemTextBold: {
 		fontSize: 20,
 		textAlign: 'left',
@@ -369,44 +342,6 @@ const styles = StyleSheet.create({
 		marginLeft: 2,
 		color: 'black'
     },
-    countHeader: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 15,
-        backgroundColor: '#F5FCFF',
-    },
-    countFooter: {
-        fontSize: 16,
-        textAlign: 'center',
-        padding: 10,
-        borderColor: '#D7D7D7',
-        backgroundColor: 'whitesmoke'
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 20,
-    },
-    loginInput: {
-        height: 50,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black'
-    },
-    loginInput1: {
-        height: 100,
-        marginTop: 10,
-        padding: 4,
-        fontSize: 18,
-        borderWidth: 1,
-        borderColor: 'lightgray',
-        borderRadius: 5,
-        color: 'black'
-    },	
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
@@ -421,94 +356,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 20,
 		fontWeight: 'bold'
-    },
-    loader: {
-        //marginTop: 40
-    },
-    error: {
-        color: 'red',
-        //paddingTop: 10,
-        textAlign: 'center'
-    },
-    img: {
-        height: 95,
-        width: 75,
-        borderRadius: 20,
-        margin: 20
     }
 });
 
-export default InputDetails;
-
-/*
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.invoiceID}
-							placeholder="invoiceID">
-						</TextInput>
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.date}
-							placeholder="date">
-						</TextInput>
-												
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.project}
-							placeholder="project">
-						</TextInput>		
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.department}
-							placeholder="department">
-						</TextInput>				
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.employee}
-							placeholder="employee">
-						</TextInput>		
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.product}
-							placeholder="product">
-						</TextInput>		
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.priceShow}
-							placeholder="price">
-						</TextInput>	
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.quantityShow}
-							placeholder="quantity">
-						</TextInput>
-
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							multiline={true}
-							style={styles.loginInput1}
-							value={this.state.description}
-							placeholder="Description">
-						</TextInput>
-						
-						<TextInput
-							underlineColorAndroid='rgba(0,0,0,0)'
-							style={styles.loginInput}
-							value={this.state.totalShow}
-							placeholder="Total">
-						</TextInput>
-*/						
+export default InputDetails;					

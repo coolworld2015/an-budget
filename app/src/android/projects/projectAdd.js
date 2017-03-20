@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold'
     },
     loader: {
-        marginTop: 40
+        marginTop: 20
     },
     error: {
         color: 'red',

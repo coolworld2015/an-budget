@@ -436,7 +436,7 @@ class Search extends Component {
 						<TouchableHighlight
 							onPress={this.onSearchPressed.bind(this)}
 							style={styles.button}>
-							<Text style={styles.buttonText}>{appConfig.language.search}</Text>
+							<Text style={styles.buttonText}>{appConfig.language.submit}</Text>
 						</TouchableHighlight>
 					</View>
 				</ScrollView>
