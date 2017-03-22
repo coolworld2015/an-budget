@@ -436,7 +436,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         padding: 10,
         borderColor: '#D7D7D7',
-        //backgroundColor: 'lightgray',
 		color: 'white',
 		fontWeight: 'bold'
     },    
@@ -444,9 +443,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'left',
 		marginTop: 1,   
-        margin: 3,
+        marginLeft: 10,
         borderColor: '#D7D7D7',
-        //backgroundColor: 'lightgray',
 		color: 'white',
 		fontWeight: 'bold'
     },	
@@ -456,7 +454,6 @@ const styles = StyleSheet.create({
         marginTop: 1,        
 		margin: 3,
         borderColor: '#D7D7D7',
-        //backgroundColor: 'lightgray',
 		color: 'white',
 		fontWeight: 'bold'
     },	
@@ -464,9 +461,8 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'right',
 		marginTop: 1,
-        margin: 3,
+        marginRight: 10,
         borderColor: '#D7D7D7',
-        //backgroundColor: 'lightgray',
 		color: 'white',
 		fontWeight: 'bold'
     },

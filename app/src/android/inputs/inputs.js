@@ -160,12 +160,9 @@ class Inputs extends Component {
             return;
         }
 
-        var items, positionY, recordsCount;
-        recordsCount = this.state.recordsCount;
-        positionY = this.state.positionY;
-        items = this.state.filteredItems.slice(0, recordsCount);
-
-        console.log(positionY + ' - ' + recordsCount + ' - ' + items.length);
+        var recordsCount = this.state.recordsCount;
+        var positionY = this.state.positionY;
+        var items = this.state.filteredItems.slice(0, recordsCount);
 
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
             console.log(items.length);
@@ -183,7 +180,7 @@ class Inputs extends Component {
         }
 
         var arr = [].concat(this.state.responseData);
-        var items = arr.filter((el) => el.project.toLowerCase().indexOf(text.toLowerCase()) != -1);
+        var items = arr.filter((el) => el.description.toLowerCase().indexOf(text.toLowerCase()) != -1);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(items),
             resultsCount: items.length,

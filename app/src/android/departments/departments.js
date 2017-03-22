@@ -360,6 +360,11 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         color: 'gray'
     },
+ 	itemWrap: {
+		flex: 1,
+		flexDirection: 'column', 
+		flexWrap: 'wrap'
+    },		
     button: {
         height: 50,
         backgroundColor: '#48BBEC',
