@@ -34,6 +34,7 @@ class Departments extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.departments.showProgress = true;
 		this.getItems();
 	}
 	
@@ -100,6 +101,7 @@ class Departments extends Component {
     }
 	
     addItem() {
+		appConfig.departments.showProgress = false;
 		this.props.navigator.push({
 			index: 32
 		});

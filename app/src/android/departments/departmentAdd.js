@@ -81,7 +81,6 @@ class DepartmentAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.departments.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

@@ -86,7 +86,6 @@ class ResourceAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.goods.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

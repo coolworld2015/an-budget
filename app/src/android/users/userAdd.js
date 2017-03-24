@@ -78,7 +78,6 @@ class UserAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.users.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

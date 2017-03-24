@@ -34,6 +34,7 @@ class Employees extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.employees.showProgress = true;
 		this.getItems();
 	}
 	
@@ -100,6 +101,7 @@ class Employees extends Component {
     }
 	
     addItem() {
+		appConfig.employees.showProgress = false;
 		this.props.navigator.push({
 			index: 42
 		});

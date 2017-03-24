@@ -34,6 +34,7 @@ class Resources extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.goods.showProgress = true;
 		this.getItems();
 	}
 	
@@ -100,6 +101,7 @@ class Resources extends Component {
     }
 	
     addItem() {
+		appConfig.goods.showProgress = false;
 		this.props.navigator.push({
 			index: 22
 		});

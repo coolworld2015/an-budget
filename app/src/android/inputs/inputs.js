@@ -34,6 +34,7 @@ class Inputs extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.inputs.showProgress = true;
 		this.getItems();
 	}
 	
@@ -100,6 +101,7 @@ class Inputs extends Component {
     }
 	
     addItem() {
+		appConfig.inputs.showProgress = false;
 		appConfig.inputs.inputsCount = (this.state.resultsCount + 1).toString();
 		this.props.navigator.push({
 			index: 2

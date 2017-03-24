@@ -268,7 +268,6 @@ class InputAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.inputs.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

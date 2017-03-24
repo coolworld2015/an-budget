@@ -197,7 +197,7 @@ class OutputAdd extends Component {
 		if (appConfig.outputs.showProgress == true) {
             return;
         }
-		
+
         if (this.state.projectID == undefined ||
             this.state.projectName == undefined ||
             this.state.employeeID == undefined ||
@@ -268,7 +268,6 @@ class OutputAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.outputs.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

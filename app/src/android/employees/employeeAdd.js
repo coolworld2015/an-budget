@@ -132,7 +132,6 @@ class EmployeeAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.employees.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

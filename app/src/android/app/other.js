@@ -90,8 +90,9 @@ class Other extends Component {
 					});
 					break;	
 					
-			case 80: this.props.onLogOut();
-					break;						
+			case 80: appConfig.login.showProgress = false;
+					 this.props.onLogOut();
+					 break;						
 		}					
     }
 

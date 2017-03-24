@@ -89,7 +89,6 @@ class Login extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.login.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

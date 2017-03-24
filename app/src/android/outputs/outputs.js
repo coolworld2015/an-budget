@@ -22,7 +22,7 @@ class Outputs extends Component {
         var ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 != r2
         });
-
+		
         this.state = {
             dataSource: ds.cloneWithRows([]),
             showProgress: true,
@@ -34,6 +34,7 @@ class Outputs extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.outputs.showProgress = true;
 		this.getItems();
 	}
 	
@@ -100,6 +101,7 @@ class Outputs extends Component {
     }
 	
     addItem() {
+		appConfig.outputs.showProgress = false;
 		appConfig.outputs.outputsCount = (this.state.resultsCount + 1).toString();
 		this.props.navigator.push({
 			index: 2

@@ -75,6 +75,7 @@ class Config extends Component {
 	setLanguage() {
 		AsyncStorage.setItem('rn-budget.language', JSON.stringify(appConfig.lang))
 			.then(json => {
+				appConfig.login.showProgress = false;
 				this.props.onLogOut();
 			})
 			.catch(error => console.log(error))

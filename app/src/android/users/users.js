@@ -34,6 +34,7 @@ class Users extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.users.showProgress = true;
 		this.getUsers();
 	}
 	
@@ -100,6 +101,7 @@ class Users extends Component {
     }
 	
     addUser() {
+		appConfig.users.showProgress = false;
 		this.props.navigator.push({
 			index: 52
 		});

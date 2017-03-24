@@ -34,6 +34,7 @@ class Projects extends Component {
     }
 	
 	componentDidMount() {
+		appConfig.projects.showProgress = true;
 		this.getItems();
 	}
 	
@@ -93,6 +94,7 @@ class Projects extends Component {
     }
 
     showDetails(rowData) {
+		appConfig.projects.showProgress = false;
 		this.props.navigator.push({
 			index: 11,
 			data: rowData

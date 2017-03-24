@@ -81,7 +81,6 @@ class ProjectAdd extends Component {
                 });
             })
             .finally(()=> {
-				appConfig.projects.showProgress = false;
                 this.setState({
                     showProgress: false
                 });
