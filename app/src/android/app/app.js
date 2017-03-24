@@ -41,31 +41,41 @@ class App extends Component {
         appConfig = {
             access_token: '',
 			url: 'http://jwt-budget.herokuapp.com/',
+			login: {
+				showProgress: false
+            },			
 			users: {
-                refresh: false
+                refresh: false,
+				showProgress: false
             },
 			goods: {
-                refresh: false
+                refresh: false,
+				showProgress: false
             },
 			projects: {
-                refresh: false
+                refresh: false,
+				showProgress: false
             },
 			departments: {
-                refresh: false
+                refresh: false,
+				showProgress: false
             },
 			employees: {
-                refresh: false
+                refresh: false,
+				showProgress: false
             },			
 			assets: {
                 refresh: false
             },
 			inputs: {
                 refresh: false,
-				inputsCount: 0
+				inputsCount: 0,
+				showProgress: false
             },
 			outputs: {
                 refresh: false,
-				outputsCount: 0
+				outputsCount: 0,
+				showProgress: false
             },
 			rus: {
 				title: 'RN-Budget',	

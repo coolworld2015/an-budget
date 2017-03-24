@@ -324,7 +324,7 @@ class SearchResults extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
-								marginRight: 60,
+								marginRight: 40,
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
@@ -452,7 +452,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
         marginTop: 1,        
-		margin: 3,
+		//margin: 3,
         borderColor: '#D7D7D7',
 		color: 'white',
 		fontWeight: 'bold'

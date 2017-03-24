@@ -194,6 +194,10 @@ class InputAdd extends Component {
 	}
 
     addItem() {
+		if (appConfig.inputs.showProgress == true) {
+            return;
+        }
+		
         if (this.state.projectID == undefined ||
             this.state.projectName == undefined ||
             this.state.employeeID == undefined ||
@@ -219,6 +223,9 @@ class InputAdd extends Component {
             showProgressAdd: true,
 			bugANDROID: ' '
         });
+		
+		appConfig.inputs.showProgress = true;
+		
         fetch(appConfig.url + 'api/inputs/add', {
             method: 'post',
             body: JSON.stringify({
@@ -256,12 +263,12 @@ class InputAdd extends Component {
                 this.props.navigator.pop();
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
             })
             .finally(()=> {
+				appConfig.inputs.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

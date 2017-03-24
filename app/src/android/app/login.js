@@ -36,10 +36,9 @@ class Login extends Component {
 	}
 	
     onLogin() {
-		this.setState({
-            showProgress: true,
-			bugANDROID: ' '
-        });
+		if (appConfig.login.showProgress == true) {
+            return;
+        }
 
         if (this.state.username == undefined ||
             this.state.password == undefined) {
@@ -49,7 +48,12 @@ class Login extends Component {
             return;
         }
 		
-		var url = appConfig.url;
+		this.setState({
+            showProgress: true,
+			bugANDROID: ' '
+        });
+		
+		appConfig.login.showProgress = true;
 		
         fetch(appConfig.url + 'api/login', {
             method: 'post',
@@ -85,6 +89,7 @@ class Login extends Component {
                 });
             })
             .finally(()=> {
+				appConfig.login.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

@@ -33,6 +33,10 @@ class DepartmentAdd extends Component {
     }
 
     addItem() {
+		if (appConfig.departments.showProgress == true) {
+            return;
+        }
+		
         if (this.state.name == undefined ||
             this.state.address == undefined ||
             this.state.phone == undefined ||
@@ -47,6 +51,8 @@ class DepartmentAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
+		
+		appConfig.departments.showProgress = true;
 		
         fetch(appConfig.url + 'api/departments/add', {
             method: 'post',
@@ -70,12 +76,12 @@ class DepartmentAdd extends Component {
                 this.props.navigator.pop();
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
             })
             .finally(()=> {
+				appConfig.departments.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

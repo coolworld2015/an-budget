@@ -33,6 +33,10 @@ class UserAdd extends Component {
     }
 
     addUser() {
+		if (appConfig.users.showProgress == true) {
+            return;
+        }
+		
         if (this.state.name == undefined ||
             this.state.pass == undefined ||
             this.state.description == undefined) {
@@ -46,6 +50,8 @@ class UserAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
+		
+		appConfig.users.showProgress = true;
 		
         fetch(appConfig.url + 'api/users/add', {
             method: 'post',
@@ -67,12 +73,12 @@ class UserAdd extends Component {
                 this.props.navigator.pop();
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
             })
             .finally(()=> {
+				appConfig.users.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

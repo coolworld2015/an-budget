@@ -80,6 +80,10 @@ class EmployeeAdd extends Component {
     }
 	
     addItem() {
+		if (appConfig.employees.showProgress == true) {
+            return;
+        }
+		
         if (this.state.name == undefined ||
             this.state.address == undefined ||
             this.state.phone == undefined ||
@@ -96,6 +100,8 @@ class EmployeeAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
+		
+		appConfig.employees.showProgress = true;
 		
         fetch(appConfig.url + 'api/employees/add', {
             method: 'post',
@@ -121,12 +127,12 @@ class EmployeeAdd extends Component {
                 this.props.navigator.pop();
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
             })
             .finally(()=> {
+				appConfig.employees.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

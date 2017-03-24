@@ -137,7 +137,6 @@ class Inputs extends Component {
     }
 
     refreshData(event) {
-		console.log(event.nativeEvent.contentOffset);
         if (this.state.showProgress == true) {
             return;
         }

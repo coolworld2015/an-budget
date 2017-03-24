@@ -33,6 +33,10 @@ class ProjectAdd extends Component {
     }
 
     addItem() {
+		if (appConfig.projects.showProgress == true) {
+            return;
+        }
+		
         if (this.state.name == undefined ||
             this.state.address == undefined ||
             this.state.phone == undefined ||
@@ -47,6 +51,8 @@ class ProjectAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
+		
+		appConfig.projects.showProgress = true;
 		
         fetch(appConfig.url + 'api/projects/add', {
             method: 'post',
@@ -70,12 +76,12 @@ class ProjectAdd extends Component {
                 this.props.navigator.pop();
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
             })
             .finally(()=> {
+				appConfig.projects.showProgress = false;
                 this.setState({
                     showProgress: false
                 });

@@ -37,6 +37,10 @@ class ResourceAdd extends Component {
 	}
 	
     addItem() {
+		if (appConfig.goods.showProgress == true) {
+            return;
+        }
+		
         if (this.state.name == undefined ||
             this.state.price == undefined ||
             this.state.description == undefined ||
@@ -52,6 +56,8 @@ class ResourceAdd extends Component {
             showProgress: true,
 			bugANDROID: ' '
         });
+		
+		appConfig.goods.showProgress = true;
 		
         fetch(appConfig.url + 'api/goods/add', {
             method: 'post',
@@ -75,12 +81,12 @@ class ResourceAdd extends Component {
                 this.props.navigator.pop();
             })
             .catch((error)=> {
-                console.log(error);
                 this.setState({
                     serverError: true
                 });
             })
             .finally(()=> {
+				appConfig.goods.showProgress = false;
                 this.setState({
                     showProgress: false
                 });
