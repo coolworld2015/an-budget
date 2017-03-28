@@ -512,6 +512,7 @@ class InputAdd extends Component {
                                         productID: good[0].id,
                                         productName: good[0].name,
                                         price: (+good[0].price).toFixed(2),
+										total: ((+good[0].price)*(+this.state.quantity)).toFixed(2).toString(),
 										invalidValue: false
                                     })
                                 }}>
