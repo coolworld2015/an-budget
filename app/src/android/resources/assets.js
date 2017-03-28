@@ -256,7 +256,7 @@ class Store extends Component {
 								fontSize: 20,
 								textAlign: 'center',
 								margin: 10,
-								marginRight: 60,
+								marginRight: 40,
 								fontWeight: 'bold',
 								color: 'white'
 							}}>
