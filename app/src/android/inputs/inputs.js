@@ -52,6 +52,12 @@ class Inputs extends Component {
     }
 
     getItems() {
+		this.setState({
+            resultsCount: 0,
+            recordsCount: 25,
+            positionY: 0
+        });
+		
         fetch(appConfig.url + 'api/inputs/get', {			
             method: 'get',
             headers: {

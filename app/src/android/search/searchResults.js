@@ -239,13 +239,13 @@ class SearchResults extends Component {
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount1;
         positionY = this.state.positionY1;
-        items = this.state.filteredItems1;
+        items = this.state.filteredItems1.slice(0, recordsCount);
 
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
             this.setState({
                 dataSource1: this.state.dataSource1.cloneWithRows(items),
-                recordsCount1: recordsCount + 20,
-                positionY1: positionY + 1000
+                recordsCount1: recordsCount + 10,
+                positionY1: positionY + 500
             });
         }
     }
@@ -258,13 +258,13 @@ class SearchResults extends Component {
         var items, positionY, recordsCount;
         recordsCount = this.state.recordsCount2;
         positionY = this.state.positionY2;
-        items = this.state.filteredItems2;
+        items = this.state.filteredItems2.slice(0, recordsCount);
 
         if (event.nativeEvent.contentOffset.y >= positionY - 10) {
             this.setState({
                 dataSource2: this.state.dataSource2.cloneWithRows(items),
-                recordsCount2: recordsCount + 20,
-                positionY2: positionY + 1000
+                recordsCount2: recordsCount + 10,
+                positionY2: positionY + 500
             });
         }
     }
