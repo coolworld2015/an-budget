@@ -33,9 +33,12 @@ class Inputs extends Component {
         };
     }
 	
-    componentWillUpdate() {
+	componentDidMount() {
 		appConfig.inputs.showProgress = true;
-		
+		this.getItems();
+	}
+	
+    componentWillUpdate() {
         if (appConfig.inputs.refresh) {
             appConfig.inputs.refresh = false;
 

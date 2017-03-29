@@ -33,6 +33,10 @@ class Store extends Component {
         };
     }
 	
+	componentDidMount() {
+		this.getItems();
+	}
+	
     componentWillUpdate() {
         if (appConfig.assets.refresh) {
             appConfig.assets.refresh = false;

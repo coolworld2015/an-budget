@@ -33,9 +33,12 @@ class Projects extends Component {
         };
     }
 	
-    componentWillUpdate() {
+	componentDidMount() {
 		appConfig.projects.showProgress = true;
-		
+		this.getItems();
+	}
+	
+    componentWillUpdate() {
         if (appConfig.projects.refresh) {
             appConfig.projects.refresh = false;
 

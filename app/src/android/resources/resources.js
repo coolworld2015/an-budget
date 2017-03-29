@@ -33,9 +33,12 @@ class Resources extends Component {
         };
     }
 	
-    componentWillUpdate() {
+	componentDidMount() {
 		appConfig.goods.showProgress = true;
-		
+		this.getItems();
+	}
+	
+    componentWillUpdate() {
         if (appConfig.goods.refresh) {
             appConfig.goods.refresh = false;
 

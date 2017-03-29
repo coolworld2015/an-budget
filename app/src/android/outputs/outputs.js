@@ -33,9 +33,12 @@ class Outputs extends Component {
         };
     }
 	
-    componentWillUpdate() {
+	componentDidMount() {
 		appConfig.outputs.showProgress = true;
-		
+		this.getItems();
+	}
+	
+    componentWillUpdate() {
         if (appConfig.outputs.refresh) {
             appConfig.outputs.refresh = false;
 
