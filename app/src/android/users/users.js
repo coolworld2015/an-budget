@@ -33,12 +33,9 @@ class Users extends Component {
         };
     }
 	
-	componentDidMount() {
-		appConfig.users.showProgress = true;
-		this.getUsers();
-	}
-	
     componentWillUpdate() {
+		appConfig.users.showProgress = true;
+		
         if (appConfig.users.refresh) {
             appConfig.users.refresh = false;
 

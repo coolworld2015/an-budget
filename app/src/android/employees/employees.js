@@ -32,13 +32,10 @@ class Employees extends Component {
             positionY: 0
         };
     }
-	
-	componentDidMount() {
-		appConfig.employees.showProgress = true;
-		this.getItems();
-	}
-	
+
     componentWillUpdate() {
+		appConfig.employees.showProgress = true;
+		
         if (appConfig.employees.refresh) {
             appConfig.employees.refresh = false;
 

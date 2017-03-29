@@ -33,12 +33,9 @@ class Departments extends Component {
         };
     }
 	
-	componentDidMount() {
-		appConfig.departments.showProgress = true;
-		this.getItems();
-	}
-	
     componentWillUpdate() {
+		appConfig.departments.showProgress = true;
+		
         if (appConfig.departments.refresh) {
             appConfig.departments.refresh = false;
 
