@@ -189,7 +189,7 @@ class Inputs extends Component {
         var arr = [].concat(this.state.responseData);
         var items = arr.filter((el) => el.description.toLowerCase().indexOf(text.toLowerCase()) != -1);
         this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(items),
+            dataSource: this.state.dataSource.cloneWithRows(items.slice(0, 25)),
             resultsCount: items.length,
             filteredItems: items,
             searchQuery: text
@@ -207,9 +207,11 @@ class Inputs extends Component {
 	
 	clearSearchQuery() {
 		this.setState({
-			dataSource: this.state.dataSource.cloneWithRows(this.state.responseData),
+			dataSource: this.state.dataSource.cloneWithRows(this.state.responseData.slice(0, 25)),
             resultsCount: this.state.responseData.length,
             filteredItems: this.state.responseData,
+			positionY: 0,
+			recordsCount: 25,
 			searchQuery: ''
 		});
 	}

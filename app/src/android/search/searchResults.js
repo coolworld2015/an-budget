@@ -51,12 +51,15 @@ class SearchResults extends Component {
 				
 				searchType: props.data.searchType,
 				showProgress: true,
+				
 				resultsCount1: 0,
-				recordsCount1: 25,				
+				recordsCount1: 25,
+				positionY1: 0,
+								
 				resultsCount2: 0,
 				recordsCount2: 25,
-				positionY1: 0,
 				positionY2: 0,
+				
 				inputsTotal: 0,
 				outputsTotal: 0
 			};
@@ -114,6 +117,7 @@ class SearchResults extends Component {
                 this.setState({
 				    dataSource1: this.state.dataSource1.cloneWithRows(items.slice(0, 25)),
                     resultsCount1: items.length,
+					recordsCount1: 25,
                     responseData1: items,
                     filteredItems1: items
                 });
@@ -167,6 +171,7 @@ class SearchResults extends Component {
                 this.setState({
 				    dataSource2: this.state.dataSource2.cloneWithRows(items.slice(0, 25)),
                     resultsCount2: items.length,
+					recordsCount2: 25,
                     responseData2: items,
                     filteredItems2: items
                 });
