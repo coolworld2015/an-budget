@@ -94,7 +94,6 @@ class Projects extends Component {
     }
 
     showDetails(rowData) {
-		appConfig.projects.showProgress = false;
 		this.props.navigator.push({
 			index: 11,
 			data: rowData
@@ -102,6 +101,7 @@ class Projects extends Component {
     }
 	
     addItem() {
+		appConfig.projects.showProgress = false;
 		this.props.navigator.push({
 			index: 12
 		});
